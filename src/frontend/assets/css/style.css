@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Inclusive+Sans:ital,wght@0,300..700;1,300..700&display=swap');
+
+
+@font-face {
+    font-family: 'inclusive-sans';
+    src: url('https://fonts.googleapis.com/css2?family=Inclusive+Sans:ital,wght@0,300..700;1,300..700&display=swap');
+}
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+   font-family: 'inclusive-sans'; -image: url('img/Campos.png');
+}
+
+main{
+    max-width: 412px;
+    margin: 20px auto;
+    padding: 0px 20px;
+}
+
+.fundo{
+    background-image: url('img/Campos.png'); 
+    width: 412px; 
+    height: 918px;
+}
