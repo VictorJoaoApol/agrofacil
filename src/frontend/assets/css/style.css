@@ -13,17 +13,93 @@
 }
 
 body{
-   font-family: 'inclusive-sans'; -image: url('img/Campos.png');
+    font-family: 'inclusive-sans';
+    font-size: 16px;
+    background-image: url('../../img/Campos.png');
+    width: 412px;
+    height: 917px;
+}
+
+header{
+    width: 100%;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 main{
-    max-width: 412px;
-    margin: 20px auto;
+    margin: 40px auto;
     padding: 0px 20px;
 }
 
-.fundo{
-    background-image: url('img/Campos.png'); 
-    width: 412px; 
-    height: 918px;
+h1{
+    font-size: 36px;
+    font-weight: bold;
+}
+
+h2{
+    font-size: 36px;
+    font-weight: bold;
+}
+
+h3{
+    font-size: 36px;
+    font-weight: bold;
+}
+
+.legendas{
+    font-size: 12px;
+    color: #EF9300;
+}
+
+.grupotexto{
+    display: flex;
+    flex-direction: column;
+}
+
+label{
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.campotexto input,
+.campotexto textarea{
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 1rem;
+}
+
+.campotexto input:focus,
+.campotexto textarea:focus{
+    background-color: #ddd;
+    border: #1abc9c;
+}
+
+input[type=submit]{
+    background-color: #1abc9c;
+    color: #fff;
+    font-weight: bold;
+}
+
+.icon{
+    width: 222px;
+    height: 222px;
+}
+
+.icon-pequeno{
+    width: 64px;
+    height: 64px;
+    margin: 16px;
+}
+
+.card{
+    background-color: #f6f6f6;
+    width: 352px;
+    height: 456px;
+    justify-content: center;
+    align-items: center;
+    padding: 16px;
+    border-radius: 24px;
 }
