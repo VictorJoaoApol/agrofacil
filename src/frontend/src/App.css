@@ -1,11 +1,37 @@
-.legendas{
-    font-size: 12px;
-    color: #EF9300;
+.icon{
+    width: 222px;
+    height: 222px;
+    margin: 2rem 0;
 }
 
-.grupotexto{
+.icon-pequeno{
+    width: 64px;
+    height: 64px;
+    margin: 1rem;
+}
+
+.card{
+    background-color: #f6f6f6;
+
+    width: auto;
+    height: auto;
+    justify-content:space-between;
+    align-items: center;
+    margin: 20px auto;
+    padding: 2rem;
+    border-radius: 24px;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.campotexto{
     display: flex;
     flex-direction: column;
+}
+
+label{
+    font-weight: bold;
+    margin-bottom: 5px;
 }
 
 .campotexto input,
@@ -28,23 +54,8 @@ input[type=submit]{
     font-weight: bold;
 }
 
-.icon{
-    width: 222px;
-    height: 222px;
-}
-
-.icon-pequeno{
-    width: 64px;
-    height: 64px;
-    margin: 8px;
-}
-
-.card{
-    background-color: #f6f6f6;
-    width: 320px;
-    height: auto;
-    justify-content: center;
-    align-items: center;
-    padding: 16px;
-    border-radius: 24px;
+input[type=submit]{
+    background-color: #1abc9c;
+    color: #fff;
+    font-weight: bold;
 }
