@@ -1,0 +1,48 @@
+@font-face {
+    font-family: 'inclusive-sans';
+    src: url('/src/assets/fonts/Inclusive_Sans/InclusiveSans-VariableFont_wght.ttf');
+}
+
+body{
+    font-family: 'inclusive-sans';
+    font-size: 16px;
+    background-image: url('/src/assets/img/Campos.png');
+    width: 412px;
+    height: 917px;
+    max-width: 412px;
+    max-height: 917px;
+    margin: 0;
+}
+
+header{
+    width: 100%;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+main{
+    padding: 0px 8px;
+}
+
+h1{
+    font-size: 36px;
+    font-weight: bold;
+    margin: 0px auto;
+}
+
+h2{
+    font-size: 28px;
+    font-weight: bold;
+}
+
+h3{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+label{
+    font-weight: bold;
+    margin-bottom: 5px;
+}
