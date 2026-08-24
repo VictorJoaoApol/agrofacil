@@ -1,3 +1,9 @@
+.fundo{
+    background-image: url('/src/assets/img/Campos.png');
+    height: 917px;
+    width: 412px;
+}
+
 .icon{
     width: 222px;
     height: 222px;
