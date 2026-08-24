@@ -1,7 +1,7 @@
 <?php
     // Carrega pacote dotenv pelo composer.
     $root = __DIR__ . '/../../..';
-    require $root . '/vendor/autoload.php';
+    require_once $root . '/vendor/autoload.php';
 
     // Carrega as váriaveis de ambiente do arquivo ".env".
     $dotenv = Dotenv\Dotenv::createImmutable($root);
