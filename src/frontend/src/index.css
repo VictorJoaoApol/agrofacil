@@ -41,17 +41,16 @@ h3{
     font-weight: bold;
 }
 
-p:link, p:visited {
-    font-size: 20px;
+.NavLink:link, .NavLink:visited {
+    font-size: 30px;
     text-decoration: none;
     font-weight: bold;
-    background-color: black;
     color: black;
 }
 
 
-p:hover, p:active {
-    font-size: 16px;
+.NavLink:hover, .Navlink:active {
+    font-size: 30px;
     text-decoration: underline;
     font-weight: bold;
     color: black;
