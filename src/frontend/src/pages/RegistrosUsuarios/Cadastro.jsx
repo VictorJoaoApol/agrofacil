@@ -1,6 +1,6 @@
 import { NavLink } from 'react-router'
 import logo from '../../assets/img/Logo.png'
-import CampoTexto from '../../components/CampoTexto'
+import FormCadastro from '../../components/forms/FormCadastro'
 
 function Cadastro() {
   return (
@@ -9,8 +9,7 @@ function Cadastro() {
         <img className="icon" src={logo} />
       </header>
 
-      <CampoTexto />
-      <NavLink to = "/">Home</NavLink> 
+      <FormCadastro />
     </div>
   )
 }
