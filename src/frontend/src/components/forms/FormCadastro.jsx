@@ -2,7 +2,6 @@ import { NavLink } from "react-router"
 
 function FormCadastro() {
     return (
-          <main>
             <section className="card">
               <h1>Cadastre-se</h1>
               <div className="campotexto">
@@ -17,10 +16,9 @@ function FormCadastro() {
                 <label htmlFor="senha">Senha:</label>
                 <input type="password" name="" id="senha" placeholder="digite sua senha" />
               </div>
-                <NavLink to = "/app">Home</NavLink> 
-                <NavLink to = "/login">Login</NavLink>
+                <NavLink to = "/app"><h1></h1>Home</NavLink> 
+                <NavLink to = "/login"><h1></h1>Login</NavLink>
             </section>
-        </main>
     )
 }
 

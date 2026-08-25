@@ -1,7 +1,7 @@
 function Card() {
     return (
             <main>
-                <section class = "card">
+                <section className = "card">
                     
                 </section>
             </main>

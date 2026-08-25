@@ -5,8 +5,7 @@ function Login() {
         <>
             <h1>Login</h1>
             <NavLink to = "/cadastro">Cadastro</NavLink>
-            
-            <Outlet />
+            <NavLink to = "recuperar-senha">Recuperar Senha</NavLink>
 
         </>
     )

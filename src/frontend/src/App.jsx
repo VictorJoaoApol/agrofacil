@@ -1,6 +1,7 @@
 import { Routes, Route } from 'react-router'
 import './App.css'
 
+import Teste from './pages/Teste.jsx'
 import NotFound from './pages/NotFound.jsx'
 import Home from './pages/Home/Home.jsx'
 import Overview from './pages/Home/Overview.jsx'
@@ -16,14 +17,12 @@ import Tarefas from './pages/Tarefas/Tarefas.jsx'
 import Painel from './pages/Painel/Painel.jsx'
 import Perfil from './pages/Perfil/Perfil.jsx'
 
-
-
-
 function App() {
 
   return (
     <>
       <Routes>
+        <Route path='/' element={<Teste />}></Route>
         <Route path="*" element={<NotFound />}></Route>
         <Route path="/cadastro" element={<Cadastro />}></Route>
         <Route path="/login" element={<Login />}>
@@ -36,6 +35,7 @@ function App() {
           <Route path="dispositivos" element={<Dispositivos />}></Route>
           <Route path="painel" element={<Painel />}></Route>
           <Route path="perfil" element={<Perfil />}></Route>
+          <Route path="faleconosco" element={<FaleConosco />}></Route>
         </Route>
       </Routes>
     </>

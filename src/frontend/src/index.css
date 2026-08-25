@@ -9,6 +9,8 @@ body{
     width: 412px;
     height: 917px;
     margin: 0;
+    border-color: black;
+
 }
 
 header{
@@ -20,7 +22,7 @@ header{
 }
 
 main{
-    padding: 0px 8px;
+    padding: 0px pxpx;
 }
 
 h1{

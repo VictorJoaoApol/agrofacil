@@ -65,3 +65,52 @@ input[type=submit]{
     color: #fff;
     font-weight: bold;
 }
+
+.dispositivo{
+    background-color: #E6E6E6;
+    width: 296px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    padding: 8px;
+}
+
+.fundoicone{
+    height: 64px;
+    width: 64px;
+    background-color: #A7C75C;
+}
+
+.descricaodispositivo{
+    height: fit-content;
+    width: fit-content;
+}
+
+.switch {
+  height: 24px;
+  width: 48px;
+}
+
+.SidebarLayout{
+    width: 300px;
+    height: 917px;
+    background-color: #4C9713;
+    opacity: 0.92;
+    position: absolute;
+}
+
+.SidebarInterior{
+
+}
+
+.SidebarMenu{
+
+}
+
+.SidebarIcones{
+
+}
+
+.SidebarEspaço{
+
+}
