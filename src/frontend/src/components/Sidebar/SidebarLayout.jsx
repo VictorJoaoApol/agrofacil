@@ -4,9 +4,9 @@ function SidebarLayout() {
     return (
 
         <>
-            <section className="SidebarLayout">
+            <div className="SidebarLayout">
                 <SidebarInterior />
-            </section>
+            </div>
         </>
     )
 }

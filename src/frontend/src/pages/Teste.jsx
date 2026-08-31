@@ -10,14 +10,8 @@ import SidebarLayout from "../components/Sidebar/SidebarLayout"
 function Teste() {
     return (
         <>
-        <SidebarLayout />
         <Navbar />
-        <CampoTexto />
-        <FormCadastro />
-        <FormLogin />
-        <Card />
-        <FormRecuperarSenha />
-        <Dispositivo />
+        <SidebarLayout />
         </>
     )
 }

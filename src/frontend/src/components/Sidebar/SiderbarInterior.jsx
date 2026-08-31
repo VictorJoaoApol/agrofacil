@@ -1,13 +1,15 @@
+import SidebarIcones from "./SidebarIcones"
 import SidebarMenu from "./SidebarMenu"
 
 function SidebarInterior() {
     return (
 
         <>
-            <section className="SidebarInterior">
+            <div className="SidebarInterior">
                 <SidebarMenu />
-                <sidebar
-            </section>
+                <div className="SidebarEspaco"></div>
+                <SidebarIcones />
+            </div>
         </>
     )
 }

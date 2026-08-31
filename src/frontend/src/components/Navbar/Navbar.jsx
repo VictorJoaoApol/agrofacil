@@ -1,10 +1,12 @@
+import NavConteudo from "./NavConteudo"
+
 function Navbar() {
     return (
 
         <>
-            <section className="Navbar">
-                
-            </section>
+            <nav className="Navbar">
+                <NavConteudo />
+            </nav>
         </>
     )
 }

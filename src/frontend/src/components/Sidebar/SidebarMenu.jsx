@@ -1,10 +1,18 @@
+import { NavLink } from "react-router"
+
 function SidebarMenu() {
     return (
 
         <>
-            <section className="SidebarMenu">
+                <ul className="SidebarMenu">
+                    <li className="SidebarItem">
+                        <NavLink to = "/" className = "Nav-Link">
+                            <i className="IconeMenu">Icone</i>
+                            <span className="NomeMenu">Nome</span>
+                        </NavLink>
+                    </li>
 
-            </section>
+                </ul>
         </>
     )
 }
