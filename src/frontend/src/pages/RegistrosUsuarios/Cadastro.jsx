@@ -1,4 +1,5 @@
 import logo from '../../assets/img/Logo.png'
+import FormCadastro from '../../components/forms/FormCadastro'
 
 function Cadastro() {
   return (
