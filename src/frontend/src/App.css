@@ -174,20 +174,17 @@ input[type=submit]{
     width: 100%;
 }
 
-.SidebarItem{
-    
-    /*Excluir background-color depois*/
-    background-color: #fde828;
-}
-
 .Nav-Link {
     position: relative;
     align-items: center;
     box-sizing: border-box;
     display: flex;
     height: 46px;
+    margin: 4px 0px;
     padding: 10px 16px;
-    width: 248px;
+    width: 100%;
+    /*Excluir background-color depois*/
+    background-color:#fde826;
 }
 
 .NomeMenu{

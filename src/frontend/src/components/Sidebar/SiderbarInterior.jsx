@@ -7,7 +7,6 @@ function SidebarInterior() {
         <>
             <div className="SidebarInterior">
                 <SidebarMenu />
-                <div className="SidebarEspaco"></div>
                 <SidebarIcones />
             </div>
         </>

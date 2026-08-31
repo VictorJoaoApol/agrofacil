@@ -1,17 +1,16 @@
-import { NavLink } from "react-router"
+import SidebarItem from "./SidebarItem"
 
 function SidebarMenu() {
     return (
 
         <>
                 <ul className="SidebarMenu">
-                    <li className="SidebarItem">
-                        <NavLink to = "/" className = "Nav-Link">
-                            <i className="IconeMenu">Icone</i>
-                            <span className="NomeMenu">Nome</span>
-                        </NavLink>
-                    </li>
-
+                    <SidebarItem link={"/"} text={"Texto"} icon={"src/assets/Icones/IconPlaceholder.svg"} />
+                    <SidebarItem link={"/"} text={"Texto"} icon={"src/assets/Icones/IconPlaceholder.svg"} />
+                    <SidebarItem link={"/"} text={"Texto"} icon={"src/assets/Icones/IconPlaceholder.svg"} />
+                    <SidebarItem link={"/"} text={"Texto"} icon={"src/assets/Icones/IconPlaceholder.svg"} />
+                    <SidebarItem link={"/"} text={"Texto"} icon={"src/assets/Icones/IconPlaceholder.svg"} />
+                    
                 </ul>
         </>
     )
