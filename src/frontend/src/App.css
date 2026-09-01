@@ -1,6 +1,139 @@
-body{
-    max-width: 412px;
-    max-height: 917px;
+:root{
+    --sidebar-width: 70%;
+    --navbar-height: 62px;
+    --sidebar-item-height: 46px;
+    --icon-size: 40px;
+    --transition-speed: 0.3s;
+
+    --debug-sidebar-layout: #4C9713;
+    --debug-sidebar-interior: #5473ff;
+    --debug-sidebar-menu: #1abc9c;
+    --debug-sidebar-icones: #c83bff;
+    --debug-nav-link: #fde826;
+}
+
+
+.Navbar{
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    height: var(--navbar-height);
+    padding: 8px 0px;
+    position: fixed;
+    background-color: #F0F0F0;
+    z-index: 5;
+}
+
+.NavConteudo{
+    align-items: center;
+    box-sizing: border-box;
+    display: flex;
+    flex-wrap: wrap;
+    height: 100%;
+    width: fit-content;
+    justify-content: space-between;
+    padding: 0px 12px;
+}
+
+.SidebarLayout{
+    width: var(--sidebar-width);
+    height: 100%;
+    background-color: var(--debug-sidebar-layout);
+    position: fixed;
+    top: 0;
+    left: 0;
+    inset: 0 auto 0 0;
+    z-index: 20;
+    transition: transform var(--transition-speed) ease;
+}
+
+.SidebarLayout.fechada{ transform: translateX(-100%); }
+.SidebarLayout.aberta{ transform: translateX(0); }
+
+.SidebarInterior{
+    position: relative;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    padding: var(--navbar-height) 0 16px;
+    opacity: 0.92;
+    background-color: var(--debug-sidebar-interior);
+}
+
+.FecharSidebar{
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.FecharSidebar{
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.SidebarMenu{
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 1rem 0 1.25rem;
+    padding: 0 1rem;
+    background-color: var(--debug-sidebar-menu);
+}
+
+.SidebarItem{
+    width: 100%;
+}
+
+.Nav-Link{
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: var(--sidebar-item-height);
+    margin: 4px 0px;
+    padding: 10px 16px;
+    background-color: var(--debug-nav-link);
+}
+
+.NomeMenu{
+    font-size: 1rem;
+}
+
+.IconeMenu{
+    width: var(--icon-size);
+    height: var(--icon-size);
+    margin: 4px;
+}
+
+.IconeMenu.medio,
+.IconeMenu.pequeno{
+    width: 24px;
+    height: 24px;
+    margin: 4px;
+}
+
+.SidebarIcones{
+    width: 100%;
+    height: 54px;
+    box-sizing: border-box;
+    margin-top: auto;
+    background-color: var(--debug-sidebar-icones);
 }
 
 .fundo{
@@ -95,117 +228,3 @@ input[type=submit]{
   height: 24px;
   width: 48px;
 }
-
-.Navbar{
-    align-items: center;
-    box-sizing: border-box;
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding: 8px 0px;
-    height: 62px;
-    position:fixed;
-    background-color: #F0F0F0;
-}
-
-.NavConteudo{
-    align-items: center;
-    box-sizing: border-box;
-    display: flex;
-    flex-wrap: wrap;
-    height: 100%;
-    width: fit-content;
-    justify-content: space-between;
-    padding: 0px 12px;
-    text-align: start;
-}
-
-.SidebarLayout{
-    width: 70%;
-    height: calc(100% - 62px);
-    background-color: #4C9713;
-    position: absolute;
-}
-
-.SidebarInterior{
-    height: calc(100% - 16px);
-    width: 100%;
-    opacity: 0.92;
-    display: flex;
-    flex-direction: column;
-    overflow-y:auto;
-    padding: 62px 0px 16px;
-    /*Excluir background-color depois*/
-    background-color:#5473ff;
-}
-
-.SidebarMenu{
-    box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    width: calc(100%);
-    height: auto;
-    margin: 1rem 0px 1.25rem;
-    padding: 0px 1rem;
-    /*Excluir background-color depois*/
-    background-color:#1abc9c;
-}
-
-.SidebarIcones{
-    width: auto;
-    height: 54px;
-    display: block;
-    box-sizing: border-box;
-    margin-top: auto;
-    /*Excluir background-color depois*/
-    background-color:#c83bff;
-}
-
-.SidebarEspaco{
-    width: 100%;
-    margin-top: 36%;
-    /*Excluir background-color depois*/
-    background-color:#fde826;
-}
-
-.SidebarConteudo{
-    height: 100%;
-    width: 100%;
-}
-
-.Nav-Link {
-    position: relative;
-    align-items: center;
-    box-sizing: border-box;
-    display: flex;
-    height: 46px;
-    margin: 4px 0px;
-    padding: 10px 16px;
-    width: 100%;
-    /*Excluir background-color depois*/
-    background-color:#fde826;
-}
-
-.NomeMenu{
-
-}
-
-.IconeMenu{
-    width: 40px;
-    height: 40px;
-    margin: 4px;
-}
-
-.IconeMenu.medio{
-    width: 24px;
-    height: 24px;
-    margin: 4px;
-}
-
-.IconeMenu.pequeno{
-    width: 24px;
-    height: 24px;
-    margin: 4px;
-}
-
