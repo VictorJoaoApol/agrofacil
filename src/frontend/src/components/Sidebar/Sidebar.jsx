@@ -1,6 +1,8 @@
 import { createContext, useContext, useState } from "react"
 import { NavLink } from "react-router"
 
+
+
 // ---------- Context ----------
 const SidebarContext = createContext()
 
@@ -20,11 +22,11 @@ export function useSidebar() {
 }
 
 // ---------- SidebarItem ----------
-function SidebarItem({ link, text, icon }) {
+function SidebarItem({ link, text, icon, classe, placeholder }) {
     return (
         <li className="SidebarItem">
             <NavLink to={link} className="Nav-Link">
-                <img src={icon} className="IconeMenu" alt="placeholder" />
+                <img src={icon} className={classe} alt={placeholder} />
                 <span className="NomeMenu">{text}</span>
             </NavLink>
         </li>
@@ -35,13 +37,13 @@ function SidebarItem({ link, text, icon }) {
 function SidebarMenu() {
     return (
         <ul className="SidebarMenu">
-            <SidebarItem link={"/cadastro"} text={"Texto"} icon={"src/assets/Icones/IconPlaceholder.svg"} />
-            <SidebarItem link={"/login"} text={"Texto"} icon={"src/assets/Icones/IconPlaceholder.svg"} />
-            <SidebarItem link={"painel"} text={"Texto"} icon={"src/assets/Icones/IconPlaceholder.svg"} />
-            <SidebarItem link={"dispositivos"} text={"Texto"} icon={"src/assets/Icones/IconPlaceholder.svg"} />
-            <SidebarItem link={"tarefas"} text={"Texto"} icon={"src/assets/Icones/IconPlaceholder.svg"} />
-            <SidebarItem link={"perfil"} text={"Texto"} icon={"src/assets/Icones/IconPlaceholder.svg"} />
-            <SidebarItem link={"faleconosco"} text={"Texto"} icon={"src/assets/Icones/IconPlaceholder.svg"} />
+            <SidebarItem link={"/cadastro"} text={"Cadastro"} icon={"src/assets/Icons/utilitarios/Email.svg"} classe={"IconeMenu medio"} placeholder={"Cadastro"}/>
+            <SidebarItem link={"/login"} text={"Login"} icon={"src/assets/Icons/utilitarios/Login.svg"} classe={"IconeMenu medio"} placeholder={"Cadastro"}/>
+            <SidebarItem link={"painel"} text={"Painel"} icon={"src/assets/Icons/utilitarios/Item.svg"} classe={"IconeMenu medio"} placeholder={"Cadastro"}/>
+            <SidebarItem link={"dispositivos"} text={"Dispositivos"} icon={"src/assets/Icons/utilitarios/Configuração.svg"} classe={"IconeMenu medio"} placeholder={"Cadastro"}/>
+            <SidebarItem link={"tarefas"} text={"Tarefas"} icon={"src/assets/Icons/utilitarios/Ponto.svg"} classe={"IconeMenu medio"} placeholder={"Cadastro"}/>
+            <SidebarItem link={"perfil"} text={"Perfil"} icon={"src/assets/Icons/utilitarios/Usuario.svg"} classe={"IconeMenu medio"} placeholder={"Cadastro"}/>
+            <SidebarItem link={"faleconosco"} text={"Fale Conosco"} icon={"src/assets/Icons/utilitarios/Notificação.svg"} classe={"IconeMenu medio"} placeholder={"Cadastro"}/>
         </ul>
     )
 }

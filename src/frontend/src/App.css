@@ -142,25 +142,30 @@
 .IconeMenu{
     width: var(--icon-size);
     height: var(--icon-size);
-    margin: 4px;
     color: var(--color-botao-padrao-preto);
 }
 
 .IconeMenu.medio{
     width: 32px;
     height: 32px;
-    margin: 4px;
 }
 .IconeMenu.pequeno{
     width: 24px;
     height: 24px;
-    margin: 4px;
+}
+
+.IconeMenu, 
+.IconeMenu.medio, 
+.IconeMenu.pequeno{
+    margin-right: 16px;
+    
 }
 
 .IconeMenu, 
 .IconeMenu.medio, 
 .IconeMenu.pequeno :hover{
-    color:
+    color: var(--color-botao-hover);
+    transition: transform var(--transition-speed) ease;
 }
 
 .SidebarIcones{
@@ -191,7 +196,6 @@
 
 .card{
     background-color: var(--color-branco);
-
     width: auto;
     height: auto;
     justify-content:space-between;
@@ -218,12 +222,15 @@ label{
     padding: 10px;
     border: 1px solid var(--color-botao-desativado);
     border-radius: 4px;
+    font-weight: bold;
     font-size: 1rem;
+    color: var(--color-botao-padrao-preto);
 }
 
 .campotexto input:focus,
 .campotexto textarea:focus{
-    background-color: var(--color-botao-desativado);
+    background-color: var(--color-botao-hover);
+    color: var(--color-botao-padrao-preto);
     border: var(--color-verde-claro);
 }
 
