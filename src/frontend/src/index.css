@@ -36,14 +36,28 @@ time, mark, audio, video {
     text-decoration-thickness :auto;
 }
 
-body{
-    font-family: 'inclusive-sans';
-    font-size: 16px;
+/* index.css ou App.css */
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: #ddd; /* fundo fora do "celular" */
+}
+
+#root {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.app-container {
     width: 412px;
     height: 917px;
-    margin: 0;
-    border-color: black;
-
+    overflow: hidden;
+    position: relative;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0,0,0,0.2);
 }
 
 header{

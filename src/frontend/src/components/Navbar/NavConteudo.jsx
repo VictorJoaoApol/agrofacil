@@ -1,13 +1,13 @@
-function NavConteudo() {
-    return (
+import { useSidebar } from "../Sidebar/Sidebar"
 
-        <>
-            <div className="NavConteudo">
-                <button type="button" onclick></button>
-            </div>
-        </>
+function NavConteudo() {
+    const { toggleSidebar } = useSidebar()
+
+    return (
+        <div className="NavConteudo">
+            <button onClick={toggleSidebar}>☰</button>
+        </div>
     )
 }
-
 
 export default NavConteudo
