@@ -5,7 +5,7 @@ function NavConteudo() {
 
     return (
         <div className="NavConteudo">
-            <button onClick={toggleSidebar}>☰</button>
+            <button onClick={toggleSidebar}></button>
         </div>
     )
 }

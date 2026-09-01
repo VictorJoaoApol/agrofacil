@@ -10,6 +10,30 @@
     --debug-sidebar-menu: #1abc9c;
     --debug-sidebar-icones: #c83bff;
     --debug-nav-link: #fde826;
+
+    --color-botao-padrao-laranja: #EF9300;
+    --color-botao-padrao-branco: #E6E6E6;
+    --color-botao-padrao-preto: #150C00;
+    --color-botao-hover: #F0BB49;
+    --color-botao-pressionado: #E6820E;
+    --color-botao-desativado: #9D9D9D;
+    --color-botao-destacado: #6AD3F8;
+
+    --color-branco-claro: #F0F0F0;
+    --color-branco: #E6E6E6;
+    --color-branco-escuro: #CECECE;
+    --color-verde-claro: #A7C75C;
+    --color-verde: #70A826;
+    --color-verde-escuro: #4C9713;
+    --color-castanho-claro: #FFDABE;
+    --color-castanho: #DDAF8D;
+    --color-castanho-escuro: #A27868;
+    --color-laranja-claro: #F9D717;
+    --color-laranja: #EF9300;
+    --color-laranja-escuro: #EA5E13;
+    --color-azul-claro: #BDEEFF;
+    --color-azul: #6AD3F8;
+    --color-azul-escuro: #4090AC;
 }
 
 
@@ -22,7 +46,7 @@
     height: var(--navbar-height);
     padding: 8px 0px;
     position: fixed;
-    background-color: #F0F0F0;
+    background-color: var(--color-branco-claro);
     z-index: 5;
 }
 
@@ -71,7 +95,7 @@
     background: none;
     border: none;
     font-size: 20px;
-    color: #fff;
+    color: var(--color-branco-claro);
     cursor: pointer;
 }
 
@@ -82,7 +106,7 @@
     background: none;
     border: none;
     font-size: 20px;
-    color: #fff;
+    color: var(--color-branco-claro);
     cursor: pointer;
 }
 
@@ -119,13 +143,24 @@
     width: var(--icon-size);
     height: var(--icon-size);
     margin: 4px;
+    color: var(--color-botao-padrao-preto);
 }
 
-.IconeMenu.medio,
+.IconeMenu.medio{
+    width: 32px;
+    height: 32px;
+    margin: 4px;
+}
 .IconeMenu.pequeno{
     width: 24px;
     height: 24px;
     margin: 4px;
+}
+
+.IconeMenu, 
+.IconeMenu.medio, 
+.IconeMenu.pequeno :hover{
+    color:
 }
 
 .SidebarIcones{
@@ -155,7 +190,7 @@
 }
 
 .card{
-    background-color: #f6f6f6;
+    background-color: var(--color-branco);
 
     width: auto;
     height: auto;
@@ -181,31 +216,31 @@ label{
 .campotexto input,
 .campotexto textarea{
     padding: 10px;
-    border: 1px solid #ccc;
+    border: 1px solid var(--color-botao-desativado);
     border-radius: 4px;
     font-size: 1rem;
 }
 
 .campotexto input:focus,
 .campotexto textarea:focus{
-    background-color: #ddd;
-    border: #1abc9c;
+    background-color: var(--color-botao-desativado);
+    border: var(--color-verde-claro);
 }
 
 input[type=submit]{
-    background-color: #1abc9c;
-    color: #fff;
+    background-color: var(--color-verde-claro);
+    color: var(--color-branco-claro);
     font-weight: bold;
 }
 
 input[type=submit]{
-    background-color: #1abc9c;
-    color: #fff;
+    background-color: var(--color-verde-claro);
+    color: var(--color-branco-claro);
     font-weight: bold;
 }
 
 .dispositivo{
-    background-color: #E6E6E6;
+    background-color: var(--color-branco);
     width: 296px;
     height: 80px;
     display: flex;
@@ -216,7 +251,7 @@ input[type=submit]{
 .fundoicone{
     height: 64px;
     width: 64px;
-    background-color: #A7C75C;
+    background-color: var(--color-verde-claro);
 }
 
 .descricaodispositivo{

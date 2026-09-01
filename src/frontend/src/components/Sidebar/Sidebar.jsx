@@ -57,7 +57,7 @@ function SidebarInterior() {
 
     return (
         <div className="SidebarInterior">
-            <button className="FecharSidebar" onClick={toggleSidebar}>✕</button>
+            <button className="FecharSidebar" onClick={toggleSidebar}></button>
             <SidebarMenu />
             <SidebarIcones />
         </div>
