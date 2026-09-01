@@ -22,7 +22,7 @@
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     } catch (PDOException $e) {
-        // Caso ocorra um erro, o captura graciosamente.
-        echo "Erro na conexão: " . $e->getMessage();
+        // Caso ocorra um erro, o captura e encerra o script.
+        die("Erro na conexão: " . $e->getMessage());
     }
 ?>
