@@ -64,12 +64,15 @@
         // Prepara statement do PDO para concretizar cadastro.
         $stmt = $pdo->prepare("INSERT INTO `agrofacil_db`.`TB_Usuarios` (nome, email, hash_senha) VALUES (:nome, :email, :hash_senha);");
 
+        
         // Passa os parâmetros.
-        $stmt->execute([
-            "nome" => $nome,
-            "email" => $email,
-            "hash_senha" => $hash_senha,
-        ]);
+        $stmt->bindParam(':nome', $nome);
+        $stmt->bindParam(':email', $email);
+        $stmt->bindParam(':hash_senha', $hash_senha);
+
+
+        // Executa o $stmt.
+        $stmt->execute();
 
 
         // Manda mensagem de sucesso caso tudo funcione, assim como o ID do cliente cadastrado.
