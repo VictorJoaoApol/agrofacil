@@ -1,6 +1,6 @@
 :root{
     --sidebar-width: 70%;
-    --navbar-height: 62px;
+    --navbar-height: 80px;
     --sidebar-item-height: 46px;
     --icon-size: 40px;
     --transition-speed: 0.3s;
@@ -36,6 +36,14 @@
     --color-azul-escuro: #4090AC;
 }
 
+.iconePerfil img{
+    width: 56px;
+    height: 56px;
+    border-radius: 100%;
+    border-color: black;
+    border-style: solid;
+    border-width: 2px;
+}
 
 .Navbar{
     align-items: center;
@@ -44,7 +52,7 @@
     justify-content: space-between;
     width: 100%;
     height: var(--navbar-height);
-    padding: 8px 0px;
+    padding: auto 0px;
     position: fixed;
     background-color: var(--color-branco-claro);
     z-index: 5;
@@ -56,7 +64,7 @@
     display: flex;
     flex-wrap: wrap;
     height: 100%;
-    width: fit-content;
+    width: 100%;
     justify-content: space-between;
     padding: 0px 12px;
 }
@@ -269,4 +277,20 @@ input[type=submit]{
 .switch {
   height: 24px;
   width: 48px;
+}
+
+.icone-Nav{
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 8px;
+    cursor: pointer;
+    width: 64px;
+    height: 64px;
+    border-radius: 64px;
+}
+
+.icone-Nav img{
+    width: 64px;
+    height: 64px;
 }

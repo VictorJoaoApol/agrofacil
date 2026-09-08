@@ -59,7 +59,7 @@ function SidebarInterior() {
 
     return (
         <div className="SidebarInterior">
-            <button className="FecharSidebar" onClick={toggleSidebar}></button>
+            <button className="FecharSidebar" onClick={toggleSidebar}><img src="src\assets\Icons\botao\Fechar.svg"></img></button>
             <SidebarMenu />
             <SidebarIcones />
         </div>

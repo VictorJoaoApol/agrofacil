@@ -20,7 +20,6 @@ import Perfil from './pages/Perfil/Perfil.jsx'
 function App() {
 
   return (
-    <div className="app-container">
       <Routes>
         <Route path='/' element={<Teste />}></Route>
         <Route path="*" element={<NotFound />}></Route>
@@ -38,7 +37,6 @@ function App() {
           <Route path="faleconosco" element={<FaleConosco />}></Route>
         </Route>
       </Routes>
-    </div>
   )
 }
 

@@ -36,28 +36,17 @@ time, mark, audio, video {
     text-decoration-thickness :auto;
 }
 
-/* index.css ou App.css */
+button{
+    all: unset;
+    cursor: pointer;
+}
+
 html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    background-color: #ddd; /* fundo fora do "celular" */
-}
-
-#root {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-}
-
-.app-container {
-    width: 412px;
-    height: 917px;
-    overflow: hidden;
-    position: relative;
-    background-color: #fff;
-    box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    background-color: #ddd;
+    overflow-y: auto;
 }
 
 header{
@@ -69,7 +58,7 @@ header{
 }
 
 main{
-    padding: 0px pxpx;
+    padding: 0px;
 }
 
 h1{
