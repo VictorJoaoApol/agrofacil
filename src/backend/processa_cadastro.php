@@ -1,7 +1,22 @@
 <?php
+    // Inicia sessão.
+    session_start();
+
+    // Verifica se o usuário já está logado.
+    if (isset($_SESSION["id_usuario"])) {
+        // Conflict -> Conflito.
+        http_response_code(409);
+        echo json_encode([
+            "status" => "ja_logado",
+            "mensagem" => "Usuário já está logado!"
+        ]);
+        die;
+    }
+
     // Manda cabeçalhos HTTP necessários para lidar com a requisição.
     header("Content-Type: application/json");
     header("Access-Control-Allow-Origin: http://localhost:5137");
+    header("Access-Control-Allow-Credentials: true");
 
     // Importa a conexão com o banco de dados e função de validação da entrada do formulário.
     require_once __DIR__ . '/db/connection.php';
