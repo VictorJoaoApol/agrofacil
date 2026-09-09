@@ -1,7 +1,7 @@
 <?php
     // Manda cabeçalhos HTTP necessários para lidar com a requisição.
     header("Content-Type: application/json");
-    header("Access-Control-Allow-Origin: *"); // Tirar "*" depois.
+    header("Access-Control-Allow-Origin: http://localhost:5137");
 
     // Importa a conexão com o banco de dados e função de validação da entrada do formulário.
     require_once __DIR__ . '/db/connection.php';
