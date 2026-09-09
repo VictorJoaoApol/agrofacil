@@ -97,7 +97,7 @@
             "mensagem" => "Usuário cadastrado com sucesso!",
             "id" => $pdo->lastInsertId()
         ]);
-
+        exit;
 
     } catch (PDOException $e) {
         // Verifica se o erro se deu devido à quebra o UNIQUE do email (código 23000).

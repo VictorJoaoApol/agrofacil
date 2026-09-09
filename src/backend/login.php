@@ -114,7 +114,7 @@
             "status" => "sucesso",
             "mensagem" => "Usuário logado com sucesso!"
         ]);
-        
+        exit;
 
     } catch (PDOException $e) {
         // Manda mensagem de erro interno do servidor caso hajam outros problemas ao logar.
