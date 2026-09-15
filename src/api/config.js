@@ -1,1 +1,1 @@
-export const API_URL = "http://localhost/agrofacil/api";
+export const API_URL = "http://localhost/agrofacil/src/api";

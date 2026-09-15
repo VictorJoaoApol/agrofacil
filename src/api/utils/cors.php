@@ -7,7 +7,7 @@
     header("Access-Control-Allow-Headers: Content-Type");           // Permite requisições com conteúdo customizado
 
     // Verifica se o React está fazendo algum setup e imediatamente retorna sucesso.
-    if ($_SERVER["REQUEST_METHOD" == 'OPTIONS']) {
+    if ($_SERVER["REQUEST_METHOD"] == 'OPTIONS') {
         http_response_code(200);
         exit;
     }

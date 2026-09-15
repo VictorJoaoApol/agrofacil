@@ -1,4 +1,7 @@
 <?php
+    // Importa os headers necessários para lidar com a requisição.
+    require_once __DIR__ . '/../utils/cors.php';
+
     // Inicia sessão.
     session_start();
 
@@ -12,10 +15,7 @@
         exit;
     }
 
-    // Importa os headers necessários para lidar com a requisição.
-    require_once __DIR__ . '/../utils/cors.php';
 
-    
     // Esvazia o array da sessão.
     $_SESSION = [];
 
