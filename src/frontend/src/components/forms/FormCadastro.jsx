@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router";
+import { cadastro } from "../../../../api/auth";
 
 function FormCadastro() {
   // Cria estado para cada dado, erros e estado de envio.
@@ -24,16 +25,10 @@ function FormCadastro() {
     // Bloco try..catch para evitar erros mal-apresentados.
     try {
       // Envia dados do formulário pro PHP e espera a resposta.
-      const resposta = await fetch("http://localhost/agrofacil/src/api/cadastro.php", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ nome, email, senha }),
-      });
+      const resposta = await cadastro(nome, email, senha);
 
-      // Espera a resposta chegar e armazena ela como JSON.
-      const resultado = await resposta.json();
+      // Armazena a resposta como JSON.
+      const resultado = resposta.json();
 
       // Se o código da resposta não for de sucesso, lança erro. 
       if (!resposta.ok) {
