@@ -24,7 +24,7 @@ function FormCadastro() {
     // Bloco try..catch para evitar erros mal-apresentados.
     try {
       // Envia dados do formulário pro PHP e espera a resposta.
-      const resposta = await fetch("http://localhost/api/processa_cadastro.php", {
+      const resposta = await fetch("http://localhost/agrofacil/src/api/cadastro.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
