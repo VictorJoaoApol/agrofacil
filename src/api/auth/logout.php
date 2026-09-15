@@ -2,12 +2,6 @@
     // Inicia sessão.
     session_start();
 
-    // Manda cabeçalhos HTTP necessários para lidar com a requisição.
-    header("Content-Type: application/json");
-    header("Access-Control-Allow-Origin: http://localhost:5173");
-    header("Access-Control-Allow-Credentials: true");
-
-
     // Checa se há um usuário logado.
     if (!isset($_SESSION["id_usuario"])) {
         http_response_code(200);
@@ -18,7 +12,10 @@
         exit;
     }
 
+    // Importa os headers necessários para lidar com a requisição.
+    require_once __DIR__ . '/../utils/cors.php';
 
+    
     // Esvazia o array da sessão.
     $_SESSION = [];
 
