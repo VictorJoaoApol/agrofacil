@@ -19,9 +19,9 @@
     header("Access-Control-Allow-Credentials: true"); // Permite envio de cookies pro front.
 
     // Importa a conexão com o banco de dados e função de validação da entrada do formulário.
-    require_once __DIR__ . '/db/connection.php';
-    require_once __DIR__ . '/utils/valida_entrada_formulario.php';
-    require_once __DIR__ . '/utils/valida_senha.php';
+    require_once __DIR__ . '../db/connection.php';
+    require_once __DIR__ . '../utils/valida_entrada_formulario.php';
+    require_once __DIR__ . '../utils/valida_senha.php';
 
 
     try {
