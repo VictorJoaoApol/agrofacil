@@ -2,7 +2,9 @@ import { Routes, Route } from 'react-router'
 import './App.css'
 
 import Teste from './pages/Teste.jsx'
+import Teste1 from './pages/Teste1.jsx'
 import NotFound from './pages/NotFound.jsx'
+
 import Home from './pages/Home/Home.jsx'
 import Overview from './pages/Home/Overview.jsx'
 import FaleConosco from './pages/Home/FaleConosco.jsx'
@@ -25,6 +27,7 @@ function App() {
         <Route path="*" element={<NotFound />}></Route>
         <Route path="/cadastro" element={<Cadastro />}></Route>
         <Route path="/login" element={<Login />}>
+        <Route path="teste1" element={<Teste1 />}></Route>
           <Route index element={<FormLogin />}></Route>
           <Route path="recuperar-senha" element={<RecuperarSenha />}></Route>
         </Route>

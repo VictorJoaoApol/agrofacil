@@ -10,6 +10,7 @@ function Home() {
             <p><NavLink to = "tarefas" className = "NavLink">Tarefas</NavLink></p>
             <p><NavLink to = "perfil" className = "NavLink">Perfil</NavLink></p>
             <p><NavLink to = "faleconosco" className = "NavLink">Fale Conosco</NavLink></p>
+            <p><NavLink to = "teste1" className = "NavLink">Teste1</NavLink></p>
         </>
     )
 }

@@ -44,6 +44,7 @@ function SidebarMenu() {
             <SidebarItem link={"tarefas"} text={"Tarefas"} icon={"src/assets/Icons/utilitarios/Ponto.svg"} classe={"IconeMenu medio"} placeholder={"Cadastro"}/>
             <SidebarItem link={"perfil"} text={"Perfil"} icon={"src/assets/Icons/utilitarios/Usuario.svg"} classe={"IconeMenu medio"} placeholder={"Cadastro"}/>
             <SidebarItem link={"faleconosco"} text={"Fale Conosco"} icon={"src/assets/Icons/utilitarios/Notificação.svg"} classe={"IconeMenu medio"} placeholder={"Cadastro"}/>
+            <SidebarItem link={"teste1"} text={"teste1"} icon={"src/assets/Icons/utilitarios/Notificação.svg"} classe={"IconeMenu medio"} placeholder={"Teste1"}/>
         </ul>
     )
 }
