@@ -81,8 +81,13 @@
     transition: transform var(--transition-speed) ease;
 }
 
-.SidebarLayout.fechada{ transform: translateX(-100%); }
-.SidebarLayout.aberta{ transform: translateX(0); }
+.SidebarLayout.fechada {
+    transform: translateX(-100%);
+}
+
+.SidebarLayout.aberta {
+    transform: translateX(0);
+}
 
 .SidebarInterior{
     position: relative;
@@ -157,7 +162,8 @@
     width: 32px;
     height: 32px;
 }
-.IconeMenu.pequeno{
+
+.IconeMenu.pequen{
     width: 24px;
     height: 24px;
 }
@@ -166,8 +172,7 @@
 .IconeMenu.medio, 
 .IconeMenu.pequeno{
     margin-right: 16px;
-    
-}
+    }
 
 .IconeMenu, 
 .IconeMenu.medio, 
@@ -189,7 +194,7 @@
     height: 917px;
     width: 412px;
 }
-
+ 
 .icon{
     width: 222px;
     height: 222px;
@@ -268,7 +273,6 @@ input[type=submit]{
     width: 64px;
     background-color: var(--color-verde-claro);
 }
-
 .descricaodispositivo{
     height: fit-content;
     width: fit-content;
