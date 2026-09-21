@@ -36,3 +36,18 @@ export async function login(email, senha) {
         ...(await resposta.json()),
     };
 }
+
+
+// Usado em frontend/src/components/forms/Logout.jsx
+export async function logout() {
+    const resposta = await fetch(`${API_URL}/auth/logout.php`, {
+        method: "POST",
+        credentials: "include",
+    });
+
+    // Espera a resposta chegar e a retorna.
+    return {
+        ok: resposta.ok,
+        ...(await resposta.json()),
+    };
+}

@@ -32,7 +32,7 @@
             // Bad Request -> Requisição inválida.
             http_response_code(400);
             echo json_encode([
-                "status" => "erro_validacao",
+                "status" => "erro_validacao_requisicao",
                 "mensagem" => "Corpo da requisição formado incorretamente."
             ]);
             die;
@@ -44,7 +44,7 @@
             // Bad Request -> Requisição inválida.
             http_response_code(400);
             echo json_encode([
-                "status" => "erro_validacao",
+                "status" => "erro_validacao_requisicao",
                 "mensagem" => "Preencha todas as entradas obrigatórias."
             ]);
             die;
@@ -63,7 +63,7 @@
             // Unprocessable Content -> Conteúdo improcessável.
             http_response_code(422);
             echo json_encode([
-                "status" => "erro_validacao",
+                "status" => "erro_validacao_credencial",
                 "mensagem" => "Senha inválida: " . ($resultado_senha["erro"] ?? "Tente novamente!")
             ]);
             die;
