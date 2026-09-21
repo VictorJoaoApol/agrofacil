@@ -3,9 +3,10 @@ import FormCadastro from '../../components/forms/FormCadastro'
 
 function Cadastro() {
   return (
-    <div className="fundo">
-      <header>
-        <img className="icon" src={logo} />
+    // A classe .tela-fundo será responsável por centralizar tudo e colocar o background
+    <div className="tela-fundo">
+      <header className="cabecalho-logo">
+        <img className="icon-logo" src={logo} alt="Logo" />
       </header>
 
       <FormCadastro />
@@ -13,4 +14,4 @@ function Cadastro() {
   )
 }
 
-export default Cadastro
+export default Cadastro;

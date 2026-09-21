@@ -294,3 +294,241 @@ input[type=submit]{
     width: 64px;
     height: 64px;
 }
+.form-card {
+  background-color: #ffffff;
+  border-radius: 24px;
+  padding: 40px 30px;
+  width: 90%;
+  max-width: 400px;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2); 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.input-group {
+  width: 100%;
+  margin-bottom: 15px;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #000; 
+  border-radius: 4px;
+  font-size: 16px;
+}
+.btn-cadastrar {
+  background-color: #72cff8; 
+  color: #000;
+  font-weight: bold;
+  border: none;
+  border-radius: 12px;
+  padding: 12px 40px;
+  font-size: 18px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.3);
+  margin-top: 20px;
+  cursor: pointer;
+}
+.container-principal {
+  background-image: url('/src/assets/img/Logo.png');
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding-top: 40px; 
+}
+
+.tela-fundo {
+  background-image: url('/src/assets/img/Campos.png'); 
+  background-size: cover;
+  background-position: center;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; 
+  padding: 20px;
+}
+
+.cabecalho-logo {
+  margin-bottom: -15px; 
+  z-index: 2; 
+}
+
+.icon-logo {
+  width: 160px; 
+  height: auto;
+}
+
+
+.card-cadastro {
+  background-color: #ffffff;
+  border-radius: 16px;
+  padding: 2rem 3rem;
+  width: 60%;
+  max-width: 320px;
+  text-align: center;
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.titulo-cadastro {
+  color: #4a2c11; 
+  font-size: 26px;
+  margin: 0;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+  margin-bottom: 25px;
+}
+
+
+.formulario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.campotexto {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  margin-bottom: 15px;
+  font-size: 12px;
+  font-weight: 500;
+  color: #000;
+}
+
+
+.campotexto input:focus {
+  border-color: #61c6ff; 
+}
+
+
+.btn-cadastrar {
+  background-color: #70d4fc; 
+  color: #000;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 0;
+  width: 65%; 
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 15px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.25); 
+  transition: transform 0.1s, opacity 0.2s;
+}
+
+.btn-cadastrar:active {
+  transform: scale(0.97);
+}
+
+.btn-cadastrar:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+  box-shadow: none;
+}
+
+
+.rodape-cadastro {
+  margin-top: 25px;
+  font-size: 13px;
+  font-weight: 500;
+  color: #000;
+}
+
+.link-login {
+  color: #f39c12;
+  font-weight: bold;
+  text-decoration: none;
+  margin-left: 5px;
+}
+
+.link-login:hover {
+  text-decoration: underline;
+}
+
+
+.erro {
+  color: red;
+  font-size: 13px;
+  margin: 5px 0;
+}
+
+
+
+.cabecalho-logo {
+  margin-bottom: 50px; 
+  z-index: 2;
+}
+
+
+.campotexto input {
+  width: 100%;
+  align-items: center;
+
+  padding: 12px 10px; 
+  margin-top: 5px;
+  border: 2px solid #000000; 
+  border-radius: 2px; 
+  font-size: 14px;
+  box-sizing: border-box;
+  outline: none;
+}
+
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+    -webkit-text-fill-color: #000 !important;
+}
+
+
+.campotexto input::placeholder {
+  color: #a0a0a0;
+  font-weight: 500;
+}
+
+
+.btn-cadastrar {
+  background-color: #61d0ff; 
+  color: #000;
+  border: none;
+  border-radius: 12px; 
+  padding: 14px 0;
+  width: 70%; 
+  font-size: 16px;
+  font-weight: 600; 
+  cursor: pointer;
+  margin-top: 20px;
+ 
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.25), 0px 3px 0px rgba(97, 208, 255, 0.5); 
+  transition: transform 0.1s;
+}
+
+
+.rodape-cadastro {
+  margin-top: 30px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #000;
+}
+
+.link-login {
+  color: #f39c12;
+  font-weight: 700;
+  text-decoration: none;
+  margin-left: 5px;
+}
