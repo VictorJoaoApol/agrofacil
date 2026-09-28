@@ -23,11 +23,11 @@ function App() {
 
   return (
       <Routes>
-        <Route path='/' element={<Teste />}></Route>
+        <Route path='/' element={<Teste1 />}></Route>
         <Route path="*" element={<NotFound />}></Route>
         <Route path="/cadastro" element={<Cadastro />}></Route>
         <Route path="/login" element={<Login />}>
-        <Route path="teste1" element={<Teste1 />}></Route>
+        <Route path="teste" element={<Teste />}></Route>
           <Route index element={<FormLogin />}></Route>
           <Route path="recuperar-senha" element={<RecuperarSenha />}></Route>
         </Route>

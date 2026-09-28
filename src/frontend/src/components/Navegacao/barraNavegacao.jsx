@@ -1,24 +1,20 @@
 import { NavLink } from "react-router";
+import { Item, Ponto, Usuario } from "../../assets/Icons";
 
-function ItemNavegacao({ link, icone, placeholder }){
-    return(
-        <>
-            <NavLink to={link} className="">
-                <img src={icone} className="" alt={placeholder}></img>
-            </NavLink>
-            
-        </>
+function ItemNavegacao({ link, icone: Icone, placeholder }) {
+    return (
+        <NavLink to={link}>
+            <Icone aria-label={placeholder} role="img" />
+        </NavLink>
     )
 }
 
-function BarraNavegacao(){
-    return(
+function BarraNavegacao() {
+    return (
         <div className="barraNavegacao">
-            <ItemNavegacao link={""} icone={""} placeholder={""}/>
-            <ItemNavegacao link={""} icone={""} placeholder={""}/>
-            <ItemNavegacao link={""} icone={""} placeholder={""}/>
-            <ItemNavegacao link={""} icone={""} placeholder={""}/>
-            <ItemNavegacao link={""} icone={""} placeholder={""}/>
+            <ItemNavegacao link="/painel" icone={Item} placeholder="Painel" />
+            <ItemNavegacao link="/tarefas" icone={Ponto} placeholder="Tarefas" />
+            <ItemNavegacao link="/perfil" icone={Usuario} placeholder="Perfil" />
         </div>
     )
 }

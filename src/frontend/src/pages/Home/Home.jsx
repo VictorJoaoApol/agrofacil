@@ -1,4 +1,5 @@
 import BarraNavegacao from "../../components/Navegacao/barraNavegacao.jsx";
+import { Seta } from "../../assets/Icons";
 
 function Home() {
     return (
@@ -17,7 +18,7 @@ function Home() {
                 <div className="cardConteudo">
                     <h1 className="cardTitulo">Tarefas</h1>
                     <p className="cardTexto">Veja suas tarefas, metas e progresso nos seus objetivos</p>
-                    <button className="cardBotao">Vamos<img src="src/assets/Icons/botao/Seta.svg"></img></button>
+                    <button className="cardBotao">Vamos<Seta aria-hidden="true" /></button>
                 </div>
             </div>
 
@@ -25,7 +26,7 @@ function Home() {
                 <div className="cardConteudo">
                     <h1 className="cardTitulo">Painel</h1>
                     <p className="cardTexto">Veja informações sobree seu uso de água, áreas de irrigação e o clima!</p>
-                    <button className="cardBotao">Vamos<img src="src/assets/Icons/botao/Seta.svg"></img></button>
+                    <button className="cardBotao">Vamos<Seta aria-hidden="true" /></button>
                 </div>
                 <div className="cardImg">
                     <img src="src/assets/img/Painel.png" className="cardIcone"></img>
