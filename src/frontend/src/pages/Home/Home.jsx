@@ -1,18 +1,41 @@
-import { NavLink } from "react-router"
+import BarraNavegacao from "../../components/Navegacao/barraNavegacao.jsx";
 
 function Home() {
     return (
+
         <>
-            <p><NavLink to = "/cadastro" className = "NavLink">Cadastro</NavLink></p>
-            <p><NavLink to = "/login" className = "NavLink">Login</NavLink></p>
-            <p><NavLink to = "painel" className = "NavLink">Painel</NavLink></p>
-            <p><NavLink to = "dispositivos" className = "NavLink">Dispositivos</NavLink></p>
-            <p><NavLink to = "tarefas" className = "NavLink">Tarefas</NavLink></p>
-            <p><NavLink to = "perfil" className = "NavLink">Perfil</NavLink></p>
-            <p><NavLink to = "faleconosco" className = "NavLink">Fale Conosco</NavLink></p>
-            <p><NavLink to = "teste1" className = "NavLink">Teste1</NavLink></p>
+            <header>
+                <img src="src/assets/img/Logo.png" className="icon"></img>
+                <h1>Bem vindo, Usuário!</h1>
+                <p>O que vamos fazer hoje?</p>
+            </header>
+
+            <div className="cardHome">
+                <div className="cardImg">
+                    <img src="src/assets/img/Tarefas.png" className="cardIcone"></img>
+                </div>
+                <div className="cardConteudo">
+                    <h1 className="cardTitulo">Tarefas</h1>
+                    <p className="cardTexto">Veja suas tarefas, metas e progresso nos seus objetivos</p>
+                    <button className="cardBotao">Vamos<img src="src/assets/Icons/botao/Seta.svg"></img></button>
+                </div>
+            </div>
+
+            <div className="cardHome">
+                <div className="cardConteudo">
+                    <h1 className="cardTitulo">Painel</h1>
+                    <p className="cardTexto">Veja informações sobree seu uso de água, áreas de irrigação e o clima!</p>
+                    <button className="cardBotao">Vamos<img src="src/assets/Icons/botao/Seta.svg"></img></button>
+                </div>
+                <div className="cardImg">
+                    <img src="src/assets/img/Painel.png" className="cardIcone"></img>
+                </div>
+            </div>
+
+            <BarraNavegacao />
         </>
-    )
+        
+    );
 }
 
-export default Home
+export default Home;
