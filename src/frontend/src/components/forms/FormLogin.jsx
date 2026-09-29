@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { NavLink, useNavigate } from "react-router";
 import { login } from "../../../../api/auth";
+import useAuth from "../../hooks/useAuth";
 
 
 function FormLogin() {
@@ -12,6 +13,9 @@ function FormLogin() {
 
   // Utilizado para redirecionar o usuário para outra parte do site.
   const navigate = useNavigate();
+
+  // Usado para avisar o AuthContext que agora existe uma sessão ativa.
+  const { checarSessao } = useAuth();
 
   // Lida com a ação de envio do formulário.
   async function handleSubmit(event) {
@@ -28,27 +32,23 @@ function FormLogin() {
       // Envia dados do formulário pro PHP e espera a resposta.
       const resultado = await login(email, senha);
 
-      // Caso hajam erros do backend, encerra o processo.
-      if (!resultado.ok) {
+      // Caso hajam erros do backend que não sejam "já logado", encerra o processo.
+      // ("ja_logado" vem com HTTP 409, então resultado.ok já é false nesse caso.)
+      if (!resultado.ok && resultado.status !== "ja_logado") {
         throw new Error(resultado.mensagem || "Erro ao fazer login");
       }
 
-      // Manda o usuário para a home se já logado.
-      if (resultado.status === "ja_logado") {
-        navigate("/app");
-        return;
-      }
-
-      // Se funcionar, redireciona para a home (provisória).
+      // Login OK (ou sessão já ativa): busca os dados da sessão atual no
+      // backend e atualiza o AuthContext antes de navegar, garantindo que
+      // as rotas protegidas já reconheçam o usuário como autenticado.
+      await checarSessao();
       navigate("/app");  
-    } 
-    catch (err) {
 
+    } catch (err) {
       // Define a mensagem de erro.
       setErro(err.message);
-    } 
-    finally {
 
+    } finally {
       // Remove o status de enviando e limpa a senha.
       setSenha("");
       setEnviando(false);
@@ -77,6 +77,7 @@ function FormLogin() {
 
         {/* Input de Senha */}
         <label className="campotexto">
+          Senha:
           <input
             type="password"
             placeholder="Digite sua senha..."

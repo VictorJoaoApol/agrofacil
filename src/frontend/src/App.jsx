@@ -1,23 +1,25 @@
-import { Routes, Route } from 'react-router'
-import './App.css'
+import { Routes, Route } from 'react-router';
+import './App.css';
 
-import Teste from './pages/Teste.jsx'
-import Teste1 from './pages/Teste1.jsx'
-import NotFound from './pages/NotFound.jsx'
+import Teste1 from './pages/Teste1.jsx';
+import NotFound from './pages/NotFound.jsx';
 
-import Home from './pages/Home/Home.jsx'
-import Overview from './pages/Home/Overview.jsx'
-import FaleConosco from './pages/Home/FaleConosco.jsx'
+import Home from './pages/Home/Home.jsx';
+import Overview from './pages/Home/Overview.jsx';
+import FaleConosco from './pages/Home/FaleConosco.jsx';
 
-import Cadastro from './pages/RegistrosUsuarios/Cadastro.jsx'
-import Login from './pages/RegistrosUsuarios/Login.jsx'
-import FormLogin from './components/forms/FormLogin.jsx'
-import RecuperarSenha from './pages/RegistrosUsuarios/RecuperarSenha.jsx'
+import Cadastro from './pages/RegistrosUsuarios/Cadastro.jsx';
+import Login from './pages/RegistrosUsuarios/Login.jsx';
+import FormLogin from './components/forms/FormLogin.jsx';
+import RecuperarSenha from './pages/RegistrosUsuarios/RecuperarSenha.jsx';
 
-import Dispositivos from './pages/Dispositivos/Dispositivos.jsx'
-import Tarefas from './pages/Tarefas/Tarefas.jsx'
-import Painel from './pages/Painel/Painel.jsx'
-import Perfil from './pages/Perfil/Perfil.jsx'
+import Dispositivos from './pages/Dispositivos/Dispositivos.jsx';
+import Tarefas from './pages/Tarefas/Tarefas.jsx';
+import Painel from './pages/Painel/Painel.jsx';
+import Perfil from './pages/Perfil/Perfil.jsx';
+
+import ProtectedRoute from './routes/ProtectedRoute.jsx';
+import PublicRoute from './routes/PublicRoute.jsx';
 
 function App() {
 
@@ -25,22 +27,30 @@ function App() {
       <Routes>
         <Route path='/' element={<Teste1 />}></Route>
         <Route path="*" element={<NotFound />}></Route>
-        <Route path="/cadastro" element={<Cadastro />}></Route>
-        <Route path="/login" element={<Login />}>
-        <Route path="teste" element={<Teste />}></Route>
-          <Route index element={<FormLogin />}></Route>
-          <Route path="recuperar-senha" element={<RecuperarSenha />}></Route>
+
+        {/* Apenas para usuários não logados */}
+        <Route element={<PublicRoute />}>
+          <Route path="/cadastro" element={<Cadastro />}></Route>
+          <Route path="/login" element={<Login />}>
+            <Route path="teste1" element={<Teste1 />}></Route>
+            <Route index element={<FormLogin />}></Route>
+            <Route path="recuperar-senha" element={<RecuperarSenha />}></Route>
+          </Route>
         </Route>
-        <Route path="/app" element={<Home />}>
-          <Route index element={<Overview />}></Route>
-          <Route path="tarefas" element={<Tarefas />}></Route>
-          <Route path="dispositivos" element={<Dispositivos />}></Route>
-          <Route path="painel" element={<Painel />}></Route>
-          <Route path="perfil" element={<Perfil />}></Route>
-          <Route path="faleconosco" element={<FaleConosco />}></Route>
+
+        {/* Apenas para usuários logados */}
+        <Route path="/app" element={<ProtectedRoute />}>
+          <Route element={<Home />}>
+            <Route index element={<Overview />}></Route>
+            <Route path="tarefas" element={<Tarefas />}></Route>
+            <Route path="dispositivos" element={<Dispositivos />}></Route>
+            <Route path="painel" element={<Painel />}></Route>
+            <Route path="perfil" element={<Perfil />}></Route>
+            <Route path="faleconosco" element={<FaleConosco />}></Route>
+          </Route>
         </Route>
       </Routes>
-  )
+  );
 }
 
-export default App
+export default App;

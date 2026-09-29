@@ -51,3 +51,18 @@ export async function logout() {
         ...(await resposta.json()),
     };
 }
+
+
+// Usado em frontend/src/context/AuthContext.jsx
+export async function verificarSessao() {
+    const resposta = await fetch(`${API_URL}/auth/sessao.php`, {
+        method: "GET",
+        credentials: "include",
+    });
+
+    // Espera a resposta chegar e a retorna.
+    return {
+        ok: resposta.ok,
+        ...(await resposta.json()),
+    };
+}
