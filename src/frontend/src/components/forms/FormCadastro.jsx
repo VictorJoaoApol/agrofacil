@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { NavLink, useNavigate } from "react-router"; 
+import { NavLink, useNavigate } from "react-router";
 import { cadastro } from "../../../../api/auth";
 
 function FormCadastro() {
@@ -9,28 +9,37 @@ function FormCadastro() {
   const [erro, setErro] = useState(null);
   const [enviando, setEnviando] = useState(false);
 
+  // Utilizado para redirecionar o usuário para outra parte do site.
   const navigate = useNavigate();
 
+  // Lida com a ação de envio do formulário.
   async function handleSubmit(event) {
+
+    // Evita que a ação padrão de envio do formulário ocorra
     event.preventDefault();
+
+    // Define estado de envio.
     setErro(null);
     setEnviando(true);
 
     try {
-      const resposta = await cadastro(nome, email, senha);
-      const resultado = await resposta.json(); // Adicionado 'await' aqui caso sua API retorne Promise no json()
-
-      if (!resposta.ok) {
+      const resultado = await cadastro(nome, email, senha);
+      
+      if (!resultado.ok) {
         throw new Error(resultado.mensagem || "Erro desconhecido ao cadastrar");
       }
       navigate("/login");
+
     } catch (err) {
       setErro(err.message);
+
     } finally {
+      // Remove o status de enviando e limpa a senha.
       setSenha("");
       setEnviando(false);
     }
   }
+
 
   return (
     // Este é o cartão branco
@@ -52,22 +61,23 @@ function FormCadastro() {
 
         {/* Input de Email */}
         <label className="campotexto">
-          Email
+          Email:
           <input
             type="email"
-            placeholder="Exemplo@Gmail.com"
+            placeholder="exemplo@email.com"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
-            required
+            required 
           />
         </label>
 
+
         {/* Input de Senha */}
         <label className="campotexto">
-          Senha
+          Senha:
           <input
             type="password"
-            placeholder="*************"
+            placeholder="Digite sua senha..."
             value={senha}
             onChange={(event) => setSenha(event.target.value)}
             required
@@ -81,7 +91,7 @@ function FormCadastro() {
         </button>
       </form>
 
-      {/* Abacate */}
+      {/* Links externos */}
       <div className="rodape-cadastro">
         <p>Possui uma conta? <NavLink to="/login" className="link-login">Login</NavLink></p>
       </div>
