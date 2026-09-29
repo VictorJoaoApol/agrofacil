@@ -1,5 +1,6 @@
 import { createContext, useContext, useState } from "react"
 import { NavLink } from "react-router"
+import { appPages, appPath } from '../../routes'
 import { Email, Login, Item, Configuracao, Ponto, Usuario, Notificacao, Fechar } from "../../assets/Icons"
 
 // ---------- Context ----------
@@ -34,18 +35,20 @@ function SidebarItem({ link, text, icon: Icon, classe, placeholder }) {
 
 // ---------- SidebarMenu ----------
 function SidebarMenu() {
-    return (
-        <ul className="SidebarMenu">
-            <SidebarItem link="/cadastro" text="Cadastro" icon={Email} classe="IconeMenu medio" placeholder="Cadastro" />
-            <SidebarItem link="/login" text="Login" icon={Login} classe="IconeMenu medio" placeholder="Login" />
-            <SidebarItem link="painel" text="Painel" icon={Item} classe="IconeMenu medio" placeholder="Painel" />
-            <SidebarItem link="dispositivos" text="Dispositivos" icon={Configuracao} classe="IconeMenu medio" placeholder="Dispositivos" />
-            <SidebarItem link="tarefas" text="Tarefas" icon={Ponto} classe="IconeMenu medio" placeholder="Tarefas" />
-            <SidebarItem link="perfil" text="Perfil" icon={Usuario} classe="IconeMenu medio" placeholder="Perfil" />
-            <SidebarItem link="faleconosco" text="Fale Conosco" icon={Notificacao} classe="IconeMenu medio" placeholder="Fale Conosco" />
-            <SidebarItem link="teste1" text="teste1" icon={Notificacao} classe="IconeMenu medio" placeholder="Teste1" />
-        </ul>
-    )
+  return (
+    <ul className="SidebarMenu">
+      {appPages.map(({ path, label, icon }) => (
+        <SidebarItem
+          key={path}
+          link={appPath(path)}
+          text={label}
+          icon={icon}
+          classe="IconeMenu medio"
+          placeholder={label}
+        />
+      ))}
+    </ul>
+  )
 }
 
 // ---------- SidebarIcones ----------

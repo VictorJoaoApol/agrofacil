@@ -1,3 +1,4 @@
+import { Outlet } from 'react-router';
 import BarraNavegacao from "../../components/Navegacao/barraNavegacao.jsx";
 import { Seta } from "../../assets/Icons";
 
@@ -34,6 +35,8 @@ function Home() {
             </div>
 
             <BarraNavegacao />
+
+            <Outlet />
         </>
         
     );
