@@ -1,35 +1,47 @@
-import { Link } from 'react-router'
+// pages/Home/Overview.jsx
+import { useEffect, useState } from 'react'
+import Button from '../../components/ui/Button.jsx'
 import { Seta } from '../../assets/Icons'
-import { appPath } from '../../routes'
-import tarefasImg from '../../assets/img/Tarefas.png'
-import painelImg from '../../assets/img/Painel.png'
-import logo from '../../assets/img/Logo.png'
+import { appPages, appPath } from '../../routes/pages'
+import { obterUsuario } from '../../features/user/userService'
 
-const cards = [
-  { titulo: 'Tarefas', texto: 'Veja suas tarefas, metas e progresso nos seus objetivos', img: tarefasImg, to: appPath('tarefas') },
-  { titulo: 'Painel', texto: 'Veja informações sobre seu uso de água, áreas de irrigação e o clima!', img: painelImg, to: appPath('painel'), invertido: true },
-]
+const cards = appPages.filter((p) => p.home)
 
 export default function Overview() {
+  const [nome, setNome] = useState('')
+
+  useEffect(() => {
+    let ativo = true
+    obterUsuario().then((res) => { if (ativo && res.ok) setNome(res.data.nome) })
+    return () => { ativo = false }
+  }, [])
+
   return (
     <>
-      <header>
-        <img src={logo} className="icon" alt="Logo" />
-        <h1>Bem vindo, Usuário!</h1>
-        <p>O que vamos fazer hoje?</p>
+      <header className="home-header">
+        <h1 className="text-title-l">Bem vindo, {nome || 'Usuário'}!</h1>
+        <p className="text-body">O que vamos fazer hoje?</p>
       </header>
 
-      {cards.map(({ titulo, texto, img, to, invertido }) => (
-        <div className="cardHome" key={titulo}>
-          {!invertido && <div className="cardImg"><img src={img} className="cardIcone" alt="" /></div>}
-          <div className="cardConteudo">
-            <h1 className="cardTitulo">{titulo}</h1>
-            <p className="cardTexto">{texto}</p>
-            <Link to={to} className="cardBotao">Vamos<Seta aria-hidden="true" /></Link>
-          </div>
-          {invertido && <div className="cardImg"><img src={img} className="cardIcone" alt="" /></div>}
-        </div>
-      ))}
+      <div className="home-cards">
+        {cards.map(({ path, label, home }, i) => (
+          <article
+            key={path}
+            className={`home-card home-card--${home.tone} ${i % 2 ? 'is-reversed' : ''}`}
+          >
+            <div className="home-card__img">
+              <img src={home.img} alt="" />
+            </div>
+            <div className="home-card__body">
+              <h2 className="text-title-s">{label}</h2>
+              <p className="text-body">{home.text}</p>
+              <Button to={appPath(path)}>
+                Vamos<Seta aria-hidden="true" />
+              </Button>
+            </div>
+          </article>
+        ))}
+      </div>
     </>
   )
 }

@@ -1,17 +1,15 @@
-import logo from '../../assets/img/Logo.png'
-import FormCadastro from '../../components/forms/FormCadastro'
+// pages/RegistrosUsuarios/Cadastro.jsx
+import FormCadastro from '../../components/forms/FormCadastro.jsx'
+import Button from '../../components/ui/Button.jsx'
 
-function Cadastro() {
+export default function Cadastro() {
   return (
-    // A classe .tela-fundo será responsável por centralizar tudo e colocar o background
-    <div className="tela-fundo">
-      <header className="cabecalho-logo">
-        <img className="icon-logo" src={logo} alt="Logo" />
-      </header>
-
+    <>
+      <h1 className="text-title-m">Cadastre-se</h1>
       <FormCadastro />
-    </div>
+      <div className="auth-links">
+        <Button variant="link" to="/login">Já tenho conta</Button>
+      </div>
+    </>
   )
 }
-
-export default Cadastro;

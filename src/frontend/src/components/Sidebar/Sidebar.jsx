@@ -1,87 +1,45 @@
-import { createContext, useContext, useState } from "react"
-import { NavLink } from "react-router"
-import { appPages, appPath } from '../../routes'
-import { Email, Login, Item, Configuracao, Ponto, Usuario, Notificacao, Fechar } from "../../assets/Icons"
+// components/Sidebar/Sidebar.jsx
+import { NavLink } from 'react-router'
+import { appPages, appPath } from '../../routes/pages'
+import { useSidebar } from './SidebarContext.jsx'
+import { useTheme } from '../../hooks/useTheme'
+import { Fechar } from '../../assets/Icons'
 
-// ---------- Context ----------
-const SidebarContext = createContext()
+export default function Sidebar() {
+  const { isOpen, close } = useSidebar()
+  const { theme, toggleTheme } = useTheme()
+  const itens = appPages.filter((p) => p.menus?.includes('sidebar'))
 
-export function SidebarProvider({ children }) {
-    const [isOpen, setIsOpen] = useState(false)
-    const toggleSidebar = () => setIsOpen((prev) => !prev)
-
-    return (
-        <SidebarContext.Provider value={{ isOpen, toggleSidebar }}>
-            {children}
-        </SidebarContext.Provider>
-    )
-}
-
-export function useSidebar() {
-    return useContext(SidebarContext)
-}
-
-// ---------- SidebarItem ----------
-function SidebarItem({ link, text, icon: Icon, classe, placeholder }) {
-    return (
-        <li className="SidebarItem">
-            <NavLink to={link} className="Nav-Link">
-                <Icon className={classe} aria-label={placeholder} role="img" />
-                <span className="NomeMenu">{text}</span>
-            </NavLink>
-        </li>
-    )
-}
-
-// ---------- SidebarMenu ----------
-function SidebarMenu() {
   return (
-    <ul className="SidebarMenu">
-      {appPages.map(({ path, label, icon }) => (
-        <SidebarItem
-          key={path}
-          link={appPath(path)}
-          text={label}
-          icon={icon}
-          classe="IconeMenu medio"
-          placeholder={label}
-        />
-      ))}
-    </ul>
+    <>
+      <div className={`sidebar-backdrop ${isOpen ? 'is-open' : ''}`} onClick={close} aria-hidden="true" />
+
+      <aside className={`sidebar ${isOpen ? 'is-open' : ''}`} inert={!isOpen} aria-label="Menu lateral">
+        <button className="sidebar__close" onClick={close} aria-label="Fechar menu">
+          <Fechar aria-hidden="true" />
+        </button>
+
+        <ul className="sidebar__menu">
+          {itens.map(({ path, label, icon: Icon }) => (
+            <li key={path || 'home'}>
+              <NavLink to={appPath(path)} end={path === ''} className="sidebar__link">
+                <Icon aria-hidden="true" />
+                <span className="text-body">{label}</span>
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+
+        <div className="sidebar__footer">
+          <label className="sidebar__toggle text-body">
+            Modo escuro
+            <input type="checkbox" role="switch" checked={theme === 'dark'} onChange={toggleTheme} />
+          </label>
+          <NavLink to="/login" className="sidebar__link">
+            <span className="text-body">Sair</span>
+          </NavLink>
+        </div>
+      </aside>
+    </>
   )
 }
-
-// ---------- SidebarIcones ----------
-function SidebarIcones() {
-    return <section className="SidebarIcones"></section>
-}
-
-// ---------- SidebarInterior ----------
-function SidebarInterior() {
-    const { toggleSidebar } = useSidebar()
-
-    return (
-        <div className="SidebarInterior">
-            <button className="FecharSidebar" onClick={toggleSidebar}><img src="src\assets\Icons\botao\Fechar.svg"></img></button>
-            <SidebarMenu />
-            <SidebarIcones />
-        </div>
-    )
-}
-
-// ---------- SidebarLayout ----------
-function SidebarLayout({ className = "" }) {
-    return (
-        <div className={`SidebarLayout ${className}`}>
-            <SidebarInterior />
-        </div>
-    )
-}
-
-// ---------- Sidebar (componente principal) ----------
-function Sidebar() {
-    const { isOpen } = useSidebar()
-    return <SidebarLayout className={isOpen ? "aberta" : "fechada"} />
-}
-
-export default Sidebar

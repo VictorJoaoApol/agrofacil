@@ -1,0 +1,30 @@
+/* styles/auth.css */
+.auth-shell { min-height: 100dvh; background: var(--surface); }
+
+.auth-screen {
+  position: relative;
+  width: 100%; max-width: var(--app-width);
+  min-height: 100dvh; margin-inline: auto;
+  display: flex; flex-direction: column; justify-content: center; gap: var(--space-3);
+  padding: var(--space-3) var(--grid-margin);
+  background-size: cover; background-position: center;
+}
+/* escurece a foto para o logo e o card ficarem legíveis */
+.auth-screen::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(to bottom, rgb(21 12 0 / .35), rgb(21 12 0 / .6));
+}
+.auth-screen > * { position: relative; }   /* fica acima do overlay */
+
+.auth-screen__logo { height: 64px; width: auto; margin-inline: auto; }
+
+.auth-card {
+  display: flex; flex-direction: column; gap: var(--space-3);
+  padding: var(--space-3);
+  background: var(--bg); color: var(--text);
+  border-radius: var(--radius-card);
+}
+.auth-form  { display: flex; flex-direction: column; gap: var(--space-2); }
+.auth-links { display: flex; flex-direction: column; align-items: center; gap: var(--space-half); }
+.auth-lead  { color: var(--text-muted); margin-top: calc(var(--space-1) * -1); }
+.auth-feedback { padding: var(--space-2); background: var(--surface); border-radius: var(--radius-button); }

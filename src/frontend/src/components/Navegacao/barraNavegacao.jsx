@@ -1,22 +1,18 @@
-import { NavLink } from "react-router";
-import { Item, Ponto, Usuario } from "../../assets/Icons";
+// components/Navegacao/BarraNavegacao.jsx
+import { NavLink } from 'react-router'
+import { appPages, appPath } from '../../routes/pages'
 
-function ItemNavegacao({ link, icone: Icone, placeholder }) {
-    return (
-        <NavLink to={link}>
-            <Icone aria-label={placeholder} role="img" />
+export default function BarraNavegacao() {
+  const abas = appPages.filter((p) => p.menus?.includes('bottom')).slice(0, 5)
+
+  return (
+    <nav className="bottom-nav" aria-label="Navegação principal">
+      {abas.map(({ path, label, icon: Icon }) => (
+        <NavLink key={path || 'home'} to={appPath(path)} end={path === ''} className="bottom-nav__item">
+          <Icon aria-hidden="true" />
+          <span className="text-caption">{label}</span>
         </NavLink>
-    )
+      ))}
+    </nav>
+  )
 }
-
-function BarraNavegacao() {
-    return (
-        <div className="barraNavegacao">
-            <ItemNavegacao link="/painel" icone={Item} placeholder="Painel" />
-            <ItemNavegacao link="/tarefas" icone={Ponto} placeholder="Tarefas" />
-            <ItemNavegacao link="/perfil" icone={Usuario} placeholder="Perfil" />
-        </div>
-    )
-}
-
-export default BarraNavegacao;

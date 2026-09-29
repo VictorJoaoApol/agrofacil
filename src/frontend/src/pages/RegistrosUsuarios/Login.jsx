@@ -1,15 +1,16 @@
-import { NavLink, Outlet } from "react-router"
+// pages/RegistrosUsuarios/Login.jsx
+import FormLogin from '../../components/forms/FormLogin.jsx'
+import Button from '../../components/ui/Button.jsx'
 
-function Login() {
-    return (
-        <>
-            <h1>Login</h1>
-            <NavLink to="/app/tarefas">Tarefas</NavLink>
-            <NavLink to="/app" end>Visão geral</NavLink>  {/* end evita ficar ativo em todas */}
-            <NavLink to="/login/recuperar-senha">Esqueci a senha</NavLink>
-            <Outlet />
-        </>
-    )
+export default function Login() {
+  return (
+    <>
+      <h1 className="text-title-m">Login</h1>
+      <FormLogin />
+      <div className="auth-links">
+        <Button variant="link" to="/login/recuperar-senha">Esqueci a senha</Button>
+        <Button variant="link" to="/cadastro">Ainda não tenho conta</Button>
+      </div>
+    </>
+  )
 }
-
-export default Login
