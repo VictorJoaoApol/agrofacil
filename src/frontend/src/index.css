@@ -1,0 +1,164 @@
+:root{
+    --sidebar-width: 70%;
+    --navbar-height: 80px;
+    --sidebar-item-height: 46px;
+    --icon-size: 40px;
+    --transition-speed: 0.3s;
+
+    --debug-sidebar-layout: #4C9713;
+    --debug-sidebar-interior: #5473ff;
+    --debug-sidebar-menu: #1abc9c;
+    --debug-sidebar-icones: #c83bff;
+    --debug-nav-link: #fde826;
+
+    --color-botao-padrao-laranja: #EF9300;
+    --color-botao-padrao-branco: #E6E6E6;
+    --color-botao-padrao-preto: #150C00;
+    --color-botao-hover: #F0BB49;
+    --color-botao-pressionado: #E6820E;
+    --color-botao-desativado: #9D9D9D;
+    --color-botao-destacado: #6AD3F8;
+
+    --color-branco-claro: #F0F0F0;
+    --color-branco: #E6E6E6;
+    --color-branco-escuro: #CECECE;
+    --color-verde-claro: #A7C75C;
+    --color-verde: #70A826;
+    --color-verde-escuro: #4C9713;
+    --color-castanho-claro: #FFDABE;
+    --color-castanho: #DDAF8D;
+    --color-castanho-escuro: #A27868;
+    --color-laranja-claro: #F9D717;
+    --color-laranja: #EF9300;
+    --color-laranja-escuro: #EA5E13;
+    --color-azul-claro: #BDEEFF;
+    --color-azul: #6AD3F8;
+    --color-azul-escuro: #4090AC;
+}
+
+@font-face {
+    font-family: 'inclusive-sans';
+    src: url('/src/assets/fonts/Inclusive_Sans/InclusiveSans-VariableFont_wght.ttf');
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+    border-collapse: collapse;
+	border-spacing: 0;
+    content: '';
+	content: none;
+    quotes: none;
+    list-style: none;
+    line-height: 1;
+    color: black;
+    text-decoration-line: none;
+    text-decoration-style: solid;
+    text-decoration-thickness :auto;
+}
+
+button{
+    all: unset;
+    cursor: pointer;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background-color: var(--color-branco-claro);
+    overflow-y: auto;
+    font-family: 'inclusive-sans';
+}
+
+header{
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+main{
+    padding: 0px;
+}
+
+div{
+    margin: 0 auto;
+    width: fit-content;
+    height: fit-content;
+}
+
+h1{
+    font-size: 36px;
+    font-weight: bold;
+}
+
+h2{
+    font-size: 28px;
+    font-weight: bold;
+}
+
+h3{
+    font-size: 20px;
+    font-weight: bold;
+}
+
+p{
+    font-size: 16px;
+}
+
+button{
+    font-size: 16px;
+}
+
+h1, h2, h3, p, button{
+    margin: 0px;
+    text-align: center;
+}
+
+
+.NavLink:link, .NavLink:visited {
+    font-size: 30px;
+    text-decoration: none;
+    font-weight: bold;
+    color: black;
+}
+
+
+.NavLink:hover, .Navlink:active {
+    font-size: 30px;
+    text-decoration: underline;
+    font-weight: bold;
+    color: black;
+}
+
+.legendas{
+    font-size: 12px;
+    color: #EF9300;
+}
+
+\* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'inclusive-sans';
+
+}

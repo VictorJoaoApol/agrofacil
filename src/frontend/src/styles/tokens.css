@@ -1,0 +1,183 @@
+:root {
+  /* ---------- paleta do Figma ---------- */
+  --white-light: #F0F0F0;   --white: #E6E6E6;   --white-dark: #CECECE;    /* 40% */
+  --green-light: #A5C763;   --green: #6DA833;   --green-dark: #489723;    /* 30% */
+  --brown-light: #FEDBC0;   --brown: #DCB190;   --brown-dark: #A2796A;    /* 15% */
+  --orange-light: #F7D93A;  --orange: #EE9728;  --orange-dark: #E96528;   /* 10% */
+  --blue-light: #BEEDFE;    --blue: #6DD1F6;    --blue-dark: #438EAA;     /*  5% */
+  --ink: #150C00;
+
+  /* ---------- botão (estados do Figma) ---------- */
+  --btn-bg: #EE9728;            /* padrão */
+  --btn-bg-hover: #EEBD55;
+  --btn-bg-active: #E58629;     /* pressionado */
+  --btn-bg-disabled: #9D9D9D;   /* desativado */
+  --btn-highlight: #6DD1F6;     /* destacado */
+
+  /* ---------- semânticos (tema claro) ---------- */
+  --bg: #FFFFFF;
+  --surface: var(--white-light);
+  --border: var(--white-dark);
+  --text: var(--ink);
+  --text-muted: #5E5347;
+  --link: #2F7A0F;              /* verde escurecido, ver nota abaixo */
+  --focus: var(--blue-dark);
+  --danger: #C62828;
+  --overlay: rgb(21 12 0 / 0.5);
+
+  /* medidas (sem mudança) */
+  --app-width: 412px;
+  --grid-cols: 4;
+  --grid-margin: 8px;
+  --grid-gutter: 24px;
+  --navbar-height: 80px;
+  --bottomnav-height: 64px;
+  --bottomnav-item-width: 80px;
+  --bottomnav-radius: 4px;
+  --sidebar-width: 288px;
+
+  --space-half: 4px;
+  --space-1: 8px;
+  --space-2: 16px;
+  --space-3: 24px;
+  --space-4: 32px;
+  --space-5: 40px;
+  --space-6: 48px;
+
+  --radius-card: 16px;    /* confirmar no Figma */
+  --radius-button: 8px;   /* confirmar no Figma */
+}
+
+:root[data-theme='dark'] {
+  --bg: #150C00;
+  --surface: #241A0D;
+  --border: #3A2E1E;
+  --text: #FFFFFF;
+  --text-muted: #C9BFAF;
+  --link: var(--green-light);
+  --focus: var(--blue);
+}
+
+/* ---------- reset enxuto ---------- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  min-height: 100dvh;
+  background: var(--surface);      /* fundo fora do "celular" */
+  color: var(--text);
+  font-family: system-ui, sans-serif;   /* troque pela fonte do Figma */
+  font-size: 16px; line-height: 24px;
+}
+img, svg { display: block; max-width: 100%; }
+button, input { font: inherit; color: inherit; }
+button { background: none; border: 0; cursor: pointer; }
+a { color: inherit; text-decoration: none; }
+ul { list-style: none; }
+
+/* ---------- tipografia (line-height múltiplo de 8/4) ---------- */
+.text-caption   { font-size: 12px; line-height: 16px; }
+.text-body      { font-size: 16px; line-height: 24px; }
+.text-title-s   { font-size: 20px; line-height: 24px; font-weight: 600; }
+.text-title-m   { font-size: 24px; line-height: 32px; font-weight: 600; }
+.text-title-l   { font-size: 32px; line-height: 40px; font-weight: 700; }
+
+/* ---------- grade 4 colunas ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), 1fr);
+  column-gap: var(--grid-gutter);
+  padding-inline: var(--grid-margin);
+}
+.span-2 { grid-column: span 2; }
+.span-4 { grid-column: span 4; }
+
+/* ---------- shells ---------- */
+.app-shell {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  max-width: var(--app-width);
+  height: 100dvh;
+  margin-inline: auto;
+  background: var(--bg);
+  display: grid;
+  grid-template-rows: var(--navbar-height) 1fr var(--bottomnav-height);
+}
+.app-main { overflow-y: auto; padding: var(--space-2) var(--grid-margin); }
+
+.auth-shell {
+  width: 100%;
+  max-width: var(--app-width);
+  min-height: 100dvh;
+  margin-inline: auto;
+  padding: var(--space-3) var(--grid-margin);
+  background: var(--bg);
+}
+.auth-shell__logo { display: flex; justify-content: center; margin-bottom: var(--space-3); }
+
+/* ---------- Navbar ---------- */
+.navbar {
+  display: flex; align-items: center; justify-content: space-between;
+  height: var(--navbar-height);
+  padding-inline: var(--space-2);
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.navbar__btn { display: grid; place-items: center; width: 48px; height: 48px; }
+.navbar__logo { height: 40px; width: auto; }
+.navbar__title { flex: 1; text-align: center; }
+.navbar__back { transform: rotate(180deg); }   /* remova se a Seta já aponta para a esquerda */
+.navbar__avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
+
+/* ---------- Barra inferior ---------- */
+.bottom-nav {
+  display: flex; justify-content: center;
+  height: var(--bottomnav-height);
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+}
+.bottom-nav__item {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: var(--space-half);
+  width: var(--bottomnav-item-width);
+  height: var(--bottomnav-height);
+  color: var(--text-muted);
+}
+.bottom-nav__item.active { color: var(--primary); }
+.bottom-nav__item:first-child { border-top-left-radius: var(--bottomnav-radius); }
+.bottom-nav__item:last-child  { border-top-right-radius: var(--bottomnav-radius); }
+
+/* ---------- Sidebar ---------- */
+.sidebar-backdrop {
+  position: absolute; inset: 0; z-index: 10;
+  background: var(--overlay);
+  opacity: 0; visibility: hidden;
+  transition: opacity .2s, visibility .2s;
+}
+.sidebar-backdrop.is-open { opacity: 1; visibility: visible; }
+
+.sidebar {
+  position: absolute; top: 0; bottom: 0; left: 0; z-index: 11;
+  width: var(--sidebar-width);
+  display: flex; flex-direction: column;
+  padding: var(--space-2);
+  background: var(--bg);
+  transform: translateX(-100%);
+  visibility: hidden;
+  transition: transform .25s ease, visibility .25s;
+}
+.sidebar.is-open { transform: none; visibility: visible; }
+.sidebar__close { align-self: flex-end; width: 48px; height: 48px; display: grid; place-items: center; }
+.sidebar__menu { flex: 1; display: flex; flex-direction: column; gap: var(--space-half); margin-top: var(--space-1); }
+.sidebar__link {
+  display: flex; align-items: center; gap: var(--space-2);
+  height: 48px; padding-inline: var(--space-2);
+  border-radius: var(--radius-button);
+}
+.sidebar__link.active { background: var(--surface); color: var(--primary); }
+.sidebar__footer { display: flex; flex-direction: column; gap: var(--space-1); border-top: 1px solid var(--border); padding-top: var(--space-2); }
+.sidebar__toggle { display: flex; align-items: center; justify-content: space-between; padding-inline: var(--space-2); height: 48px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar, .sidebar-backdrop { transition: none; }
+}
