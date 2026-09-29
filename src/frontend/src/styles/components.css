@@ -137,3 +137,90 @@
   flex: 1; min-width: 0;
   display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-1);
 }
+
+/* ---------- Perfil ---------- */
+.perfil-header { display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-4); }
+.perfil-email { color: var(--text-muted); }
+.avatar {
+  display: grid; place-items: center; flex: 0 0 64px; height: 64px;
+  border-radius: 50%; background: var(--brown); color: var(--ink);
+  font-size: 24px; line-height: 32px; font-weight: 600;
+}
+.perfil-lista {
+  margin-bottom: var(--space-4);
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card);
+}
+
+/* ---------- Switch ---------- */
+.switch-row {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; min-height: 64px; padding: var(--space-1) var(--space-2);
+}
+.switch {
+  position: relative; width: 48px; height: 24px; border-radius: 12px;
+  background: var(--btn-bg-disabled); transition: background-color .2s;
+}
+.switch__thumb {
+  position: absolute; top: 2px; left: 2px; width: 20px; height: 20px;
+  border-radius: 50%; background: #fff; transition: transform .2s;
+}
+.switch-row[aria-checked='true'] .switch { background: var(--green-dark); }
+.switch-row[aria-checked='true'] .switch__thumb { transform: translateX(24px); }
+.switch-row:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
+
+/* ---------- Modal ---------- */
+.modal {
+  width: min(calc(var(--app-width) - 2 * var(--space-3)), 90vw);
+  padding: var(--space-3); margin: auto;
+  background: var(--bg); color: var(--text);
+  border: 1px solid var(--border); border-radius: var(--radius-card);
+}
+.modal::backdrop { background: var(--overlay); }
+.modal > * + * { margin-top: var(--space-2); }
+.modal__actions { display: flex; justify-content: flex-end; gap: var(--space-1); }
+
+@media (prefers-reduced-motion: reduce) {
+  .switch, .switch__thumb { transition: none; }
+}
+
+/* ---------- Painel ---------- */
+.painel__titulo { margin-bottom: var(--space-3); }
+
+.painel-card {
+  display: flex; flex-direction: column; gap: var(--space-1);
+  padding: var(--space-2); margin-bottom: var(--space-2);
+  border-radius: var(--radius-card); color: var(--ink);
+}
+.painel-card--blue  { background: var(--blue-light); }
+.painel-card--green { background: var(--green-light); }
+
+.meter { height: 8px; border-radius: 4px; background: rgb(21 12 0 / .15); overflow: hidden; }
+.meter__fill { display: block; height: 100%; background: var(--blue-dark); }
+
+.clima { display: flex; justify-content: space-between; gap: var(--space-1); }
+.clima li { display: flex; flex-direction: column; }
+
+.painel__areas-head {
+  display: flex; align-items: center; justify-content: space-between;
+  margin: var(--space-3) 0 var(--space-2);
+}
+.area-list { display: flex; flex-direction: column; gap: var(--space-1); }
+.area {
+  min-height: 64px; padding: var(--space-1) var(--space-2);
+  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-button);
+}
+.area__meta { color: var(--text-muted); }
+
+/* ---------- Campos do modal ---------- */
+.field { display: flex; flex-direction: column; gap: var(--space-half); }
+.field input, .field select {
+  min-height: 48px; padding-inline: var(--space-2);
+  background: var(--bg); color: var(--text);
+  border: 1px solid var(--border); border-radius: var(--radius-button);
+}
+.field input:focus-visible, .field select:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
+.field input[aria-invalid='true'] { border-color: var(--danger); }
+.field__erro { color: var(--danger); }
+
+.resumo { display: grid; grid-template-columns: auto 1fr; gap: var(--space-half) var(--space-2); }
+.resumo dt { color: var(--text-muted); }
