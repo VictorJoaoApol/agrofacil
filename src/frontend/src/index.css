@@ -1,3 +1,41 @@
+:root{
+    --sidebar-width: 70%;
+    --navbar-height: 80px;
+    --sidebar-item-height: 46px;
+    --icon-size: 40px;
+    --transition-speed: 0.3s;
+
+    --debug-sidebar-layout: #4C9713;
+    --debug-sidebar-interior: #5473ff;
+    --debug-sidebar-menu: #1abc9c;
+    --debug-sidebar-icones: #c83bff;
+    --debug-nav-link: #fde826;
+
+    --color-botao-padrao-laranja: #EF9300;
+    --color-botao-padrao-branco: #E6E6E6;
+    --color-botao-padrao-preto: #150C00;
+    --color-botao-hover: #F0BB49;
+    --color-botao-pressionado: #E6820E;
+    --color-botao-desativado: #9D9D9D;
+    --color-botao-destacado: #6AD3F8;
+
+    --color-branco-claro: #F0F0F0;
+    --color-branco: #E6E6E6;
+    --color-branco-escuro: #CECECE;
+    --color-verde-claro: #A7C75C;
+    --color-verde: #70A826;
+    --color-verde-escuro: #4C9713;
+    --color-castanho-claro: #FFDABE;
+    --color-castanho: #DDAF8D;
+    --color-castanho-escuro: #A27868;
+    --color-laranja-claro: #F9D717;
+    --color-laranja: #EF9300;
+    --color-laranja-escuro: #EA5E13;
+    --color-azul-claro: #BDEEFF;
+    --color-azul: #6AD3F8;
+    --color-azul-escuro: #4090AC;
+}
+
 @font-face {
     font-family: 'inclusive-sans';
     src: url('/src/assets/fonts/Inclusive_Sans/InclusiveSans-VariableFont_wght.ttf');
@@ -19,7 +57,6 @@ time, mark, audio, video {
 	margin: 0;
 	padding: 0;
 	border: 0;
-    font-family: 'inclusive-sans';
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
@@ -45,14 +82,16 @@ html, body {
     margin: 0;
     padding: 0;
     height: 100%;
-    background-color: #ddd;
+    background-color: var(--color-branco-claro);
     overflow-y: auto;
+    font-family: 'inclusive-sans';
 }
 
 header{
     width: 100%;
     height: auto;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 }
@@ -61,12 +100,15 @@ main{
     padding: 0px;
 }
 
+div{
+    margin: 0 auto;
+    width: fit-content;
+    height: fit-content;
+}
+
 h1{
     font-size: 36px;
     font-weight: bold;
-    margin: 0px;
-    padding: 12px;
-    text-align: center;
 }
 
 h2{
@@ -78,6 +120,20 @@ h3{
     font-size: 20px;
     font-weight: bold;
 }
+
+p{
+    font-size: 16px;
+}
+
+button{
+    font-size: 16px;
+}
+
+h1, h2, h3, p, button{
+    margin: 0px;
+    text-align: center;
+}
+
 
 .NavLink:link, .NavLink:visited {
     font-size: 30px;
@@ -103,6 +159,6 @@ h3{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'inclusive-sans';
 
 }

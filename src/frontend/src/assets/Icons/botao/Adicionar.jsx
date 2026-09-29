@@ -1,0 +1,7 @@
+export function Adicionar({ iconSvg }) {
+  return (
+    <svg width="36" height="36" className={iconSvg} viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M15.4286 20.5714H0V15.4286H15.4286V0H20.5714V15.4286H36V20.5714H20.5714V36H15.4286V20.5714Z" fill="#F0F0F0"/>
+    </svg>
+  );
+}

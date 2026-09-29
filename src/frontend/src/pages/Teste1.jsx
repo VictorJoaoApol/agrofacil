@@ -1,5 +1,3 @@
-
-
 import Navbar from "../components/Navbar/Navbar"
 import Sidebar, { SidebarProvider } from "../components/Sidebar/Sidebar"
 

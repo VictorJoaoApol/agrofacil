@@ -1,21 +1,42 @@
-import { NavLink, Outlet } from "react-router"
+import BarraNavegacao from "../../components/Navegacao/barraNavegacao.jsx";
+import { Seta } from "../../assets/Icons";
 
 function Home() {
     return (
-        <>
-            <p><NavLink to="teste1"         className="NavLink">Teste1</NavLink></p>
-            <p><NavLink to="/cadastro"      className="NavLink">Cadastro</NavLink></p>
-            <p><NavLink to="/login"         className="NavLink">Login</NavLink></p>
-            <p><NavLink to="painel"         className="NavLink">Painel</NavLink></p>
-            <p><NavLink to="dispositivos"   className="NavLink">Dispositivos</NavLink></p>
-            <p><NavLink to="tarefas"        className="NavLink">Tarefas</NavLink></p>
-            <p><NavLink to="perfil"         className="NavLink">Perfil</NavLink></p>
-            <p><NavLink to="faleconosco"    className="NavLink">Fale Conosco</NavLink></p>
 
-            {/* Renderiza a rota filha ativa (Overview, Painel, Tarefas, etc.) */}
-            <Outlet />
+        <>
+            <header>
+                <img src="src/assets/img/Logo.png" className="icon"></img>
+                <h1>Bem vindo, Usuário!</h1>
+                <p>O que vamos fazer hoje?</p>
+            </header>
+
+            <div className="cardHome">
+                <div className="cardImg">
+                    <img src="src/assets/img/Tarefas.png" className="cardIcone"></img>
+                </div>
+                <div className="cardConteudo">
+                    <h1 className="cardTitulo">Tarefas</h1>
+                    <p className="cardTexto">Veja suas tarefas, metas e progresso nos seus objetivos</p>
+                    <button className="cardBotao">Vamos<Seta aria-hidden="true" /></button>
+                </div>
+            </div>
+
+            <div className="cardHome">
+                <div className="cardConteudo">
+                    <h1 className="cardTitulo">Painel</h1>
+                    <p className="cardTexto">Veja informações sobree seu uso de água, áreas de irrigação e o clima!</p>
+                    <button className="cardBotao">Vamos<Seta aria-hidden="true" /></button>
+                </div>
+                <div className="cardImg">
+                    <img src="src/assets/img/Painel.png" className="cardIcone"></img>
+                </div>
+            </div>
+
+            <BarraNavegacao />
         </>
-    )
+        
+    );
 }
 
 export default Home;
