@@ -136,6 +136,23 @@ CREATE TABLE IF NOT EXISTS `agrofacil_db`.`TB_Leituras` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
+--------------------------------------------------------
+-- Table `agrofacil_db`.`TB_Tokens_Recuperacao`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `agrofacil_db`.`TB_Tokens_Recuperacao` (
+  `id_usuario` INT UNSIGNED NOT NULL,
+  `token` CHAR(64) NOT NULL,
+  `validade` DATETIME NOT NULL,
+  `ja_usado` BOOLEAN NOT NULL DEFAULT FALSE,
+  PRIMARY KEY (`id_usuario`),
+  INDEX `id_usuario_INDEX` (`id_usuario` ASC) VISIBLE,
+  CONSTRAINT `fk_usuarios_token`
+    FOREIGN KEY (`id_usuario`)
+    REFERENCES `agrofacil_db`.`TB_Usuarios` (`id`)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
+ENGINE = InnoDB;
+
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
