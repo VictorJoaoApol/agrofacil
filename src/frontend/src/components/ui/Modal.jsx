@@ -16,7 +16,7 @@ export default function Modal({ open, onClose, title, children }) {
       className="modal"
       aria-labelledby="modal-title"
       onClose={onClose}
-      onClick={(e) => e.target === ref.current && onClose()}   {/* clique no fundo */}
+      onClick={(e) => e.target === ref.current && onClose()}
     >
       <h2 id="modal-title" className="text-title-s">{title}</h2>
       {children}

@@ -3,18 +3,11 @@ import { useEffect, useState } from 'react'
 import Button from '../../components/ui/Button.jsx'
 import { Seta } from '../../assets/Icons'
 import { appPages, appPath } from '../../routes/pages'
-import { obterUsuario } from '../../features/user/userService'
 
 const cards = appPages.filter((p) => p.home)
 
 export default function Overview() {
   const [nome, setNome] = useState('')
-
-  useEffect(() => {
-    let ativo = true
-    obterUsuario().then((res) => { if (ativo && res.ok) setNome(res.data.nome) })
-    return () => { ativo = false }
-  }, [])
 
   return (
     <>

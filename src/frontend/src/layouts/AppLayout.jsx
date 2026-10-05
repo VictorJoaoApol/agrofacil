@@ -10,7 +10,7 @@ function Shell() {
   return (
     <div className="app-shell">
       <Navbar />
-      {/* inert: enquanto a sidebar está aberta, o conteúdo não recebe foco nem clique */}
+      
       <main className="app-main" inert={isOpen}>
         <Suspense fallback={<p className="text-body">Carregando...</p>}>
           <Outlet />

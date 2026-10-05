@@ -1,7 +1,7 @@
 // layouts/AuthLayout.jsx
 import { Outlet } from 'react-router'
 import logo from '../assets/img/Logo.png'
-import fundo from '../assets/img/FundoAuth.jpg'   // foto de fundo do Figma
+import fundo from '../assets/img/Campos.png'
 import '../styles/auth.css'
 
 export default function AuthLayout() {

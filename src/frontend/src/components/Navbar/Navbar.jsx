@@ -4,7 +4,7 @@ import { getPage } from '../../routes/pages'
 import { useSidebar } from '../Sidebar/SidebarContext.jsx'
 import { Seta } from '../../assets/Icons'
 import logo from '../../assets/img/Logo.png'
-import avatar from '../../assets/img/Avatar.png'   // ajuste para sua imagem
+import avatar from '../../assets/img/Perfil.png'
 
 const Logo = () => <img className="navbar__logo" src={logo} alt="AgroFácil" />
 
@@ -35,7 +35,7 @@ export default function Navbar() {
       </button>
       <h1 className="navbar__title text-title-m">{label}</h1>
       {variant === 'profile'
-        ? <img className="navbar__avatar" src={avatar} alt="Seu perfil" />
+        ? <Avatar nome={usuario?.nome} size={40} />
         : <Logo />}
     </header>
   )

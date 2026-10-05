@@ -4,7 +4,7 @@ import Accordion from '../../components/ui/Accordion.jsx'
 import EmptyState from '../../components/ui/EmptyState.jsx'
 import Button from '../../components/ui/Button.jsx'
 import DeviceItem from '../../components/devices/DeviceItem.jsx'
-import { listarDispositivos } from '../../features/devices/devicesService'
+import { listarDispositivos } from '../../features/device/devicesService.js'
 
 export default function Dispositivos() {
   const [status, setStatus] = useState('loading')   // loading | ready | error
