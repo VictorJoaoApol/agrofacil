@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import Modal from '../ui/Modal.jsx'
 import Button from '../ui/Button.jsx'
-import { criarArea } from '../../features/painel/painelService'
+import { criarArea } from '../../features/painel/painelService.js'
 
 const CULTURAS = ['Hortaliças', 'Soja', 'Café', 'Milho', 'Outra']
 const VAZIO = { nome: '', cultura: CULTURAS[0], hectares: '' }

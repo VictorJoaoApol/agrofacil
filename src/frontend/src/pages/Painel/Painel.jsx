@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import Button from '../../components/ui/Button.jsx'
 import EmptyState from '../../components/ui/EmptyState.jsx'
-import NovaAreaModal from '../../components/painel/NovaArealModal.jsx'
+import NovaAreaModal from '../../components/painel/NovaAreaModal.jsx'
 import { obterPainel } from '../../features/painel/painelService'
 
 export default function Painel() {

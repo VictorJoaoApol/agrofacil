@@ -4,19 +4,11 @@ import { useNavigate } from 'react-router'
 import Button from '../../components/ui/Button.jsx'
 import Modal from '../../components/ui/Modal.jsx'
 import ThemeSwitch from '../../components/ui/ThemeSwitch.jsx'
-import { obterUsuario, sair } from '../../features/user/userService'
 
 export default function Perfil() {
   const navigate = useNavigate()
-  const [usuario, setUsuario] = useState(null)
   const [confirmando, setConfirmando] = useState(false)
   const [saindo, setSaindo] = useState(false)
-
-  useEffect(() => {
-    let ativo = true
-    obterUsuario().then((r) => { if (ativo && r.ok) setUsuario(r.data) })
-    return () => { ativo = false }
-  }, [])
 
   const confirmarSaida = async () => {
     setSaindo(true)

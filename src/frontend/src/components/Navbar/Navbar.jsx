@@ -4,7 +4,8 @@ import { getPage } from '../../routes/pages'
 import { useSidebar } from '../Sidebar/SidebarContext.jsx'
 import { Seta } from '../../assets/Icons'
 import logo from '../../assets/img/Logo.png'
-import avatar from '../../assets/img/Perfil.png'
+import Avatar from '../ui/Avatar.jsx'
+
 
 const Logo = () => <img className="navbar__logo" src={logo} alt="AgroFácil" />
 

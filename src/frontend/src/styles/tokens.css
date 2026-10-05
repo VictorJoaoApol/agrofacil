@@ -117,7 +117,9 @@ ul { list-style: none; }
 
 /* ---------- Navbar ---------- */
 .navbar {
-  display: flex; align-items: center; justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   height: var(--navbar-height);
   padding-inline: var(--space-2);
   background: var(--bg);
