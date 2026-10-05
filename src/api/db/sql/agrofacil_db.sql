@@ -140,12 +140,13 @@ ENGINE = InnoDB;
 -- Table `agrofacil_db`.`TB_Tokens_Recuperacao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `agrofacil_db`.`TB_Tokens_Recuperacao` (
+  `id` INT UNSIGNED NOT NULL PRIMARY KEY,
   `id_usuario` INT UNSIGNED NOT NULL,
   `token` CHAR(64) NOT NULL,
   `validade` DATETIME NOT NULL,
-  `ja_usado` BOOLEAN NOT NULL DEFAULT FALSE,
-  PRIMARY KEY (`id_usuario`),
-  INDEX `id_usuario_INDEX` (`id_usuario` ASC) VISIBLE,
+  `data_criacao` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  INDEX `id_INDEX` (`id` ASC) VISIBLE,
   CONSTRAINT `fk_usuarios_token`
     FOREIGN KEY (`id_usuario`)
     REFERENCES `agrofacil_db`.`TB_Usuarios` (`id`)
