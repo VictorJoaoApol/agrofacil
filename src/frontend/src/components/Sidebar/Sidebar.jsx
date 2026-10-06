@@ -31,11 +31,20 @@ export default function Sidebar() {
 
         {/* Lista principal de rotas e páginas do aplicativo */}
         <ul className="sidebar__menu">
-          {itens.map(({ path, label, icon: Icon }) => (
+          {itens.map(({ path, label, icon: Icon, iconActive: IconActive }) => (
             <li key={path || 'home'}>
               <NavLink to={appPath(path)} end={path === ''} className="sidebar__link">
-                <Icon aria-hidden="true" />
-                <span className="text-body">{label}</span>
+                {({ isActive }) => {
+                  /* Alterna entre o ícone normal e a versão 'Ativado' preenchida */
+                  const IconComponent = isActive && IconActive ? IconActive : Icon
+
+                  return (
+                    <>
+                      <IconComponent aria-hidden="true" />
+                      <span className="text-body">{label}</span>
+                    </>
+                  )
+                }}
               </NavLink>
             </li>
           ))}

@@ -1,8 +1,6 @@
 // routes/pages.js
 import { lazy } from 'react'
-import { Ajuda, IconPlaceholder, Item, Configuracao, Ponto, Usuario } from '../assets/Icons'
-import tarefasImg from '../assets/img/Tarefas.png'
-import painelImg from '../assets/img/Painel.png'
+import { Ajuda, Dispositivos, DispositivosAtivado, Home, HomeAtivado, Tarefas, TarefasAtivado, Configuracao, Painel, PainelAtivado, Perfil, PerfilAtivado, } from '../assets/Icons'
 
 /*
   ÚNICA lista de páginas internas: rotas, barra inferior, Sidebar, títulos da
@@ -23,31 +21,57 @@ export const appPath = (path = '') => (path ? `/app/${path}` : '/app')
 /* Lista mestra de configuração de rotas e menus da área privada */
 export const appPages = [
   {
-    path: '', label: 'Home', variant: 'home',
-    icon: IconPlaceholder, // TODO: ícone "casa" (hoje Home e Painel não podem repetir o ícone Item)
+    path: '',
+    label: 'Home',
+    variant: 'home',
+    icon: Home,
+    iconActive: HomeAtivado,
     menus: ['bottom', 'sidebar'],
     Component: lazy(() => import('../pages/Home/Overview.jsx')),
   },
+
   {
-    path: 'tarefas', label: 'Tarefas', icon: Ponto, menus: ['bottom', 'sidebar'],
-    home: { tone: 'green', img: tarefasImg, text: 'Veja suas tarefas, metas e progresso nos seus objetivos' },
+    path: 'tarefas',
+    label: 'Tarefas',
+    icon: Tarefas,
+    iconActive: TarefasAtivado,
+    menus: ['bottom', 'sidebar'],
     Component: lazy(() => import('../pages/Tarefas/Tarefas.jsx')),
   },
+
   {
-    path: 'dispositivos', label: 'Dispositivos', icon: Configuracao, menus: ['bottom', 'sidebar'],
+    path: 'dispositivos',
+    label: 'Dispositivos',
+    icon: Dispositivos,
+    iconActive: DispositivosAtivado,
+    menus: ['bottom', 'sidebar'],
     Component: lazy(() => import('../pages/Dispositivos/Dispositivos.jsx')),
   },
+
   {
-    path: 'painel', label: 'Painel', icon: Item, menus: ['bottom', 'sidebar'],
-    home: { tone: 'blue', img: painelImg, text: 'Veja informações sobre seu uso de água, áreas de irrigação e o clima!' },
+    path: 'painel',
+    label: 'Painel',
+    icon: Painel,
+    iconActive: PainelAtivado,
+    menus: ['bottom', 'sidebar'],
     Component: lazy(() => import('../pages/Painel/Painel.jsx')),
   },
+
   {
-    path: 'perfil', label: 'Perfil', variant: 'profile', icon: Usuario, menus: ['bottom', 'sidebar'],
+    path: 'perfil',
+    label: 'Perfil',
+    variant: 'profile',
+    icon: Perfil,
+    iconActive: PerfilAtivado,
+    menus: ['bottom', 'sidebar'],
     Component: lazy(() => import('../pages/Perfil/Perfil.jsx')),
   },
+
   {
-    path: 'fale-conosco', label: 'Fale Conosco', icon: Ajuda, menus: ['sidebar'],
+    path: 'fale-conosco',
+    label: 'Fale Conosco',
+    icon: Ajuda,
+    menus: ['sidebar'],
     Component: lazy(() => import('../pages/Home/FaleConosco.jsx')),
   },
 ]

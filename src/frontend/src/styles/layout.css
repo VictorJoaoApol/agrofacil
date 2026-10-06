@@ -1,3 +1,5 @@
+@import url(tokens.css);
+
 /* ==========================================================
    LAYOUT — ocupa a tela toda; o formato base é 412 x 917
    (veja os pontos de quebra em tokens.css)
@@ -104,10 +106,12 @@
   display: grid;
   grid-template-columns: repeat(5, minmax(0, var(--bottomnav-item-width)));
   justify-content: center;
-  align-content: start;
+  align-content: center;
   height: 100%;
   padding-bottom: env(safe-area-inset-bottom, 0px);
   background: var(--bg);
+  max-width: 412px;
+  margin: 0 auto;
 }
 
 /*----- Item individual do menu inferior com alinhamento vertical e cores padrão -----*/
@@ -123,19 +127,28 @@
 }
 
 /*----- Alteração da cor de fundo nos estados hover e ativo do item da barra inferior -----*/
-.bottom-nav__item:hover,
-.bottom-nav__item.active {
+.bottom-nav__item:hover {
   background: var(--green);
+}
+
+.bottom-nav__item.active {
+  background: none;
 }
 
 /*----- Arredonda o canto superior/inferior esquerdo do primeiro item da barra inferior -----*/
 .bottom-nav__item:first-child {
-  border-radius: var(--bottomnav-radius) 0 0 var(--bottomnav-radius);
+  border-radius: var(--bottomnav-radius) 0 0 0 ;
 }
 
 /*----- Arredonda o canto superior/inferior direito do último item da barra inferior -----*/
 .bottom-nav__item:last-child {
-  border-radius: 0 var(--bottomnav-radius) var(--bottomnav-radius) 0;
+  border-radius: 0 var(--bottomnav-radius) 0 0;
+}
+
+/* Esconde qualquer texto ou elemento de label dentro da barra inferior */
+.bottom-nav__item span,
+.bottom-nav__label {
+  display: none !important;
 }
 
 /* ---------- Sidebar (gaveta sobre o shell) ---------- */
@@ -230,9 +243,41 @@
   border-top: 1px solid var(--border);
 }
 
+/* Exemplo: ícones pretos por padrão e cinza escuro no hover */
+.sidebar__link svg {
+  fill: #000;
+  stroke: #000;
+}
+
+/* Preenche o interior de todos os elementos dentro do SVG da Sidebar */
+.sidebar__link svg path,
+.sidebar__link svg circle,
+.sidebar__link svg rect,
+.sidebar__close svg path {
+  fill: #000 !important;
+}
+
+.sidebar__link:hover svg,
+.sidebar__link.active svg {
+  fill: #333333;
+  stroke: #333333;
+}
+
 /*----- Desativa transições da barra lateral para preferências de movimento reduzido -----*/
 @media (prefers-reduced-motion: reduce) {
   .sidebar, .sidebar-backdrop {
     transition: none;
   }
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
 }

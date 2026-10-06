@@ -235,6 +235,14 @@ textarea.field__input {
   color: var(--link);
 }
 
+.iconSvg,
+.bottom-nav__icon {
+  display: block;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+}
+
 /*----- Container de informações de texto do dispositivo com flexível truncamento -----*/
 .device__info {
   flex: 1;
