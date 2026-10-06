@@ -1,11 +1,19 @@
-/* styles/auth.css */
-.auth-shell { min-height: 100dvh; background: var(--surface); }
+/* ==========================================================
+   AUTH — Login, Cadastro e Recuperar senha
+   A foto de fundo ocupa a tela toda; o card mantém a largura do formato base (396px).
+   ========================================================== */
+
+.auth-shell {
+  min-height: 100vh; min-height: 100dvh;
+  background: var(--surface);
+}
 
 .auth-screen {
   position: relative;
-  width: 100%; max-width: var(--app-width);
-  min-height: 100dvh; margin-inline: auto;
-  display: flex; flex-direction: column; justify-content: center; gap: var(--space-3);
+  width: 100%;
+  min-height: 100vh; min-height: 100dvh;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: var(--space-3);
   padding: var(--space-3) var(--grid-margin);
   background-size: cover; background-position: center;
 }
@@ -16,10 +24,11 @@
 }
 .auth-screen > * { position: relative; }   /* fica acima do overlay */
 
-.auth-screen__logo { height: 64px; width: auto; margin-inline: auto; }
+.auth-screen__logo { height: 64px; width: auto; }
 
 .auth-card {
   display: flex; flex-direction: column; gap: var(--space-3);
+  width: 100%; max-width: var(--auth-card-max);
   padding: var(--space-3);
   background: var(--bg); color: var(--text);
   border-radius: var(--radius-card);

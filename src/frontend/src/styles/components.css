@@ -1,4 +1,7 @@
-/* styles/components.css */
+/* ==========================================================
+   COMPONENTES — Button, Field, Accordion, DeviceItem, EmptyState,
+   Avatar, Switch, Modal e as seções de cada tela.
+   ========================================================== */
 
 /* ---------- Button ---------- */
 .btn {
@@ -11,7 +14,7 @@
 }
 .btn svg { flex-shrink: 0; }
 
-/* primary: Padrão / Hover / Pressionado */
+/* primary: Padrão / Hover / Pressionado (laranja) */
 .btn--primary { background: var(--btn-bg); color: var(--ink); }
 .btn--primary:hover:not(:disabled)  { background: var(--btn-bg-hover); }
 .btn--primary:active:not(:disabled) { background: var(--btn-bg-active); }
@@ -31,32 +34,27 @@
   background: var(--btn-bg-disabled); color: var(--ink); cursor: not-allowed;
 }
 
-/* ---------- TextField ---------- */
+/* ---------- Field (TextField, select e textarea compartilham o visual) ---------- */
 .field { display: flex; flex-direction: column; gap: var(--space-half); }
 .field__control { position: relative; }
 .field__input {
-  width: 100%; height: 48px;
+  width: 100%; min-height: 48px;
   padding-inline: var(--space-2);
   background: var(--bg); color: var(--text);
   border: 1px solid var(--border); border-radius: var(--radius-button);
 }
-.field__input[type='password'],
-.field__input[type='text'] { padding-right: 88px; }   /* espaço do "Mostrar" */
-.field__input[aria-invalid='true'] { border-color: #C62828; }
+.field__input--password { padding-right: 88px; }      /* espaço do "Mostrar" */
+.field__input[aria-invalid='true'] { border-color: var(--danger); }
+textarea.field__input { min-height: 120px; padding-block: var(--space-1); resize: vertical; }
 .field__toggle {
   position: absolute; top: 0; right: var(--space-1);
   height: 48px; padding-inline: var(--space-1);
-  color: var(--primary);
+  color: var(--link);
 }
-.field__error { color: #C62828; }
-
-/* foco visível para teclado */
-.btn:focus-visible, .field__input:focus-visible, .field__toggle:focus-visible {
-  outline: 2px solid var(--blue); outline-offset: 2px;
-}
+.field__error { color: var(--danger); }
+.field__contador { align-self: flex-end; color: var(--text-muted); }
 
 /* ---------- Accordion ---------- */
-.accordion-list { display: flex; flex-direction: column; gap: var(--space-1); }
 
 .accordion {
   background: var(--surface);
@@ -70,6 +68,7 @@
   text-align: left;
 }
 .accordion__trigger > span:first-child { flex: 1; }
+.accordion__trigger:focus-visible { outline-offset: -2px; }   /* overflow:hidden cortaria o contorno */
 .accordion__meta { color: var(--text-muted); }
 .accordion__chevron { transition: transform .2s; }
 .accordion.is-open .accordion__chevron { transform: rotate(180deg); }
@@ -79,19 +78,16 @@
   transition: grid-template-rows .25s ease;
 }
 .accordion.is-open .accordion__panel { grid-template-rows: 1fr; }
-.accordion__inner { overflow: hidden; }
+.accordion__inner { overflow: hidden; min-height: 0; }
 .accordion.is-open .accordion__inner { padding: 0 var(--space-2) var(--space-2); }
 
-.accordion__trigger:focus-visible { outline: 2px solid var(--blue); outline-offset: -2px; }
-
 /* ---------- DeviceItem ---------- */
-.device-list { display: flex; flex-direction: column; gap: var(--space-1); }
 .device {
   display: flex; align-items: center; gap: var(--space-2);
   min-height: 64px; padding: var(--space-1) var(--space-2);
   background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-button);
 }
-.device__icon { display: grid; place-items: center; width: 40px; height: 40px; color: var(--primary); }
+.device__icon { display: grid; place-items: center; width: 40px; height: 40px; color: var(--link); }
 .device__info { flex: 1; min-width: 0; }
 .device__name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .device__status { display: flex; align-items: center; gap: var(--space-half); color: var(--text-muted); }
@@ -111,14 +107,48 @@
 }
 .empty-state__text { color: var(--text-muted); }
 
-@media (prefers-reduced-motion: reduce) {
-  .accordion__panel, .accordion__chevron { transition: none; }
+/* ---------- Avatar ---------- */
+.avatar {
+  display: grid; place-items: center; flex: 0 0 var(--avatar-size, 64px);
+  width: var(--avatar-size, 64px); height: var(--avatar-size, 64px);
+  border-radius: 50%; overflow: hidden;
+  background: var(--brown); color: var(--ink);
+  font-size: calc(var(--avatar-size, 64px) * .4); font-weight: 600; line-height: 1;
 }
+.avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+/* ---------- Switch ---------- */
+.switch-row {
+  display: flex; align-items: center; justify-content: space-between;
+  width: 100%; min-height: 64px; padding: var(--space-1) var(--space-2);
+}
+.switch {
+  position: relative; width: 48px; height: 24px; border-radius: 12px;
+  background: var(--btn-bg-disabled); transition: background-color .2s;
+}
+.switch__thumb {
+  position: absolute; top: 2px; left: 2px; width: 20px; height: 20px;
+  border-radius: 50%; background: #fff; transition: transform .2s;
+}
+.switch-row[aria-checked='true'] .switch { background: var(--green-dark); }
+.switch-row[aria-checked='true'] .switch__thumb { transform: translateX(24px); }
+
+/* ---------- Modal ---------- */
+.modal {
+  width: min(calc(var(--design-width) - 2 * var(--space-3)), 90vw);
+  padding: var(--space-3); margin: auto;
+  background: var(--bg); color: var(--text);
+  border: 1px solid var(--border); border-radius: var(--radius-card);
+}
+.modal::backdrop { background: var(--overlay); }
+.modal > * + * { margin-top: var(--space-2); }
+.modal__actions { display: flex; justify-content: flex-end; gap: var(--space-1); }
+
+.resumo { display: grid; grid-template-columns: auto 1fr; gap: var(--space-half) var(--space-2); }
+.resumo dt { color: var(--text-muted); }
 
 /* ---------- Home ---------- */
 .home-header { display: flex; flex-direction: column; gap: var(--space-half); margin-bottom: var(--space-3); }
-
-.home-cards { display: flex; flex-direction: column; gap: var(--space-3); }
 
 .home-card {
   display: flex; align-items: center; gap: var(--space-2);
@@ -141,46 +171,9 @@
 /* ---------- Perfil ---------- */
 .perfil-header { display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-4); }
 .perfil-email { color: var(--text-muted); }
-.avatar {
-  display: grid; place-items: center; flex: 0 0 64px; height: 64px;
-  border-radius: 50%; background: var(--brown); color: var(--ink);
-  font-size: 24px; line-height: 32px; font-weight: 600;
-}
 .perfil-lista {
   margin-bottom: var(--space-4);
   background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card);
-}
-
-/* ---------- Switch ---------- */
-.switch-row {
-  display: flex; align-items: center; justify-content: space-between;
-  width: 100%; min-height: 64px; padding: var(--space-1) var(--space-2);
-}
-.switch {
-  position: relative; width: 48px; height: 24px; border-radius: 12px;
-  background: var(--btn-bg-disabled); transition: background-color .2s;
-}
-.switch__thumb {
-  position: absolute; top: 2px; left: 2px; width: 20px; height: 20px;
-  border-radius: 50%; background: #fff; transition: transform .2s;
-}
-.switch-row[aria-checked='true'] .switch { background: var(--green-dark); }
-.switch-row[aria-checked='true'] .switch__thumb { transform: translateX(24px); }
-.switch-row:focus-visible { outline: 2px solid var(--focus); outline-offset: -2px; }
-
-/* ---------- Modal ---------- */
-.modal {
-  width: min(calc(var(--app-width) - 2 * var(--space-3)), 90vw);
-  padding: var(--space-3); margin: auto;
-  background: var(--bg); color: var(--text);
-  border: 1px solid var(--border); border-radius: var(--radius-card);
-}
-.modal::backdrop { background: var(--overlay); }
-.modal > * + * { margin-top: var(--space-2); }
-.modal__actions { display: flex; justify-content: flex-end; gap: var(--space-1); }
-
-@media (prefers-reduced-motion: reduce) {
-  .switch, .switch__thumb { transition: none; }
 }
 
 /* ---------- Painel ---------- */
@@ -204,37 +197,11 @@
   display: flex; align-items: center; justify-content: space-between;
   margin: var(--space-3) 0 var(--space-2);
 }
-.area-list { display: flex; flex-direction: column; gap: var(--space-1); }
 .area {
   min-height: 64px; padding: var(--space-1) var(--space-2);
   background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-button);
 }
 .area__meta { color: var(--text-muted); }
-
-/* ---------- Campos do modal ---------- */
-.field { display: flex; flex-direction: column; gap: var(--space-half); }
-.field input, .field select {
-  min-height: 48px; padding-inline: var(--space-2);
-  background: var(--bg); color: var(--text);
-  border: 1px solid var(--border); border-radius: var(--radius-button);
-}
-.field input:focus-visible, .field select:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
-.field input[aria-invalid='true'] { border-color: var(--danger); }
-.field__erro { color: var(--danger); }
-
-.resumo { display: grid; grid-template-columns: auto 1fr; gap: var(--space-half) var(--space-2); }
-.resumo dt { color: var(--text-muted); }
-
-/* ---------- Avatar ----------*/
-
-.avatar {
-  display: grid; place-items: center; flex: 0 0 var(--avatar-size, 64px);
-  width: var(--avatar-size, 64px); height: var(--avatar-size, 64px);
-  border-radius: 50%; overflow: hidden;
-  background: var(--brown); color: var(--ink);
-  font-size: calc(var(--avatar-size, 64px) * .4); font-weight: 600; line-height: 1;
-}
-.avatar img { width: 100%; height: 100%; object-fit: cover; }
 
 /* ---------- Tarefas ---------- */
 .tarefas__titulo { margin-bottom: var(--space-3); }
@@ -252,9 +219,7 @@
   font-size: 16px; line-height: 24px; color: var(--text);
 }
 .segmented__btn[aria-pressed='true'] { background: var(--btn-bg); color: var(--ink); font-weight: 600; }
-.segmented__btn:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 
-.tarefa-list { display: flex; flex-direction: column; gap: var(--space-1); }
 .tarefa {
   background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-button);
 }
@@ -277,19 +242,44 @@
 .contato-form { display: flex; flex-direction: column; gap: var(--space-2); }
 .contato-form .btn { align-self: stretch; }
 
-.field textarea {
-  padding: var(--space-1) var(--space-2); resize: vertical; min-height: 120px;
-  background: var(--bg); color: var(--text);
-  border: 1px solid var(--border); border-radius: var(--radius-button);
-  font: inherit; line-height: 24px;
-}
-.field textarea:focus-visible { outline: 2px solid var(--focus); outline-offset: 1px; }
-.field textarea[aria-invalid='true'] { border-color: var(--danger); }
-.field__contador { align-self: flex-end; color: var(--text-muted); }
-
 .contato-ok {
   display: flex; flex-direction: column; gap: var(--space-1); align-items: flex-start;
   padding: var(--space-2); border-radius: var(--radius-card);
   background: var(--green-light); color: var(--ink);
 }
-.contato-ok:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .accordion__panel, .accordion__chevron, .switch, .switch__thumb { transition: none; }
+}
+
+/* ==========================================================
+   RESPONSIVO
+   Base 412 x 917 (4 colunas) -> 744px+ (8 colunas) -> 1100px+ (12 colunas).
+   No formato base tudo continua em 1 coluna, como no Figma.
+   ========================================================== */
+
+/* listas de cards: 1 coluna no celular, mais colunas conforme a largura */
+.accordion-list, .device-list, .area-list, .tarefa-list, .home-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--card-min)), 1fr));
+  gap: var(--space-1);
+  align-items: start;
+}
+.home-cards { gap: var(--space-3); align-items: stretch; }
+
+/* blocos que ocupam "meia grade" (tela inteira no celular) */
+.painel-card { grid-column: span var(--span-half); }
+
+.perfil-header,
+.perfil-lista,
+.app-main > .btn,
+.tarefa-form,
+.segmented { grid-column: 1 / span var(--span-half); }
+
+.app-main > section[aria-labelledby='faq-titulo'],
+.contato__form-secao { grid-column: span var(--span-half); }
+
+@media (min-width: 744px) {
+  /* FAQ e formulário ficam lado a lado: o espaço de cima não é mais necessário */
+  .contato__form-secao { margin-top: 0; }
+}

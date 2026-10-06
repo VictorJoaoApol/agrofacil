@@ -1,15 +1,17 @@
 // components/devices/DeviceItem.jsx
-import { Configuracao } from '../../assets/Icons'
+import { Configuracao, Precipitacao, Umidade } from '../../assets/Icons'
 
 const BATERIA_BAIXA = 20
+const ICONES = { sensor: Umidade, valvula: Precipitacao }
 
 export default function DeviceItem({ nome, tipo, bateria, online }) {
   const baixa = bateria <= BATERIA_BAIXA
+  const Icone = ICONES[tipo] ?? Configuracao
 
   return (
     <li className="device">
       <span className="device__icon" aria-hidden="true">
-        <Configuracao />
+        <Icone />
       </span>
 
       <div className="device__info">

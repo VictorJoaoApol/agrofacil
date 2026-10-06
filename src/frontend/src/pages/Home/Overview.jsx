@@ -1,18 +1,19 @@
 // pages/Home/Overview.jsx
-import { useEffect, useState } from 'react'
 import Button from '../../components/ui/Button.jsx'
 import { Seta } from '../../assets/Icons'
+import useAuth from '../../hooks/useAuth'
 import { appPages, appPath } from '../../routes/pages'
 
 const cards = appPages.filter((p) => p.home)
 
 export default function Overview() {
-  const [nome, setNome] = useState('')
+  const { usuario } = useAuth()
+  const primeiroNome = usuario?.nome?.split(' ')[0]
 
   return (
     <>
       <header className="home-header">
-        <h1 className="text-title-l">Bem vindo, {nome || 'Usuário'}!</h1>
+        <h1 className="text-title-l">Bem vindo, {primeiroNome || 'Usuário'}!</h1>
         <p className="text-body">O que vamos fazer hoje?</p>
       </header>
 

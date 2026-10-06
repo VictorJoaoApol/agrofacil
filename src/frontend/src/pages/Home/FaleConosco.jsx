@@ -53,7 +53,7 @@ export default function FaleConosco() {
         <h2 id="faq-titulo" className="text-title-s contato__secao">Perguntas frequentes</h2>
         <div className="accordion-list">
           {FAQ.map(({ p, r }) => (
-            <Accordion key={p} title={p}>
+            <Accordion key={p} title={p} headingLevel={3}>
               <p className="text-body">{r}</p>
             </Accordion>
           ))}
@@ -73,22 +73,22 @@ export default function FaleConosco() {
           <form className="contato-form" onSubmit={enviar} noValidate>
             <label className="field">
               <span className="text-body">Assunto</span>
-              <select value={assunto} onChange={(e) => setAssunto(e.target.value)}>
+              <select className="field__input text-body" value={assunto} onChange={(e) => setAssunto(e.target.value)}>
                 {ASSUNTOS.map((a) => <option key={a}>{a}</option>)}
               </select>
             </label>
 
             <label className="field">
               <span className="text-body">Mensagem</span>
-              <textarea rows={5} maxLength={LIMITE} value={mensagem}
+              <textarea className="field__input text-body" rows={5} maxLength={LIMITE} value={mensagem}
                 onChange={(e) => setMensagem(e.target.value)}
                 aria-invalid={!!erro} aria-describedby={erro ? 'erro-contato' : 'contador'} />
               <span id="contador" className="text-caption field__contador">{mensagem.length}/{LIMITE}</span>
             </label>
 
-            {erro && <p id="erro-contato" role="alert" className="text-caption field__erro">{erro}</p>}
+            {erro && <p id="erro-contato" role="alert" className="text-caption field__error">{erro}</p>}
 
-            <Button type="submit" disabled={enviando}>{enviando ? 'Enviando...' : 'Enviar'}</Button>
+            <Button type="submit" loading={enviando}>Enviar</Button>
           </form>
         )}
       </section>

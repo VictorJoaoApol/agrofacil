@@ -13,7 +13,7 @@ export default function TextField({ label, error, type = 'text', ...props }) {
       <div className="field__control">
         <input
           id={id}
-          className="field__input text-body"
+          className={`field__input text-body ${isPassword ? 'field__input--password' : ''}`}
           type={isPassword && visible ? 'text' : type}
           aria-invalid={Boolean(error)}
           aria-describedby={error ? `${id}-erro` : undefined}

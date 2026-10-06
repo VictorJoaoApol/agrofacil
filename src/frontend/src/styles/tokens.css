@@ -1,3 +1,17 @@
+/* ==========================================================
+   TOKENS + RESET + TIPOGRAFIA BASE
+   Só variáveis, reset e utilitários globais. Nada de componente aqui
+   (layout em layout.css, componentes em components.css, auth em auth.css).
+   ========================================================== */
+
+@font-face {
+  font-family: 'Inclusive Sans';
+  src: url('../assets/fonts/Inclusive_Sans/InclusiveSans-VariableFont_wght.ttf') format('truetype');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* ---------- paleta do Figma ---------- */
   --white-light: #F0F0F0;   --white: #E6E6E6;   --white-dark: #CECECE;    /* 40% */
@@ -20,16 +34,28 @@
   --border: var(--white-dark);
   --text: var(--ink);
   --text-muted: #5E5347;
-  --link: #2F7A0F;              /* verde escurecido, ver nota abaixo */
+  --link: #2F7A0F;
   --focus: var(--blue-dark);
   --danger: #C62828;
   --overlay: rgb(21 12 0 / 0.5);
 
-  /* medidas (sem mudança) */
-  --app-width: 412px;
+  /* ---------- formato base (Figma): 412 x 917, grade de 4 colunas ----------
+     É o ponto de partida (mobile-first). Telas maiores só ganham mais
+     colunas e mais espaço; nada é limitado a 412px.                        */
+  --design-width: 412px;
+  --design-height: 917px;
+  --app-width: var(--design-width);       /* alias antigo */
+
   --grid-cols: 4;
   --grid-margin: 8px;
   --grid-gutter: 24px;
+  --span-half: 4;                         /* "meia grade": 4 de 4, 4 de 8, 6 de 12 */
+  --content-max: 1200px;                  /* largura máxima do conteúdo em telas grandes */
+  --card-min: 360px;                      /* largura mínima de um card em listas */
+  --auth-card-max: 396px;                 /* 412 - 2 x 8 */
+  /* margem lateral: 8px no celular; em telas largas centraliza o conteúdo */
+  --content-pad: max(var(--grid-margin), calc((100% - var(--content-max)) / 2));
+
   --navbar-height: 80px;
   --bottomnav-height: 64px;
   --bottomnav-item-width: 80px;
@@ -46,6 +72,33 @@
 
   --radius-card: 16px;    /* confirmar no Figma */
   --radius-button: 8px;   /* confirmar no Figma */
+
+  --font-family: 'Inclusive Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+}
+
+/* ---------- pontos de quebra (media query não aceita variável) ---------- */
+@media (min-width: 744px) {            /* tablet: grade de 8 colunas */
+  :root {
+    --grid-cols: 8;
+    --grid-margin: 24px;
+    --span-half: 4;
+    --bottomnav-item-width: 112px;
+    --sidebar-width: 320px;
+  }
+}
+@media (min-width: 1100px) {           /* desktop: grade de 12 colunas */
+  :root {
+    --grid-cols: 12;
+    --grid-margin: 32px;
+    --span-half: 6;
+    --bottomnav-item-width: 128px;
+  }
+}
+@media (max-height: 480px) and (orientation: landscape) {   /* celular deitado */
+  :root {
+    --navbar-height: 56px;
+    --bottomnav-height: 48px;
+  }
 }
 
 :root[data-theme='dark'] {
@@ -63,123 +116,47 @@
 html { -webkit-text-size-adjust: 100%; }
 body {
   min-height: 100dvh;
-  background: var(--surface);      /* fundo fora do "celular" */
+  background: var(--surface);          /* fundo fora do "celular" */
   color: var(--text);
-  font-family: system-ui, sans-serif;   /* troque pela fonte do Figma */
+  font-family: var(--font-family);
   font-size: 16px; line-height: 24px;
+  -webkit-font-smoothing: antialiased;
 }
+/* quem define o tamanho do título é a classe .text-title-*, não a tag */
+h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: inherit; }
 img, svg { display: block; max-width: 100%; }
-button, input { font: inherit; color: inherit; }
+button, input, select, textarea { font: inherit; color: inherit; }
 button { background: none; border: 0; cursor: pointer; }
 a { color: inherit; text-decoration: none; }
-ul { list-style: none; }
+ul, ol { list-style: none; }
 
-/* ---------- tipografia (line-height múltiplo de 8/4) ---------- */
-.text-caption   { font-size: 12px; line-height: 16px; }
-.text-body      { font-size: 16px; line-height: 24px; }
-.text-title-s   { font-size: 20px; line-height: 24px; font-weight: 600; }
-.text-title-m   { font-size: 24px; line-height: 32px; font-weight: 600; }
-.text-title-l   { font-size: 32px; line-height: 40px; font-weight: 700; }
+:focus-visible { outline: 2px solid var(--focus); outline-offset: 2px; }
 
-/* ---------- grade 4 colunas ---------- */
+/* ---------- tipografia (estilos de texto do Figma, Inclusive Sans) ---------- */
+.text-caption { font-size: 12px; line-height: 16px; }                     /* Legendas */
+.text-body    { font-size: 16px; line-height: 24px; }                     /* Corpo / Botões */
+.text-title-s { font-size: 20px; line-height: 24px; font-weight: 700; }   /* H3 */
+.text-title-m { font-size: 28px; line-height: 32px; font-weight: 700; }   /* H2 */
+.text-title-l { font-size: 36px; line-height: 40px; font-weight: 700; }   /* H1 */
+
+/* ---------- utilitários ---------- */
+.sr-only {
+  position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0;
+  overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0;
+}
+
 .grid {
   display: grid;
-  grid-template-columns: repeat(var(--grid-cols), 1fr);
+  grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
   column-gap: var(--grid-gutter);
   padding-inline: var(--grid-margin);
 }
 .span-2 { grid-column: span 2; }
 .span-4 { grid-column: span 4; }
 
-/* ---------- shells ---------- */
-.app-shell {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  max-width: var(--app-width);
-  height: 100dvh;
-  margin-inline: auto;
-  background: var(--bg);
-  display: grid;
-  grid-template-rows: var(--navbar-height) 1fr var(--bottomnav-height);
-}
-.app-main { overflow-y: auto; padding: var(--space-2) var(--grid-margin); }
-
-.auth-shell {
-  width: 100%;
-  max-width: var(--app-width);
-  min-height: 100dvh;
-  margin-inline: auto;
-  padding: var(--space-3) var(--grid-margin);
-  background: var(--bg);
-}
-.auth-shell__logo { display: flex; justify-content: center; margin-bottom: var(--space-3); }
-
-/* ---------- Navbar ---------- */
-.navbar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  height: var(--navbar-height);
-  padding-inline: var(--space-2);
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
-}
-.navbar__btn { display: grid; place-items: center; width: 48px; height: 48px; }
-.navbar__logo { height: 40px; width: auto; }
-.navbar__title { flex: 1; text-align: center; }
-.navbar__back { transform: rotate(180deg); }   /* remova se a Seta já aponta para a esquerda */
-.navbar__avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
-
-/* ---------- Barra inferior ---------- */
-.bottom-nav {
-  display: flex; justify-content: center;
-  height: var(--bottomnav-height);
-  background: var(--bg);
-  border-top: 1px solid var(--border);
-}
-.bottom-nav__item {
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: var(--space-half);
-  width: var(--bottomnav-item-width);
-  height: var(--bottomnav-height);
-  color: var(--text-muted);
-}
-.bottom-nav__item.active { color: var(--primary); }
-.bottom-nav__item:first-child { border-top-left-radius: var(--bottomnav-radius); }
-.bottom-nav__item:last-child  { border-top-right-radius: var(--bottomnav-radius); }
-
-/* ---------- Sidebar ---------- */
-.sidebar-backdrop {
-  position: absolute; inset: 0; z-index: 10;
-  background: var(--overlay);
-  opacity: 0; visibility: hidden;
-  transition: opacity .2s, visibility .2s;
-}
-.sidebar-backdrop.is-open { opacity: 1; visibility: visible; }
-
-.sidebar {
-  position: absolute; top: 0; bottom: 0; left: 0; z-index: 11;
-  width: var(--sidebar-width);
-  display: flex; flex-direction: column;
-  padding: var(--space-2);
-  background: var(--bg);
-  transform: translateX(-100%);
-  visibility: hidden;
-  transition: transform .25s ease, visibility .25s;
-}
-.sidebar.is-open { transform: none; visibility: visible; }
-.sidebar__close { align-self: flex-end; width: 48px; height: 48px; display: grid; place-items: center; }
-.sidebar__menu { flex: 1; display: flex; flex-direction: column; gap: var(--space-half); margin-top: var(--space-1); }
-.sidebar__link {
-  display: flex; align-items: center; gap: var(--space-2);
-  height: 48px; padding-inline: var(--space-2);
-  border-radius: var(--radius-button);
-}
-.sidebar__link.active { background: var(--surface); color: var(--primary); }
-.sidebar__footer { display: flex; flex-direction: column; gap: var(--space-1); border-top: 1px solid var(--border); padding-top: var(--space-2); }
-.sidebar__toggle { display: flex; align-items: center; justify-content: space-between; padding-inline: var(--space-2); height: 48px; }
-
 @media (prefers-reduced-motion: reduce) {
-  .sidebar, .sidebar-backdrop { transition: none; }
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }

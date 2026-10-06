@@ -1,102 +1,86 @@
-import { useState } from "react";
-import { NavLink, useNavigate } from "react-router";
-import { cadastro } from "../../../../api/auth";
+// components/forms/FormCadastro.jsx
+// Só os campos e o botão: título e links ficam em pages/RegistrosUsuarios/Cadastro.jsx.
+import { useState } from 'react'
+import { useNavigate } from 'react-router'
+import TextField from '../ui/TextField.jsx'
+import Button from '../ui/Button.jsx'
+import { useForm } from '../../hooks/useForm'
+import { all, email, minLength, required } from '../../utils/validators'
+import { cadastro } from '../../services/auth'
+
+const REGRAS = {
+  nome: required('Informe seu nome'),
+  email: all(required('Informe seu e-mail'), email()),
+  senha: all(required('Crie uma senha'), minLength(8)),   // ajuste ao que o PHP exige
+}
 
 function FormCadastro() {
-  const [nome, setNome] = useState("");
-  const [email, setEmail] = useState("");
-  const [senha, setSenha] = useState("");
-  const [erro, setErro] = useState(null);
-  const [enviando, setEnviando] = useState(false);
+  const [erro, setErro] = useState('')
+  const [enviando, setEnviando] = useState(false)
 
-  // Utilizado para redirecionar o usuário para outra parte do site.
-  const navigate = useNavigate();
+  const navigate = useNavigate()
+  const { values, errors, onChange, validate, setValues } = useForm(
+    { nome: '', email: '', senha: '' },
+    REGRAS,
+  )
 
-  // Lida com a ação de envio do formulário.
   async function handleSubmit(event) {
+    event.preventDefault()
+    setErro('')
+    if (!validate()) return
 
-    // Evita que a ação padrão de envio do formulário ocorra
-    event.preventDefault();
-
-    // Define estado de envio.
-    setErro(null);
-    setEnviando(true);
-
+    setEnviando(true)
     try {
-      const resultado = await cadastro(nome, email, senha);
-      
+      const resultado = await cadastro(values.nome, values.email, values.senha)
       if (!resultado.ok) {
-        throw new Error(resultado.mensagem || "Erro desconhecido ao cadastrar");
+        throw new Error(resultado.message || 'Erro desconhecido ao cadastrar')
       }
-      navigate("/login");
-
+      navigate('/login')
     } catch (err) {
-      setErro(err.message);
-
+      setErro(err.message)
     } finally {
-      // Remove o status de enviando e limpa a senha.
-      setSenha("");
-      setEnviando(false);
+      setValues((v) => ({ ...v, senha: '' }))
+      setEnviando(false)
     }
   }
 
-
   return (
-    // Este é o cartão branco
-    <div className="card-cadastro">
-      <h1 className="titulo-cadastro">Cadastre-se</h1>
-      
-      <form onSubmit={handleSubmit} className="formulario">
-        {/* Input de Nome */}
-        <label className="campotexto">
-          Nome
-          <input
-            type="text"
-            placeholder="Insire seu nome"
-            value={nome}
-            onChange={(event) => setNome(event.target.value)}
-            required
-          />
-        </label>
+    <form className="auth-form" onSubmit={handleSubmit} noValidate>
+      <TextField
+        label="Nome"
+        name="nome"
+        autoComplete="name"
+        placeholder="Insira seu nome"
+        value={values.nome}
+        onChange={onChange}
+        error={errors.nome}
+      />
+      <TextField
+        label="Email"
+        name="email"
+        type="email"
+        autoComplete="email"
+        placeholder="Insira seu email"
+        value={values.email}
+        onChange={onChange}
+        error={errors.email}
+      />
+      <TextField
+        label="Senha"
+        name="senha"
+        type="password"
+        autoComplete="new-password"
+        placeholder="Insira sua senha"
+        value={values.senha}
+        onChange={onChange}
+        error={errors.senha}
+      />
 
-        {/* Input de Email */}
-        <label className="campotexto">
-          Email:
-          <input
-            type="email"
-            placeholder="exemplo@email.com"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            required 
-          />
-        </label>
+      {erro && <p className="field__error text-body" role="alert">{erro}</p>}
 
-
-        {/* Input de Senha */}
-        <label className="campotexto">
-          Senha:
-          <input
-            type="password"
-            placeholder="Digite sua senha..."
-            value={senha}
-            onChange={(event) => setSenha(event.target.value)}
-            required
-          />
-        </label>
-
-        {erro && <p className="erro">{erro}</p>}
-
-        <button type="submit" className="btn-cadastrar" disabled={enviando}>
-          {enviando ? "Cadastrando..." : "Cadastrar"}
-        </button>
-      </form>
-
-      {/* Links externos */}
-      <div className="rodape-cadastro">
-        <p>Possui uma conta? <NavLink to="/login" className="link-login">Login</NavLink></p>
-      </div>
-    </div>
-  );
+      <Button type="submit" variant="highlight" loading={enviando}>Cadastrar</Button>
+    </form>
+  )
 }
 
-export default FormCadastro;
+export default FormCadastro

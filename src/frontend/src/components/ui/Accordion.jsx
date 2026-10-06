@@ -1,13 +1,15 @@
 // components/ui/Accordion.jsx
 import { useId, useState } from 'react'
 
-export default function Accordion({ title, meta, defaultOpen = false, children }) {
+// headingLevel: nível do título (2 por padrão; use 3 dentro de uma seção que já tem h2)
+export default function Accordion({ title, meta, defaultOpen = false, headingLevel = 2, children }) {
   const id = useId()
   const [open, setOpen] = useState(defaultOpen)
+  const Heading = `h${headingLevel}`
 
   return (
     <section className={`accordion ${open ? 'is-open' : ''}`}>
-      <h2 className="accordion__heading">
+      <Heading>
         <button
           type="button"
           className="accordion__trigger"
@@ -23,7 +25,7 @@ export default function Accordion({ title, meta, defaultOpen = false, children }
             <path d="M6 9l6 6 6-6" />
           </svg>
         </button>
-      </h2>
+      </Heading>
 
       <div className="accordion__panel" id={`${id}-panel`} role="region"
         aria-labelledby={`${id}-trigger`} inert={!open}>

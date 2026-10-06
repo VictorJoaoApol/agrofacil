@@ -2,7 +2,7 @@
 import { useState } from 'react'
 import Modal from '../ui/Modal.jsx'
 import Button from '../ui/Button.jsx'
-import { criarArea } from '../../features/painel/painelService.js'
+import { criarArea } from '../../features/painel/painelService'
 
 const CULTURAS = ['Hortaliças', 'Soja', 'Café', 'Milho', 'Outra']
 const VAZIO = { nome: '', cultura: CULTURAS[0], hectares: '' }
@@ -39,7 +39,7 @@ export default function NovaAreaModal({ open, onClose, onCriada }) {
       {passo === 1 && (
         <label className="field">
           <span className="text-body">Nome da área</span>
-          <input value={dados.nome} onChange={set('nome')} maxLength={40} autoFocus
+          <input className="field__input text-body" value={dados.nome} onChange={set('nome')} maxLength={40} autoFocus
             aria-invalid={!!erro} aria-describedby={erro ? 'erro-area' : undefined} />
         </label>
       )}
@@ -48,13 +48,13 @@ export default function NovaAreaModal({ open, onClose, onCriada }) {
         <>
           <label className="field">
             <span className="text-body">Cultura</span>
-            <select value={dados.cultura} onChange={set('cultura')}>
+            <select className="field__input text-body" value={dados.cultura} onChange={set('cultura')}>
               {CULTURAS.map((c) => <option key={c}>{c}</option>)}
             </select>
           </label>
           <label className="field">
             <span className="text-body">Tamanho (hectares)</span>
-            <input type="number" inputMode="decimal" min="0" step="0.1"
+            <input className="field__input text-body" type="number" inputMode="decimal" min="0" step="0.1"
               value={dados.hectares} onChange={set('hectares')} />
           </label>
         </>
@@ -68,7 +68,7 @@ export default function NovaAreaModal({ open, onClose, onCriada }) {
         </dl>
       )}
 
-      {erro && <p id="erro-area" role="alert" className="text-caption field__erro">{erro}</p>}
+      {erro && <p id="erro-area" role="alert" className="text-caption field__error">{erro}</p>}
 
       <div className="modal__actions">
         <Button variant="link" onClick={passo === 1 ? fechar : () => setPasso((p) => p - 1)}>

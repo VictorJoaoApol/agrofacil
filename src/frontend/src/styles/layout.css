@@ -1,0 +1,121 @@
+/* ==========================================================
+   LAYOUT — ocupa a tela toda; o formato base é 412 x 917
+   (veja os pontos de quebra em tokens.css)
+   ========================================================== */
+
+/* ---------- shell ---------- */
+.app-shell {
+  position: relative;                    /* a Sidebar se ancora aqui */
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  background: var(--bg);
+  display: grid;
+  grid-template-rows:
+    calc(var(--navbar-height) + env(safe-area-inset-top, 0px))
+    minmax(0, 1fr)
+    calc(var(--bottomnav-height) + env(safe-area-inset-bottom, 0px));
+}
+
+/* Só o <main> rola. Ele é uma grade (4 / 8 / 12 colunas): as páginas ficam em 1 coluna
+   no celular e se distribuem sozinhas em telas maiores. */
+.app-main {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+  column-gap: var(--grid-gutter);
+  align-content: start;
+  padding: var(--space-2) var(--content-pad) var(--space-3);
+}
+/* por padrão, cada bloco da página ocupa a linha inteira (:where = sem peso na cascata,
+   então qualquer classe de componente consegue sobrescrever) */
+:where(.app-main) > * { grid-column: 1 / -1; min-width: 0; }
+
+/* página avulsa (404) */
+.page-frame {
+  display: grid; place-content: center;
+  width: 100%;
+  min-height: 100vh; min-height: 100dvh;
+  padding: var(--space-3) var(--grid-margin);
+  background: var(--bg);
+}
+
+/* ---------- Navbar ---------- */
+.navbar {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 100%;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-inline: max(var(--space-2), calc((100% - var(--content-max)) / 2));
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+}
+.navbar__btn { display: grid; place-items: center; width: 48px; height: 48px; }
+.navbar__logo { height: 40px; width: auto; }
+.navbar__title { flex: 1; text-align: center; }
+.navbar__back { transform: rotate(180deg); }   /* remova se a Seta já aponta para a esquerda */
+
+/* ---------- Barra inferior ----------
+   Formato base: 5 itens de 80 x 64 (400px) centralizados nos 412px, pontas com 4px de raio.
+   Em telas maiores os itens crescem (112px, 128px) e a barra continua centralizada. */
+.bottom-nav {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, var(--bottomnav-item-width)));
+  justify-content: center;
+  align-content: start;
+  height: 100%;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  background: var(--bg);
+}
+.bottom-nav__item {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  gap: var(--space-half);
+  height: var(--bottomnav-height);
+  background: var(--green-dark);
+  color: #fff;
+}
+.bottom-nav__item:hover,
+.bottom-nav__item.active { background: var(--green); }
+.bottom-nav__item:first-child { border-radius: var(--bottomnav-radius) 0 0 var(--bottomnav-radius); }
+.bottom-nav__item:last-child  { border-radius: 0 var(--bottomnav-radius) var(--bottomnav-radius) 0; }
+
+/* ---------- Sidebar (gaveta sobre o shell) ---------- */
+.sidebar-backdrop {
+  position: absolute; inset: 0; z-index: 10;
+  background: var(--overlay);
+  opacity: 0; visibility: hidden;
+  transition: opacity .2s, visibility .2s;
+}
+.sidebar-backdrop.is-open { opacity: 1; visibility: visible; }
+
+.sidebar {
+  position: absolute; top: 0; bottom: 0; left: 0; z-index: 11;
+  width: min(var(--sidebar-width), 85%);
+  display: flex; flex-direction: column;
+  overflow-y: auto;
+  padding: calc(var(--space-2) + env(safe-area-inset-top, 0px)) var(--space-2) var(--space-2);
+  background: var(--bg);
+  transform: translateX(-100%);
+  visibility: hidden;
+  transition: transform .25s ease, visibility .25s;
+}
+.sidebar.is-open { transform: none; visibility: visible; }
+.sidebar__close { align-self: flex-end; width: 48px; height: 48px; display: grid; place-items: center; }
+.sidebar__menu { flex: 1; display: flex; flex-direction: column; gap: var(--space-half); margin-top: var(--space-1); }
+.sidebar__link {
+  display: flex; align-items: center; gap: var(--space-2);
+  min-height: 48px; padding-inline: var(--space-2);
+  border-radius: var(--radius-button);
+  text-align: left;
+}
+.sidebar__link.active { background: var(--surface); color: var(--link); }
+.sidebar__link--danger { color: var(--orange-dark); }
+.sidebar__footer {
+  display: flex; flex-direction: column; gap: var(--space-1);
+  padding-top: var(--space-2); border-top: 1px solid var(--border);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sidebar, .sidebar-backdrop { transition: none; }
+}

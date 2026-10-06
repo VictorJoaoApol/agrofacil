@@ -1,19 +1,11 @@
 // features/auth/authService.js
-// Mock com o mesmo formato que a API PHP deve devolver: { ok, message, data }.
-// Para trocar pela API real, substitua só o corpo destas funções por fetch.
+// Login, cadastro e sessão vivem em src/services/auth.js (API PHP).
+// Aqui fica só o que ainda não tem endpoint: recuperar senha (mock).
+// TODO: trocar o corpo por requisitar('/auth/recuperar_senha.php', ...) quando o backend existir.
 const wait = (ms) => new Promise((r) => setTimeout(r, ms))
-
-export async function login({ email, senha }) {
-  await wait(500)
-  return { ok: true, message: '', data: { nome: 'Guilherme', email } }
-}
-
-export async function cadastrar({ nome, email, senha }) {
-  await wait(500)
-  return { ok: true, message: '', data: { nome, email } }
-}
 
 export async function recuperarSenha({ email }) {
   await wait(500)
-  return { ok: true, message: 'E-mail enviado', data: null }
+  if (!email) return { ok: false, message: 'Informe seu e-mail.', data: null }
+  return { ok: true, message: 'Se o e-mail estiver cadastrado, você receberá as instruções.', data: null }
 }

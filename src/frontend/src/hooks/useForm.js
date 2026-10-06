@@ -1,6 +1,6 @@
-// hooks/useForm.js
 import { useState } from 'react'
 
+// rules: { campo: (valor, todosOsValores) => 'mensagem de erro' | '' }
 export function useForm(initial, rules) {
   const [values, setValues] = useState(initial)
   const [errors, setErrors] = useState({})
@@ -21,5 +21,5 @@ export function useForm(initial, rules) {
     return Object.keys(next).length === 0
   }
 
-  return { values, errors, onChange, validate, setErrors }
+  return { values, errors, onChange, validate, setErrors, setValues }
 }

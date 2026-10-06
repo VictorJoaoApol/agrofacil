@@ -1,6 +1,8 @@
-import { lazy } from 'react'
-import { useRoutes, Navigate } from 'react-router'
+// routes/index.jsx
+import { Navigate, useRoutes } from 'react-router'
 import { appPages } from './pages'
+import ProtectedRoute from './ProtectedRoute.jsx'
+import PublicRoute from './PublicRoute.jsx'
 import AppLayout from '../layouts/AppLayout.jsx'
 import AuthLayout from '../layouts/AuthLayout.jsx'
 import NotFound from '../pages/NotFound.jsx'
@@ -12,26 +14,34 @@ export default function AppRoutes() {
   return useRoutes([
     { path: '/', element: <Navigate to="/app" replace /> },
 
+    // Só para quem NÃO está logado (logado é redirecionado para /app)
     {
-      element: <AuthLayout />,
+      element: <PublicRoute />,
       children: [
-        { path: 'login', element: <Login /> },
-        { path: 'login/recuperar-senha', element: <RecuperarSenha /> },
-        { path: 'cadastro', element: <Cadastro /> },
+        {
+          element: <AuthLayout />,
+          children: [
+            { path: 'login', element: <Login /> },
+            { path: 'login/recuperar-senha', element: <RecuperarSenha /> },
+            { path: 'cadastro', element: <Cadastro /> },
+          ],
+        },
       ],
     },
 
+    // Só para quem está logado (senão vai para /login)
     {
-      path: '/app',
-      element: <AppLayout />,
-      children: appPages.map(({ path, Component }) =>
-        path === '' ? { index: true, Component } : { path, Component }
-      ),
+      element: <ProtectedRoute />,
+      children: [
+        {
+          path: '/app',
+          element: <AppLayout />,
+          children: appPages.map(({ path, Component }) =>
+            path === '' ? { index: true, Component } : { path, Component },
+          ),
+        },
+      ],
     },
-
-    ...(import.meta.env.DEV
-      ? [{ path: '/teste', Component: lazy(() => import('../pages/Teste.jsx')) }]
-      : []),
 
     { path: '*', element: <NotFound /> },
   ])

@@ -1,8 +1,5 @@
-export const obterUsuario = () => (USAR_MOCK ? obterUsuarioMock() : api('/usuario.php'))
-export const sair = () => (USAR_MOCK ? sairMock() : api('/logout.php', { metodo: 'POST' }))
-
 // features/contato/contatoService.js
-// Mesmo formato { ok, message, data } da API PHP.
+// Mesmo formato { ok, message, data } da API PHP. Para trocar, mude só o corpo.
 const wait = (ms) => new Promise((r) => setTimeout(r, ms))
 
 export async function enviarMensagem({ assunto, mensagem }) {
@@ -11,4 +8,3 @@ export async function enviarMensagem({ assunto, mensagem }) {
   if (mensagem.trim().length < 10) return { ok: false, message: 'A mensagem está muito curta.', data: null }
   return { ok: true, message: '', data: { protocolo: `AF-${Date.now().toString().slice(-6)}`, assunto } }
 }
-

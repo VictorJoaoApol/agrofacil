@@ -1,78 +1,64 @@
-import { createContext, useContext, useEffect, useState } from "react";
-import { verificarSessao, logout } from "../../../api/auth";
+import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
+import { verificarSessao, logout } from '../services/auth'
 
 // Contexto que guarda o usuário autenticado (ou null, se não houver sessão ativa).
-const AuthContext = createContext(null);
+const AuthContext = createContext(null)
 
 export function AuthProvider({ children }) {
-  // Dados do usuário logado (id, nome, email) ou null se não autenticado.
-  const [usuario, setUsuario] = useState(null);
+  const [usuario, setUsuario] = useState(null)
 
-  // Indica se a checagem inicial de sessão ainda está em andamento.
   // Evita que ProtectedRoute redirecione para /login antes de saber a resposta do backend.
-  const [carregando, setCarregando] = useState(true);
+  const [carregando, setCarregando] = useState(true)
 
-  // Pergunta ao backend (sessao.php) se existe uma sessão PHP ativa e,
-  // se houver, atualiza o estado do usuário. Usada tanto na carga inicial
-  // do app quanto logo após um login bem-sucedido.
-  async function checarSessao() {
+  // Pergunta ao backend se existe uma sessão ativa. Usada na carga inicial
+  // do app (F5) e logo após um login bem-sucedido.
+  const checarSessao = useCallback(async () => {
     try {
-      const resultado = await verificarSessao();
-
-      if (resultado.ok && resultado.usuario) {
-        setUsuario(resultado.usuario);
-      } else {
-        setUsuario(null);
-      }
+      const resultado = await verificarSessao()
+      setUsuario(resultado.ok && resultado.usuario ? resultado.usuario : null)
     } catch (err) {
-      // Erro de rede ou servidor indisponível: trata como não autenticado
-      // em vez de travar a aplicação.
-      console.error("Erro ao verificar sessão:", err);
-      setUsuario(null);
+      console.error('Erro ao verificar sessão:', err)
+      setUsuario(null)
     } finally {
-      setCarregando(false);
+      setCarregando(false)
     }
-  }
+  }, [])
 
-  // Ao carregar o app (ex: usuário dá F5 na página), verifica se já existe
-  // uma sessão ativa no backend, garantindo persistência de sessão.
   useEffect(() => {
-    checarSessao();
-  }, []);
+    checarSessao()
+  }, [checarSessao])
 
-  // Encerra a sessão no backend (logout.php) e, só se der certo, limpa o
-  // usuário local. Se a requisição falhar, lança erro para quem chamou
-  // (ex: o botão de logout) poder mostrar a mensagem.
-  async function deslogar() {
-    const resultado = await logout();
+  // services/http.js dispara este evento quando qualquer requisição recebe 401:
+  // a sessão caiu com o app aberto, então o usuário local é descartado.
+  useEffect(() => {
+    const aoExpirar = () => setUsuario(null)
+    window.addEventListener('auth:expirada', aoExpirar)
+    return () => window.removeEventListener('auth:expirada', aoExpirar)
+  }, [])
 
+  // Encerra a sessão no backend e, só se der certo, limpa o usuário local.
+  const deslogar = useCallback(async () => {
+    const resultado = await logout()
     if (!resultado.ok) {
-      throw new Error(resultado.mensagem || "Erro ao sair da conta");
+      throw new Error(resultado.message || 'Erro ao sair da conta')
     }
+    setUsuario(null)
+  }, [])
 
-    setUsuario(null);
-  }
+  const value = useMemo(
+    () => ({ usuario, estaAutenticado: !!usuario, carregando, setUsuario, checarSessao, deslogar }),
+    [usuario, carregando, checarSessao, deslogar],
+  )
 
-  const value = {
-    usuario,
-    estaAutenticado: !!usuario,
-    carregando,
-    setUsuario,
-    checarSessao,
-    deslogar,
-  };
-
-  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
+  return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
 
-// Hook interno para consumir o contexto. Prefira usar o hook
-// `useAuth` em frontend/src/hooks/useAuth.jsx nos componentes.
+// Prefira o hook `useAuth` (src/hooks/useAuth.jsx) nos componentes.
+// eslint-disable-next-line react-refresh/only-export-components
 export function useAuthContext() {
-  const context = useContext(AuthContext);
-
+  const context = useContext(AuthContext)
   if (context === null) {
-    throw new Error("useAuthContext precisa ser usado dentro de um <AuthProvider>.");
+    throw new Error('useAuthContext precisa ser usado dentro de um <AuthProvider>.')
   }
-
-  return context;
+  return context
 }

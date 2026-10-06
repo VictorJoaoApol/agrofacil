@@ -1,27 +1,14 @@
 // pages/Painel/Painel.jsx
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import Button from '../../components/ui/Button.jsx'
 import EmptyState from '../../components/ui/EmptyState.jsx'
 import NovaAreaModal from '../../components/painel/NovaAreaModal.jsx'
+import useAsync from '../../hooks/useAsync'
 import { obterPainel } from '../../features/painel/painelService'
 
 export default function Painel() {
-  const [status, setStatus] = useState('loading')   // loading | ready | error
-  const [painel, setPainel] = useState(null)
+  const { status, data: painel, recarregar, setData } = useAsync(obterPainel)
   const [novaArea, setNovaArea] = useState(false)
-
-  const carregar = () => {
-    setStatus('loading')
-    obterPainel()
-      .then((res) => {
-        if (!res.ok) throw new Error(res.message)
-        setPainel(res.data)
-        setStatus('ready')
-      })
-      .catch(() => setStatus('error'))
-  }
-
-  useEffect(carregar, [])
 
   if (status === 'loading') return <p className="text-body" role="status">Carregando painel...</p>
 
@@ -30,7 +17,7 @@ export default function Painel() {
       <EmptyState
         title="Não foi possível carregar"
         text="Verifique sua conexão e tente novamente."
-        action={<Button onClick={carregar}>Tentar de novo</Button>}
+        action={<Button onClick={recarregar}>Tentar de novo</Button>}
       />
     )
   }
@@ -55,9 +42,9 @@ export default function Painel() {
       <section className="painel-card painel-card--green" aria-labelledby="clima-titulo">
         <h2 id="clima-titulo" className="text-title-s">Clima</h2>
         <ul className="clima">
-          <li><strong className="text-title-m">{clima.temperatura}°C</strong><span className="text-caption">Temperatura</span></li>
-          <li><strong className="text-title-m">{clima.umidade}%</strong><span className="text-caption">Umidade</span></li>
-          <li><strong className="text-title-m">{clima.chuvaPct}%</strong><span className="text-caption">Chuva</span></li>
+          <li><strong className="text-title-s">{clima.temperatura}°C</strong><span className="text-caption">Temperatura</span></li>
+          <li><strong className="text-title-s">{clima.umidade}%</strong><span className="text-caption">Umidade</span></li>
+          <li><strong className="text-title-s">{clima.chuvaPct}%</strong><span className="text-caption">Chuva</span></li>
         </ul>
       </section>
 
@@ -84,7 +71,7 @@ export default function Painel() {
       <NovaAreaModal
         open={novaArea}
         onClose={() => setNovaArea(false)}
-        onCriada={(a) => setPainel((p) => ({ ...p, areas: [...p.areas, a] }))}
+        onCriada={(a) => setData((p) => ({ ...p, areas: [...p.areas, a] }))}
       />
     </>
   )

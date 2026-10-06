@@ -1,29 +1,23 @@
 // pages/Perfil/Perfil.jsx
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router'
+import { useState } from 'react'
+import Avatar from '../../components/ui/Avatar.jsx'
 import Button from '../../components/ui/Button.jsx'
 import Modal from '../../components/ui/Modal.jsx'
 import ThemeSwitch from '../../components/ui/ThemeSwitch.jsx'
+import useAuth from '../../hooks/useAuth'
+import useLogout from '../../hooks/useLogout'
 
 export default function Perfil() {
-  const navigate = useNavigate()
+  const { usuario } = useAuth()
+  const { sair, saindo, erro } = useLogout()
   const [confirmando, setConfirmando] = useState(false)
-  const [saindo, setSaindo] = useState(false)
-
-  const confirmarSaida = async () => {
-    setSaindo(true)
-    await sair()
-    navigate('/login', { replace: true })   // replace: o botão voltar não retorna ao app
-  }
-
-  const inicial = (usuario?.nome ?? 'U').charAt(0).toUpperCase()
 
   return (
     <>
       <header className="perfil-header">
-        <div className="avatar" aria-hidden="true">{inicial}</div>
+        <Avatar nome={usuario?.nome} size={64} />
         <div>
-          <h1 className="text-title-m">{usuario?.nome ?? 'Usuário'}</h1>
+          <h1 className="text-title-s">{usuario?.nome ?? 'Usuário'}</h1>
           <p className="text-body perfil-email">{usuario?.email}</p>
         </div>
       </header>
@@ -36,11 +30,10 @@ export default function Perfil() {
 
       <Modal open={confirmando} onClose={() => setConfirmando(false)} title="Deseja sair?">
         <p className="text-body">Você precisará entrar novamente para acessar sua conta.</p>
+        {erro && <p role="alert" className="text-caption field__error">{erro}</p>}
         <div className="modal__actions">
           <Button variant="link" onClick={() => setConfirmando(false)}>Cancelar</Button>
-          <Button onClick={confirmarSaida} disabled={saindo}>
-            {saindo ? 'Saindo...' : 'Sair'}
-          </Button>
+          <Button onClick={sair} disabled={saindo}>{saindo ? 'Saindo...' : 'Sair'}</Button>
         </div>
       </Modal>
     </>

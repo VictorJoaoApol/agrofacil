@@ -2,7 +2,6 @@
 import { Outlet } from 'react-router'
 import logo from '../assets/img/Logo.png'
 import fundo from '../assets/img/Campos.png'
-import '../styles/auth.css'
 
 export default function AuthLayout() {
   return (

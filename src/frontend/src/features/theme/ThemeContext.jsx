@@ -8,7 +8,9 @@ function temaInicial() {
   try {
     const salvo = localStorage.getItem(KEY)
     if (salvo === 'light' || salvo === 'dark') return salvo
-  } catch {}
+  } catch {
+    // localStorage indisponível: segue a preferência do sistema
+  }
   return matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
 }
 
@@ -17,12 +19,21 @@ export function ThemeProvider({ children }) {
 
   useEffect(() => {
     document.documentElement.dataset.theme = tema
-    try { localStorage.setItem(KEY, tema) } catch {}
   }, [tema])
 
-  const alternar = () => setTema((t) => (t === 'dark' ? 'light' : 'dark'))
+  // Só persiste quando o usuário escolhe; sem escolha, vale a preferência do sistema.
+  const alternar = () => {
+    const proximo = tema === 'dark' ? 'light' : 'dark'
+    setTema(proximo)
+    try {
+      localStorage.setItem(KEY, proximo)
+    } catch {
+      // sem persistência, o tema vale só nesta sessão
+    }
+  }
 
   return <ThemeContext.Provider value={{ tema, alternar }}>{children}</ThemeContext.Provider>
 }
 
+// eslint-disable-next-line react-refresh/only-export-components
 export const useTheme = () => useContext(ThemeContext)
