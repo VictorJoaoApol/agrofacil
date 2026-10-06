@@ -9,20 +9,29 @@ import { useForm } from '../../hooks/useForm'
 import { all, email, required } from '../../utils/validators'
 import { login } from '../../services/auth'
 
+/* Definição das regras de validação para os campos do formulário de login */
 const REGRAS = {
   email: all(required('Informe seu e-mail'), email()),
   senha: required('Informe sua senha'),
 }
 
+/* Componente funcional do formulário de autenticação/login de usuários */
 function FormLogin() {
+  /* Estados locais para controle de mensagem de erro global e indicador de requisição em andamento */
   const [erro, setErro] = useState('')
   const [enviando, setEnviando] = useState(false)
 
+  /* Hooks para navegação entre rotas e acesso à localização atual (origem do redirecionamento) */
   const navigate = useNavigate()
   const { state } = useLocation()          // ProtectedRoute guarda a rota de origem em state.de
+
+  /* Hook global para checagem e gestão do contexto de autenticação */
   const { checarSessao } = useAuth()       // avisa o AuthContext que agora existe uma sessão
+
+  /* Hook personalizado para controle de formulário, validações e estado dos inputs */
   const { values, errors, onChange, validate, setValues } = useForm({ email: '', senha: '' }, REGRAS)
 
+  /* Manipulador do evento de submissão do formulário e autenticação via API */
   async function handleSubmit(event) {
     event.preventDefault()
     setErro('')
@@ -44,6 +53,7 @@ function FormLogin() {
     } catch (err) {
       setErro(err.message)
     } finally {
+      /* Reseta a senha no formulário por questões de segurança e finaliza o estado de envio */
       setValues((v) => ({ ...v, senha: '' }))
       setEnviando(false)
     }
@@ -51,6 +61,7 @@ function FormLogin() {
 
   return (
     <form className="auth-form" onSubmit={handleSubmit} noValidate>
+      {/* Campo de entrada para o e-mail do usuário */}
       <TextField
         label="Email"
         name="email"
@@ -61,6 +72,8 @@ function FormLogin() {
         onChange={onChange}
         error={errors.email}
       />
+
+      {/* Campo de entrada para a senha do usuário */}
       <TextField
         label="Senha"
         name="senha"
@@ -72,8 +85,10 @@ function FormLogin() {
         error={errors.senha}
       />
 
+      {/* Exibição condicional da mensagem de erro de autenticação */}
       {erro && <p className="field__error text-body" role="alert">{erro}</p>}
 
+      {/* Botão de envio do formulário com suporte a carregamento */}
       <Button type="submit" variant="highlight" loading={enviando}>Login</Button>
     </form>
   )

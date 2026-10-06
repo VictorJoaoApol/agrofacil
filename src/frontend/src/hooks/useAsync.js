@@ -1,3 +1,4 @@
+// hooks/useAsync.js
 import { useCallback, useEffect, useState } from 'react'
 
 /**
@@ -8,10 +9,16 @@ import { useCallback, useEffect, useState } from 'react'
  * Devolve: status ('loading' | 'ready' | 'error'), data, message,
  * recarregar() e setData(valor | (anterior) => novo).
  */
+
+/* Hook utilitário para gerenciamento de requisições assíncronas com controle de estado, recarregamento e atualização local */
 export default function useAsync(request) {
+  /* Estado consolidado contendo status da requisição, dados retornados e mensagem de erro */
   const [estado, setEstado] = useState({ status: 'loading', data: null, message: '' })
+  
+  /* Contador de tentativas para disparar reexecuções do efeito de carregamento */
   const [tentativa, setTentativa] = useState(0)
 
+  /* Efeito assíncrono para execução da requisição com flag de limpeza para evitar atualização em componentes desmontados */
   useEffect(() => {
     let ativo = true
 
@@ -33,11 +40,13 @@ export default function useAsync(request) {
     }
   }, [request, tentativa])
 
+  /* Função memorizada para redefinir o estado para carregando e forçar uma nova chamada */
   const recarregar = useCallback(() => {
     setEstado((e) => ({ ...e, status: 'loading' }))
     setTentativa((t) => t + 1)
   }, [])
 
+  /* Função memorizada para atualização manual/otimista do estado de dados local */
   const setData = useCallback((atualizar) => {
     setEstado((e) => ({
       ...e,

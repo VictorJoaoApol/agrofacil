@@ -2,6 +2,7 @@
 import FormRecuperarSenha from '../../components/forms/FormRecuperarSenha.jsx'
 import Button from '../../components/ui/Button.jsx'
 
+/* Página pública de solicitação de recuperação de senha */
 export default function RecuperarSenha() {
   return (
     <>

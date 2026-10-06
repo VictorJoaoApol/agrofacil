@@ -7,9 +7,15 @@ import ThemeSwitch from '../../components/ui/ThemeSwitch.jsx'
 import useAuth from '../../hooks/useAuth'
 import useLogout from '../../hooks/useLogout'
 
+/* Página de perfil e preferências do usuário com opção de alteração de tema e encerramento da sessão */
 export default function Perfil() {
+  /* Resgata os dados da conta do usuário logado */
   const { usuario } = useAuth()
+  
+  /* Manipuladores e estados de logout */
   const { sair, saindo, erro } = useLogout()
+  
+  /* Controle de exibição do modal de confirmação de logout */
   const [confirmando, setConfirmando] = useState(false)
 
   return (
@@ -22,12 +28,14 @@ export default function Perfil() {
         </div>
       </header>
 
+      {/* Seção de preferências do aplicativo */}
       <section className="perfil-lista" aria-label="Preferências">
         <ThemeSwitch />
       </section>
 
       <Button variant="highlight" onClick={() => setConfirmando(true)}>Sair</Button>
 
+      {/* Modal de confirmação para efetuar logout */}
       <Modal open={confirmando} onClose={() => setConfirmando(false)} title="Deseja sair?">
         <p className="text-body">Você precisará entrar novamente para acessar sua conta.</p>
         {erro && <p role="alert" className="text-caption field__error">{erro}</p>}

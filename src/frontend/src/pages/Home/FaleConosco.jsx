@@ -4,27 +4,37 @@ import Accordion from '../../components/ui/Accordion.jsx'
 import Button from '../../components/ui/Button.jsx'
 import { enviarMensagem } from '../../features/contato/contatoService'
 
+/* Opções de assunto disponíveis para envio de mensagem de suporte */
 const ASSUNTOS = ['Dúvida', 'Problema com dispositivo', 'Sugestão', 'Outro']
+
+/* Limite máximo de caracteres permitido na mensagem */
 const LIMITE = 500
 
+/* Lista de perguntas e respostas frequentes para autoatendimento */
 const FAQ = [
   { p: 'Como adiciono um dispositivo?', r: 'Dispositivos são vinculados à sua conta pela equipe AgroFácil. Se algum estiver faltando, envie uma mensagem abaixo.' },
   { p: 'Por que um dispositivo aparece offline?', r: 'Verifique a bateria e o sinal no local. Se continuar offline depois de alguns minutos, fale conosco.' },
   { p: 'Como altero o modo escuro?', r: 'Em Perfil ou no menu lateral, use a opção "Modo escuro".' },
 ]
 
+/* Página de suporte com FAQ e formulário para envio de mensagens */
 export default function FaleConosco() {
+  /* Estados do formulário e controle de envio */
   const [assunto, setAssunto] = useState(ASSUNTOS[0])
   const [mensagem, setMensagem] = useState('')
   const [erro, setErro] = useState('')
   const [enviando, setEnviando] = useState(false)
   const [protocolo, setProtocolo] = useState('')
+  
+  /* Referência para foco no bloco de confirmação de envio */
   const confirmacaoRef = useRef(null)
 
+  /* Move o foco para a mensagem de confirmação assim que o protocolo for gerado */
   useEffect(() => {
     if (protocolo) confirmacaoRef.current?.focus()
   }, [protocolo])
 
+  /* Processa o envio do formulário de contato para o serviço */
   const enviar = async (e) => {
     e.preventDefault()
     setEnviando(true)
@@ -40,6 +50,7 @@ export default function FaleConosco() {
     }
   }
 
+  /* Reseta os campos do formulário para permitir um novo envio */
   const novaMensagem = () => { setProtocolo(''); setMensagem(''); setAssunto(ASSUNTOS[0]) }
 
   return (
@@ -49,6 +60,7 @@ export default function FaleConosco() {
         <p className="text-body">Encontre respostas rápidas ou envie uma mensagem para nossa equipe.</p>
       </header>
 
+      {/* Seção de perguntas frequentes */}
       <section aria-labelledby="faq-titulo">
         <h2 id="faq-titulo" className="text-title-s contato__secao">Perguntas frequentes</h2>
         <div className="accordion-list">
@@ -60,6 +72,7 @@ export default function FaleConosco() {
         </div>
       </section>
 
+      {/* Seção com formulário de envio ou confirmação com número de protocolo */}
       <section aria-labelledby="msg-titulo" className="contato__form-secao">
         <h2 id="msg-titulo" className="text-title-s contato__secao">Envie uma mensagem</h2>
 

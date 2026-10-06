@@ -1,3 +1,4 @@
+// hooks/useAuth.js
 import { useAuthContext } from "../context/AuthContext";
 
 /**
@@ -7,6 +8,8 @@ import { useAuthContext } from "../context/AuthContext";
  *
  * Precisa ser usado dentro de um <AuthProvider> (ver src/main.jsx).
  */
+
+/* Hook customizado de conveniência que expõe o contexto de autenticação da aplicação */
 function useAuth() {
   return useAuthContext();
 }

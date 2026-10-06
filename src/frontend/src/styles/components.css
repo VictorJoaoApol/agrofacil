@@ -4,252 +4,733 @@
    ========================================================== */
 
 /* ---------- Button ---------- */
+
+/*----- Define a estrutura base do botão: layout flexível, espaçamentos, tipografia e transição -----*/
 .btn {
-  display: inline-flex; align-items: center; justify-content: center;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   gap: var(--space-1);
-  min-height: 48px; padding-inline: var(--space-3);
+  min-height: 48px;
+  padding-inline: var(--space-3);
   border-radius: var(--radius-button);
-  font-size: 16px; line-height: 24px; font-weight: 600;
+  font-size: 16px;
+  line-height: 24px;
+  font-weight: 600;
   transition: background-color .15s;
 }
-.btn svg { flex-shrink: 0; }
+
+/*----- Impede o encolhimento de ícones vetoriais inseridos dentro do botão -----*/
+.btn svg {
+  flex-shrink: 0;
+}
 
 /* primary: Padrão / Hover / Pressionado (laranja) */
-.btn--primary { background: var(--btn-bg); color: var(--ink); }
-.btn--primary:hover:not(:disabled)  { background: var(--btn-bg-hover); }
-.btn--primary:active:not(:disabled) { background: var(--btn-bg-active); }
+
+/*----- Estilização visual do botão primário (cor de fundo e texto) -----*/
+.btn--primary {
+  background: var(--btn-bg);
+  color: var(--ink);
+}
+
+/*----- Alteração da cor de fundo no estado de hover do botão primário -----*/
+.btn--primary:hover:not(:disabled) {
+  background: var(--btn-bg-hover);
+}
+
+/*----- Alteração da cor de fundo no estado pressionado/ativo do botão primário -----*/
+.btn--primary:active:not(:disabled) {
+  background: var(--btn-bg-active);
+}
 
 /* highlight: Destacado (azul) */
-.btn--highlight { background: var(--btn-highlight); color: var(--ink); }
-.btn--highlight:hover:not(:disabled)  { background: var(--blue-light); }
-.btn--highlight:active:not(:disabled) { background: var(--blue-dark); color: #fff; }
 
+/*----- Estilização visual do botão de destaque/secundário -----*/
+.btn--highlight {
+  background: var(--btn-highlight);
+  color: var(--ink);
+}
+
+/*----- Alteração da cor de fundo no estado de hover do botão de destaque -----*/
+.btn--highlight:hover:not(:disabled) {
+  background: var(--blue-light);
+}
+
+/*----- Alteração das cores de fundo e texto no estado ativo do botão de destaque -----*/
+.btn--highlight:active:not(:disabled) {
+  background: var(--blue-dark);
+  color: #fff;
+}
+
+/*----- Estilização do botão em formato de link de texto -----*/
 .btn--link {
-  min-height: 40px; padding-inline: var(--space-1);
-  background: none; color: var(--link); text-decoration: underline;
+  min-height: 40px;
+  padding-inline: var(--space-1);
+  background: none;
+  color: var(--link);
+  text-decoration: underline;
 }
 
 /* Desativado (vale para primary e highlight) */
+
+/*----- Estilos visuais e comportamentais para botões desativados -----*/
 .btn--primary:disabled, .btn--highlight:disabled {
-  background: var(--btn-bg-disabled); color: var(--ink); cursor: not-allowed;
+  background: var(--btn-bg-disabled);
+  color: var(--ink);
+  cursor: not-allowed;
 }
 
 /* ---------- Field (TextField, select e textarea compartilham o visual) ---------- */
-.field { display: flex; flex-direction: column; gap: var(--space-half); }
-.field__control { position: relative; }
-.field__input {
-  width: 100%; min-height: 48px;
-  padding-inline: var(--space-2);
-  background: var(--bg); color: var(--text);
-  border: 1px solid var(--border); border-radius: var(--radius-button);
+
+/*----- Container estrutural para rotulagem e campos de formulário em coluna -----*/
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-half);
 }
-.field__input--password { padding-right: 88px; }      /* espaço do "Mostrar" */
-.field__input[aria-invalid='true'] { border-color: var(--danger); }
-textarea.field__input { min-height: 120px; padding-block: var(--space-1); resize: vertical; }
+
+/*----- Container relativo para posicionamento de elementos internos (ex: botão de senha) -----*/
+.field__control {
+  position: relative;
+}
+
+/*----- Estilização padrão para inputs de texto, seletores e áreas de texto -----*/
+.field__input {
+  width: 100%;
+  min-height: 48px;
+  padding-inline: var(--space-2);
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-button);
+}
+
+/*----- Ajuste de espaçamento interno à direita para campos de senha com botão alternador -----*/
+.field__input--password {
+  padding-right: 88px;
+}      /* espaço do "Mostrar" */
+
+/*----- Altera a cor da borda quando o campo possui erro de validação -----*/
+.field__input[aria-invalid='true'] {
+  border-color: var(--danger);
+}
+
+/*----- Ajuste de altura e redimensionamento específico para elementos textarea -----*/
+textarea.field__input {
+  min-height: 120px;
+  padding-block: var(--space-1);
+  resize: vertical;
+}
+
+/*----- Posicionamento do botão alternador de exibição de senha no canto do input -----*/
 .field__toggle {
-  position: absolute; top: 0; right: var(--space-1);
-  height: 48px; padding-inline: var(--space-1);
+  position: absolute;
+  top: 0;
+  right: var(--space-1);
+  height: 48px;
+  padding-inline: var(--space-1);
   color: var(--link);
 }
-.field__error { color: var(--danger); }
-.field__contador { align-self: flex-end; color: var(--text-muted); }
+
+/*----- Estilização do texto de mensagem de erro do campo -----*/
+.field__error {
+  color: var(--danger);
+}
+
+/*----- Alinhamento e estilo do contador de caracteres do campo -----*/
+.field__contador {
+  align-self: flex-end;
+  color: var(--text-muted);
+}
 
 /* ---------- Accordion ---------- */
 
+/*----- Container principal do acordeão com bordas, fundo e ocultação de transbordo -----*/
 .accordion {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-card);
   overflow: hidden;
 }
+
+/*----- Botão disparador do acordeão com espaçamentos e alinhamento do título/ícone -----*/
 .accordion__trigger {
-  display: flex; align-items: center; gap: var(--space-1);
-  width: 100%; min-height: 64px; padding: var(--space-1) var(--space-2);
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  width: 100%;
+  min-height: 64px;
+  padding: var(--space-1) var(--space-2);
   text-align: left;
 }
-.accordion__trigger > span:first-child { flex: 1; }
-.accordion__trigger:focus-visible { outline-offset: -2px; }   /* overflow:hidden cortaria o contorno */
-.accordion__meta { color: var(--text-muted); }
-.accordion__chevron { transition: transform .2s; }
-.accordion.is-open .accordion__chevron { transform: rotate(180deg); }
 
+/*----- Garante que o texto do título do acordeão ocupe o espaço disponível -----*/
+.accordion__trigger > span:first-child {
+  flex: 1;
+}
+
+/*----- Ajusta o deslocamento do contorno de foco para não ser cortado pelo overflow -----*/
+.accordion__trigger:focus-visible {
+  outline-offset: -2px;
+}   /* overflow:hidden cortaria o contorno */
+
+/*----- Estilização de informações metadados/secundárias no cabeçalho do acordeão -----*/
+.accordion__meta {
+  color: var(--text-muted);
+}
+
+/*----- Suavização do movimento de rotação do ícone de seta do acordeão -----*/
+.accordion__chevron {
+  transition: transform .2s;
+}
+
+/*----- Rotaciona o ícone de seta quando o acordeão está aberto -----*/
+.accordion.is-open .accordion__chevron {
+  transform: rotate(180deg);
+}
+
+/*----- Painel oculto com transição de altura via CSS Grid -----*/
 .accordion__panel {
-  display: grid; grid-template-rows: 0fr;
+  display: grid;
+  grid-template-rows: 0fr;
   transition: grid-template-rows .25s ease;
 }
-.accordion.is-open .accordion__panel { grid-template-rows: 1fr; }
-.accordion__inner { overflow: hidden; min-height: 0; }
-.accordion.is-open .accordion__inner { padding: 0 var(--space-2) var(--space-2); }
+
+/*----- Expande as linhas do grid para revelar o conteúdo quando aberto -----*/
+.accordion.is-open .accordion__panel {
+  grid-template-rows: 1fr;
+}
+
+/*----- Envolvente interno que permite a animação de transição suave da altura -----*/
+.accordion__inner {
+  overflow: hidden;
+  min-height: 0;
+}
+
+/*----- Aplica os espaçamentos internos ao painel quando o acordeão está aberto -----*/
+.accordion.is-open .accordion__inner {
+  padding: 0 var(--space-2) var(--space-2);
+}
 
 /* ---------- DeviceItem ---------- */
-.device {
-  display: flex; align-items: center; gap: var(--space-2);
-  min-height: 64px; padding: var(--space-1) var(--space-2);
-  background: var(--bg); border: 1px solid var(--border); border-radius: var(--radius-button);
-}
-.device__icon { display: grid; place-items: center; width: 40px; height: 40px; color: var(--link); }
-.device__info { flex: 1; min-width: 0; }
-.device__name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.device__status { display: flex; align-items: center; gap: var(--space-half); color: var(--text-muted); }
-.device__dot { width: 8px; height: 8px; border-radius: 50%; }
-.device__dot.is-online  { background: var(--green); }
-.device__dot.is-offline { background: var(--text-muted); }
 
-.device__battery { display: flex; flex-direction: column; align-items: flex-end; gap: var(--space-half); }
-.device__bar { width: 40px; height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
-.device__fill { display: block; height: 100%; background: var(--green); }
-.device__fill.is-low { background: var(--orange); }
+/*----- Container visual e estrutural para exibição de itens de dispositivo -----*/
+.device {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 64px;
+  padding: var(--space-1) var(--space-2);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-button);
+}
+
+/*----- Área quadrada centralizada para o ícone representativo do dispositivo -----*/
+.device__icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  color: var(--link);
+}
+
+/*----- Container de informações de texto do dispositivo com flexível truncamento -----*/
+.device__info {
+  flex: 1;
+  min-width: 0;
+}
+
+/*----- Trunca o nome do dispositivo com reticências em caso de texto longo -----*/
+.device__name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/*----- Alinhamento e estilo da linha de status do dispositivo -----*/
+.device__status {
+  display: flex;
+  align-items: center;
+  gap: var(--space-half);
+  color: var(--text-muted);
+}
+
+/*----- Ponto indicador circular do estado de conexão do dispositivo -----*/
+.device__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+}
+
+/*----- Cor verde para o indicador de status online -----*/
+.device__dot.is-online {
+  background: var(--green);
+}
+
+/*----- Cor neutra/apagada para o indicador de status offline -----*/
+.device__dot.is-offline {
+  background: var(--text-muted);
+}
+
+/*----- Container do indicador de bateria posicionado à direita -----*/
+.device__battery {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--space-half);
+}
+
+/*----- Trilho/fundo da barra do nível de bateria -----*/
+.device__bar {
+  width: 40px;
+  height: 8px;
+  background: var(--border);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+/*----- Preenchimento padrão da barra de bateria (nível normal/alto) -----*/
+.device__fill {
+  display: block;
+  height: 100%;
+  background: var(--green);
+}
+
+/*----- Preenchimento com cor de alerta para nível de bateria baixo -----*/
+.device__fill.is-low {
+  background: var(--orange);
+}
 
 /* ---------- EmptyState ---------- */
+
+/*----- Estrutura centralizada para telas/seções de estado vazio (sem dados) -----*/
 .empty-state {
-  display: flex; flex-direction: column; align-items: center; gap: var(--space-2);
-  padding: var(--space-6) var(--space-3); text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-6) var(--space-3);
+  text-align: center;
 }
-.empty-state__text { color: var(--text-muted); }
+
+/*----- Cor e estilo do texto explicativo do estado vazio -----*/
+.empty-state__text {
+  color: var(--text-muted);
+}
 
 /* ---------- Avatar ---------- */
+
+/*----- Container circular centralizado para fotos de perfil ou iniciais -----*/
 .avatar {
-  display: grid; place-items: center; flex: 0 0 var(--avatar-size, 64px);
-  width: var(--avatar-size, 64px); height: var(--avatar-size, 64px);
-  border-radius: 50%; overflow: hidden;
-  background: var(--brown); color: var(--ink);
-  font-size: calc(var(--avatar-size, 64px) * .4); font-weight: 600; line-height: 1;
+  display: grid;
+  place-items: center;
+  flex: 0 0 var(--avatar-size, 64px);
+  width: var(--avatar-size, 64px);
+  height: var(--avatar-size, 64px);
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--brown);
+  color: var(--ink);
+  font-size: calc(var(--avatar-size, 64px) * .4);
+  font-weight: 600;
+  line-height: 1;
 }
-.avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+/*----- Garante que a imagem do avatar cubra todo o espaço circular sem distorcer -----*/
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
 
 /* ---------- Switch ---------- */
+
+/*----- Linha de controle do interruptor com rótulo e alinhamento espaçado -----*/
 .switch-row {
-  display: flex; align-items: center; justify-content: space-between;
-  width: 100%; min-height: 64px; padding: var(--space-1) var(--space-2);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-height: 64px;
+  padding: var(--space-1) var(--space-2);
 }
+
+/*----- Trilho do botão interruptor (switch/toggle) desativado/padrão -----*/
 .switch {
-  position: relative; width: 48px; height: 24px; border-radius: 12px;
-  background: var(--btn-bg-disabled); transition: background-color .2s;
+  position: relative;
+  width: 48px;
+  height: 24px;
+  border-radius: 12px;
+  background: var(--btn-bg-disabled);
+  transition: background-color .2s;
 }
+
+/*----- Marcador/circulo deslizante do interruptor -----*/
 .switch__thumb {
-  position: absolute; top: 2px; left: 2px; width: 20px; height: 20px;
-  border-radius: 50%; background: #fff; transition: transform .2s;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform .2s;
 }
-.switch-row[aria-checked='true'] .switch { background: var(--green-dark); }
-.switch-row[aria-checked='true'] .switch__thumb { transform: translateX(24px); }
+
+/*----- Cor de fundo do trilho quando o interruptor está marcado/ativo -----*/
+.switch-row[aria-checked='true'] .switch {
+  background: var(--green-dark);
+}
+
+/*----- Desloca o marcador circular para a direita quando o interruptor está ativo -----*/
+.switch-row[aria-checked='true'] .switch__thumb {
+  transform: translateX(24px);
+}
 
 /* ---------- Modal ---------- */
+
+/*----- Caixa de diálogo modal responsiva centralizada com dimensões limite -----*/
 .modal {
   width: min(calc(var(--design-width) - 2 * var(--space-3)), 90vw);
-  padding: var(--space-3); margin: auto;
-  background: var(--bg); color: var(--text);
-  border: 1px solid var(--border); border-radius: var(--radius-card);
+  padding: var(--space-3);
+  margin: auto;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
 }
-.modal::backdrop { background: var(--overlay); }
-.modal > * + * { margin-top: var(--space-2); }
-.modal__actions { display: flex; justify-content: flex-end; gap: var(--space-1); }
 
-.resumo { display: grid; grid-template-columns: auto 1fr; gap: var(--space-half) var(--space-2); }
-.resumo dt { color: var(--text-muted); }
+/*----- Estilização da camada escura de fundo (backdrop) do modal -----*/
+.modal::backdrop {
+  background: var(--overlay);
+}
+
+/*----- Espaçamento vertical entre elementos filhos consecutivos do modal -----*/
+.modal > * + * {
+  margin-top: var(--space-2);
+}
+
+/*----- Container para botões de ação do modal alinhados à direita -----*/
+.modal__actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-1);
+}
+
+/*----- Grid para exibição de lista de chave-valor tipo resumo de informações -----*/
+.resumo {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-half) var(--space-2);
+}
+
+/*----- Cor suavizada para os termos/rótulos da lista de resumo -----*/
+.resumo dt {
+  color: var(--text-muted);
+}
 
 /* ---------- Home ---------- */
-.home-header { display: flex; flex-direction: column; gap: var(--space-half); margin-bottom: var(--space-3); }
 
-.home-card {
-  display: flex; align-items: center; gap: var(--space-2);
-  min-height: 176px; padding: var(--space-2);
-  border-radius: var(--radius-card);
-  color: var(--ink);                       /* fixo: o card é claro nos dois temas */
+/*----- Cabeçalho da página inicial com margem inferior e estrutura em coluna -----*/
+.home-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-half);
+  margin-bottom: var(--space-3);
 }
-.home-card--green { background: var(--green-light); }
-.home-card--blue  { background: var(--blue-light); }
-.home-card.is-reversed { flex-direction: row-reverse; }
 
-.home-card__img { flex: 0 0 120px; }
-.home-card__img img { width: 100%; max-height: 144px; object-fit: contain; margin-inline: auto; }
+/*----- Card informativo da página inicial com flexbox e altura mínima -----*/
+.home-card {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 176px;
+  padding: var(--space-2);
+  border-radius: var(--radius-card);
+  color: var(--ink);                 /* fixo: o card é claro nos dois temas */
+}
 
+/*----- Variação de fundo verde para o card da home -----*/
+.home-card--green {
+  background: var(--green-light);
+}
+
+/*----- Variação de fundo azul para o card da home -----*/
+.home-card--blue {
+  background: var(--blue-light);
+}
+
+/*----- Inverte a ordem da imagem e do conteúdo do card -----*/
+.home-card.is-reversed {
+  flex-direction: row-reverse;
+}
+
+/*----- Container da imagem com largura fixa dentro do card da home -----*/
+.home-card__img {
+  flex: 0 0 120px;
+}
+
+/*----- Ajuste de dimensão e encaixe proporcional da imagem no card -----*/
+.home-card__img img {
+  width: 100%;
+  max-height: 144px;
+  object-fit: contain;
+  margin-inline: auto;
+}
+
+/*----- Corpo de texto e conteúdo do card alinhado à esquerda em coluna -----*/
 .home-card__body {
-  flex: 1; min-width: 0;
-  display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-1);
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-1);
 }
 
 /* ---------- Perfil ---------- */
-.perfil-header { display: flex; align-items: center; gap: var(--space-2); margin-bottom: var(--space-4); }
-.perfil-email { color: var(--text-muted); }
+
+/*----- Cabeçalho da página de perfil com avatar e informações do usuário -----*/
+.perfil-header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-4);
+}
+
+/*----- Estilização do texto de e-mail do usuário -----*/
+.perfil-email {
+  color: var(--text-muted);
+}
+
+/*----- Container e estilo visual para a lista de opções de perfil -----*/
 .perfil-lista {
   margin-bottom: var(--space-4);
-  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-card);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
 }
 
 /* ---------- Painel ---------- */
-.painel__titulo { margin-bottom: var(--space-3); }
 
-.painel-card {
-  display: flex; flex-direction: column; gap: var(--space-1);
-  padding: var(--space-2); margin-bottom: var(--space-2);
-  border-radius: var(--radius-card); color: var(--ink);
+/*----- Espaçamento inferior para o título das seções do painel -----*/
+.painel__titulo {
+  margin-bottom: var(--space-3);
 }
-.painel-card--blue  { background: var(--blue-light); }
-.painel-card--green { background: var(--green-light); }
 
-.meter { height: 8px; border-radius: 4px; background: rgb(21 12 0 / .15); overflow: hidden; }
-.meter__fill { display: block; height: 100%; background: var(--blue-dark); }
+/*----- Card estilizado do painel com espaçamentos em coluna -----*/
+.painel-card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  padding: var(--space-2);
+  margin-bottom: var(--space-2);
+  border-radius: var(--radius-card);
+  color: var(--ink);
+}
 
-.clima { display: flex; justify-content: space-between; gap: var(--space-1); }
-.clima li { display: flex; flex-direction: column; }
+/*----- Variação de cor de fundo azul para os cards do painel -----*/
+.painel-card--blue {
+  background: var(--blue-light);
+}
 
+/*----- Variação de cor de fundo verde para os cards do painel -----*/
+.painel-card--green {
+  background: var(--green-light);
+}
+
+/*----- Barra de medição/progresso genérica -----*/
+.meter {
+  height: 8px;
+  border-radius: 4px;
+  background: rgb(21 12 0 / .15);
+  overflow: hidden;
+}
+
+/*----- Preenchimento interno ativo da barra de medição -----*/
+.meter__fill {
+  display: block;
+  height: 100%;
+  background: var(--blue-dark);
+}
+
+/*----- Layout horizontal para exibição de informações de clima -----*/
+.clima {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--space-1);
+}
+
+/*----- Estruturação dos itens da lista de previsão do clima -----*/
+.clima li {
+  display: flex;
+  flex-direction: column;
+}
+
+/*----- Cabeçalho da seção de áreas do painel com alinhamento entre elementos -----*/
 .painel__areas-head {
-  display: flex; align-items: center; justify-content: space-between;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   margin: var(--space-3) 0 var(--space-2);
 }
+
+/*----- Container visual para apresentação de áreas/cômodos -----*/
 .area {
-  min-height: 64px; padding: var(--space-1) var(--space-2);
-  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-button);
+  min-height: 64px;
+  padding: var(--space-1) var(--space-2);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-button);
 }
-.area__meta { color: var(--text-muted); }
+
+/*----- Texto descritivo/secundário dentro do card de área -----*/
+.area__meta {
+  color: var(--text-muted);
+}
 
 /* ---------- Tarefas ---------- */
-.tarefas__titulo { margin-bottom: var(--space-3); }
 
-.tarefa-form { display: flex; align-items: flex-end; gap: var(--space-1); margin-bottom: var(--space-1); }
-.tarefa-form__campo { flex: 1; min-width: 0; }
+/*----- Espaçamento do título principal da página de tarefas -----*/
+.tarefas__titulo {
+  margin-bottom: var(--space-3);
+}
 
+/*----- Formulário de adição de novas tarefas alinhado na base -----*/
+.tarefa-form {
+  display: flex;
+  align-items: flex-end;
+  gap: var(--space-1);
+  margin-bottom: var(--space-1);
+}
+
+/*----- Garante que o campo de entrada ocupe o espaço restante do formulário -----*/
+.tarefa-form__campo {
+  flex: 1;
+  min-width: 0;
+}
+
+/*----- Controle de seleção segmentada (abas de filtro) em duas colunas -----*/
 .segmented {
-  display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-half);
-  margin: var(--space-3) 0 var(--space-2); padding: var(--space-half);
-  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-button);
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-half);
+  margin: var(--space-3) 0 var(--space-2);
+  padding: var(--space-half);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-button);
 }
-.segmented__btn {
-  min-height: 40px; border-radius: 4px;
-  font-size: 16px; line-height: 24px; color: var(--text);
-}
-.segmented__btn[aria-pressed='true'] { background: var(--btn-bg); color: var(--ink); font-weight: 600; }
 
+/*----- Botões individuais dentro da seleção segmentada -----*/
+.segmented__btn {
+  min-height: 40px;
+  border-radius: 4px;
+  font-size: 16px;
+  line-height: 24px;
+  color: var(--text);
+}
+
+/*----- Destaque visual do botão segmentado selecionado (pressionado) -----*/
+.segmented__btn[aria-pressed='true'] {
+  background: var(--btn-bg);
+  color: var(--ink);
+  font-weight: 600;
+}
+
+/*----- Container visual para um item da lista de tarefas -----*/
 .tarefa {
-  background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius-button);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-button);
 }
+
+/*----- Rótulo clicável da tarefa unindo checkbox e textos -----*/
 .tarefa__label {
-  display: flex; align-items: center; gap: var(--space-2);
-  min-height: 64px; padding: var(--space-1) var(--space-2); cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 64px;
+  padding: var(--space-1) var(--space-2);
+  cursor: pointer;
 }
+
+/*----- Estilização da caixa de seleção (checkbox) da tarefa -----*/
 .tarefa__label input {
-  flex: 0 0 24px; width: 24px; height: 24px; accent-color: var(--green-dark);
+  flex: 0 0 24px;
+  width: 24px;
+  height: 24px;
+  accent-color: var(--green-dark);
 }
-.tarefa__texto { display: flex; flex-direction: column; min-width: 0; }
-.tarefa__area { color: var(--text-muted); }
-.tarefa__label input:checked + .tarefa__texto .tarefa__nome { text-decoration: line-through; color: var(--text-muted); }
+
+/*----- Container dos textos (nome e área) da tarefa -----*/
+.tarefa__texto {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/*----- Cor do texto identificador da área da tarefa -----*/
+.tarefa__area {
+  color: var(--text-muted);
+}
+
+/*----- Aplica risco no texto e cor opaca quando a tarefa está marcada como concluída -----*/
+.tarefa__label input:checked + .tarefa__texto .tarefa__nome {
+  text-decoration: line-through;
+  color: var(--text-muted);
+}
 
 /* ---------- Fale Conosco ---------- */
-.contato-header { display: flex; flex-direction: column; gap: var(--space-half); margin-bottom: var(--space-3); }
-.contato__secao { margin-bottom: var(--space-2); }
-.contato__form-secao { margin-top: var(--space-4); }
 
-.contato-form { display: flex; flex-direction: column; gap: var(--space-2); }
-.contato-form .btn { align-self: stretch; }
-
-.contato-ok {
-  display: flex; flex-direction: column; gap: var(--space-1); align-items: flex-start;
-  padding: var(--space-2); border-radius: var(--radius-card);
-  background: var(--green-light); color: var(--ink);
+/*----- Cabeçalho da tela de contato -----*/
+.contato-header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-half);
+  margin-bottom: var(--space-3);
 }
 
+/*----- Margem inferior para seções da página de contato -----*/
+.contato__secao {
+  margin-bottom: var(--space-2);
+}
+
+/*----- Espaçamento superior da seção contendo o formulário de contato -----*/
+.contato__form-secao {
+  margin-top: var(--space-4);
+}
+
+/*----- Estrutura do formulário de contato em coluna -----*/
+.contato-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+/*----- Estica o botão para cobrir toda a largura no formulário de contato -----*/
+.contato-form .btn {
+  align-self: stretch;
+}
+
+/*----- Mensagem de confirmação de envio bem-sucedido no formulário de contato -----*/
+.contato-ok {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  align-items: flex-start;
+  padding: var(--space-2);
+  border-radius: var(--radius-card);
+  background: var(--green-light);
+  color: var(--ink);
+}
+
+/*----- Desativa transições para usuários que preferem movimentos reduzidos -----*/
 @media (prefers-reduced-motion: reduce) {
-  .accordion__panel, .accordion__chevron, .switch, .switch__thumb { transition: none; }
+  .accordion__panel, .accordion__chevron, .switch, .switch__thumb {
+    transition: none;
+  }
 }
 
 /* ==========================================================
@@ -259,27 +740,47 @@ textarea.field__input { min-height: 120px; padding-block: var(--space-1); resize
    ========================================================== */
 
 /* listas de cards: 1 coluna no celular, mais colunas conforme a largura */
+
+/*----- Configuração de grade auto-adaptável para listas de cartões, itens e dispositivos -----*/
 .accordion-list, .device-list, .area-list, .tarefa-list, .home-cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--card-min)), 1fr));
   gap: var(--space-1);
   align-items: start;
 }
-.home-cards { gap: var(--space-3); align-items: stretch; }
+
+/*----- Ajuste de espaçamento e estiramento específico para os cards da home -----*/
+.home-cards {
+  gap: var(--space-3);
+  align-items: stretch;
+}
 
 /* blocos que ocupam "meia grade" (tela inteira no celular) */
-.painel-card { grid-column: span var(--span-half); }
 
+/*----- Faz com que o card do painel ocupe metade das colunas da grade -----*/
+.painel-card {
+  grid-column: span var(--span-half);
+}
+
+/*----- Elementos da interface ajustados para ocupar metade da grade em telas maiores -----*/
 .perfil-header,
 .perfil-lista,
 .app-main > .btn,
 .tarefa-form,
-.segmented { grid-column: 1 / span var(--span-half); }
+.segmented {
+  grid-column: 1 / span var(--span-half);
+}
 
+/*----- Seções de FAQ e formulário ajustados para divisão de grade -----*/
 .app-main > section[aria-labelledby='faq-titulo'],
-.contato__form-secao { grid-column: span var(--span-half); }
+.contato__form-secao {
+  grid-column: span var(--span-half);
+}
 
+/*----- Ajustes responsivos para telas a partir de 744px de largura -----*/
 @media (min-width: 744px) {
   /* FAQ e formulário ficam lado a lado: o espaço de cima não é mais necessário */
-  .contato__form-secao { margin-top: 0; }
+  .contato__form-secao {
+    margin-top: 0;
+  }
 }

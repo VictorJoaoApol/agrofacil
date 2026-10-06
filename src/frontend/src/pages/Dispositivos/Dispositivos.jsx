@@ -7,10 +7,13 @@ import DeviceItem from '../../components/devices/DeviceItem.jsx'
 import useAsync from '../../hooks/useAsync'
 import { listarDispositivos } from '../../features/device/devicesService.js'
 
+/* Página de listagem e acompanhamento do status de dispositivos IoT agrupados por área */
 export default function Dispositivos() {
+  /* Requisição assíncrona para buscar os dispositivos cadastrados */
   const { status, data, recarregar } = useAsync(listarDispositivos)
 
   // { Horta: [...], Soja: [...] }
+  /* Agrupa a lista de dispositivos por área agrícola usando memorização */
   const porArea = useMemo(() => {
     const grupos = {}
     for (const d of data ?? []) (grupos[d.area] ??= []).push(d)
@@ -36,6 +39,7 @@ export default function Dispositivos() {
   return (
     <>
       <h1 className="sr-only">Dispositivos</h1>
+      {/* Lista sanfonada de dispositivos agrupados por suas respectivas áreas */}
       <div className="accordion-list">
         {porArea.map(([area, itens], i) => (
           <Accordion

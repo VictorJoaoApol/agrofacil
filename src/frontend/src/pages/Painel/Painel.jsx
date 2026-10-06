@@ -6,8 +6,12 @@ import NovaAreaModal from '../../components/painel/NovaAreaModal.jsx'
 import useAsync from '../../hooks/useAsync'
 import { obterPainel } from '../../features/painel/painelService'
 
+/* Dashboard principal com métricas de uso de água, condições do clima e áreas agrícolas */
 export default function Painel() {
+  /* Requisição dos dados do painel */
   const { status, data: painel, recarregar, setData } = useAsync(obterPainel)
+  
+  /* Estado de visibilidade do modal de cadastro de nova área */
   const [novaArea, setNovaArea] = useState(false)
 
   if (status === 'loading') return <p className="text-body" role="status">Carregando painel...</p>
@@ -23,12 +27,14 @@ export default function Painel() {
   }
 
   const { agua, clima, areas } = painel
+  /* Calcula a porcentagem de consumo de água em relação à meta */
   const pct = Math.min(100, Math.round((agua.usadoLitros / agua.metaLitros) * 100))
 
   return (
     <>
       <h1 className="text-title-l painel__titulo">Painel</h1>
 
+      {/* Card indicador de uso de água */}
       <section className="painel-card painel-card--blue" aria-labelledby="agua-titulo">
         <h2 id="agua-titulo" className="text-title-s">Uso de água</h2>
         <p className="text-body">{agua.usadoLitros} L de {agua.metaLitros} L</p>
@@ -39,6 +45,7 @@ export default function Painel() {
         <p className="text-caption">{pct}% da meta</p>
       </section>
 
+      {/* Card indicador de dados meteorológicos locais */}
       <section className="painel-card painel-card--green" aria-labelledby="clima-titulo">
         <h2 id="clima-titulo" className="text-title-s">Clima</h2>
         <ul className="clima">
@@ -48,6 +55,7 @@ export default function Painel() {
         </ul>
       </section>
 
+      {/* Seção de gestão de áreas de irrigação */}
       <section aria-labelledby="areas-titulo">
         <div className="painel__areas-head">
           <h2 id="areas-titulo" className="text-title-s">Áreas de irrigação</h2>
@@ -68,6 +76,7 @@ export default function Painel() {
           )}
       </section>
 
+      {/* Modal de adição de uma nova área */}
       <NovaAreaModal
         open={novaArea}
         onClose={() => setNovaArea(false)}

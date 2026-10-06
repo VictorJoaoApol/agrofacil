@@ -10,8 +10,10 @@ import Login from '../pages/RegistrosUsuarios/Login.jsx'
 import Cadastro from '../pages/RegistrosUsuarios/Cadastro.jsx'
 import RecuperarSenha from '../pages/RegistrosUsuarios/RecuperarSenha.jsx'
 
+/* Gerenciador central de rotas da aplicação utilizando hook de configuração declarativa */
 export default function AppRoutes() {
   return useRoutes([
+    /* Redirecionamento padrão da raiz para a área logada do sistema */
     { path: '/', element: <Navigate to="/app" replace /> },
 
     // Só para quem NÃO está logado (logado é redirecionado para /app)
@@ -36,6 +38,7 @@ export default function AppRoutes() {
         {
           path: '/app',
           element: <AppLayout />,
+          /* Mapeia dinamicamente as páginas cadastradas em appPages para a subrota /app */
           children: appPages.map(({ path, Component }) =>
             path === '' ? { index: true, Component } : { path, Component },
           ),
@@ -43,6 +46,7 @@ export default function AppRoutes() {
       ],
     },
 
+    /* Rota coringa para tratamento de páginas inexistentes (Erro 404) */
     { path: '*', element: <NotFound /> },
   ])
 }

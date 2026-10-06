@@ -1,3 +1,4 @@
+// routes/PublicRoute.jsx
 import { Navigate, Outlet } from "react-router";
 import useAuth from "../hooks/useAuth";
 
@@ -9,16 +10,20 @@ import useAuth from "../hooks/useAuth";
  * um "flash" do formulário antes do redirecionamento).
  */
 function PublicRoute() {
+  /* Resgata o estado de autenticação e carregamento da sessão */
   const { estaAutenticado, carregando } = useAuth();
 
+  /* Aguarda a verificação da sessão antes de liberar a visualização */
   if (carregando) {
     return null;
   }
 
+  /* Redireciona automaticamente para a aplicação caso o usuário já esteja autenticado */
   if (estaAutenticado) {
     return <Navigate to="/app" replace />;
   }
 
+  /* Renderiza os formulários públicos (Login, Cadastro, Recuperar Senha) */
   return <Outlet />;
 }
 

@@ -4,10 +4,15 @@ import { Seta } from '../../assets/Icons'
 import useAuth from '../../hooks/useAuth'
 import { appPages, appPath } from '../../routes/pages'
 
+/* Filtra apenas os módulos configurados para exibição no painel inicial */
 const cards = appPages.filter((p) => p.home)
 
+/* Página inicial da área logada com atalhos para os principais recursos */
 export default function Overview() {
+  /* Resgata as informações do usuário logado */
   const { usuario } = useAuth()
+  
+  /* Extrai o primeiro nome para a saudação inicial */
   const primeiroNome = usuario?.nome?.split(' ')[0]
 
   return (
@@ -17,6 +22,7 @@ export default function Overview() {
         <p className="text-body">O que vamos fazer hoje?</p>
       </header>
 
+      {/* Grade de cartões de navegação rápida do sistema */}
       <div className="home-cards">
         {cards.map(({ path, label, home }, i) => (
           <article

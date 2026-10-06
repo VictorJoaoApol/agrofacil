@@ -2,6 +2,7 @@
 import EmptyState from '../components/ui/EmptyState.jsx'
 import Button from '../components/ui/Button.jsx'
 
+/* Página utilitária de fallback para rotas não encontradas (Erro 404) */
 export default function NotFound() {
   return (
     <div className="auth-shell">

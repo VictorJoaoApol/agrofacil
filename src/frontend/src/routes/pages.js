@@ -12,12 +12,15 @@ import painelImg from '../assets/img/Painel.png'
   path     -> vira /app/<path> ('' = /app)
   label    -> nome no menu e título da Navbar
   icon     -> componente de ícone
-  variant  -> 'home' | 'inner' (padrão) | 'profile'   (aparência da Navbar)
+  variant  -> 'home' | 'inner' (padrão) | 'profile'    (aparência da Navbar)
   menus    -> onde aparece: 'bottom' (barra inferior, máx. 5) e/ou 'sidebar'
   home     -> (opcional) cria um card na Home: { tone, img, text }
 */
+
+/* Helper para formatação do caminho absoluto da rota interna */
 export const appPath = (path = '') => (path ? `/app/${path}` : '/app')
 
+/* Lista mestra de configuração de rotas e menus da área privada */
 export const appPages = [
   {
     path: '', label: 'Home', variant: 'home',
@@ -49,9 +52,11 @@ export const appPages = [
   },
 ]
 
+/* Filtra as páginas destinadas a um menu específico (ex: 'bottom' ou 'sidebar') */
 export const pagesFor = (menu) => appPages.filter((p) => p.menus?.includes(menu))
 
 // Página atual pela URL; o prefixo mais longo vence (/app/painel/areas/1 -> Painel)
+/* Retorna o objeto de página correspondente com base no caminho atual da URL */
 export function getPage(pathname) {
   const clean = pathname.replace(/\/+$/, '')
   return (

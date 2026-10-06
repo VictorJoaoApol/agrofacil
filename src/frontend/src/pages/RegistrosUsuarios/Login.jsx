@@ -2,6 +2,7 @@
 import FormLogin from '../../components/forms/FormLogin.jsx'
 import Button from '../../components/ui/Button.jsx'
 
+/* Página pública de autenticação de usuários */
 export default function Login() {
   return (
     <>

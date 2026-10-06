@@ -4,18 +4,22 @@ import Button from '../../components/ui/Button.jsx'
 import EmptyState from '../../components/ui/EmptyState.jsx'
 import { listarTarefas, alternarTarefa, criarTarefa } from '../../features/tarefas/tarefasService'
 
+/* Opções para filtragem das tarefas por status */
 const FILTROS = [
   { id: 'pendentes',  label: 'Pendentes' },
   { id: 'concluidas', label: 'Concluídas' },
 ]
 
+/* Página de gerenciamento de tarefas agrícolas (criação, alternância e filtragem) */
 export default function Tarefas() {
+  /* Estados locais para tarefas e formulários */
   const [status, setStatus] = useState('loading')   // loading | ready | error
   const [tarefas, setTarefas] = useState([])
   const [filtro, setFiltro] = useState('pendentes')
   const [titulo, setTitulo] = useState('')
   const [erro, setErro] = useState('')
 
+  /* Busca as tarefas registradas no servidor */
   const carregar = () => {
     setStatus('loading')
     listarTarefas()
@@ -29,22 +33,26 @@ export default function Tarefas() {
 
   useEffect(carregar, [])
 
+  /* Métricas gerais de progresso das tarefas */
   const total = tarefas.length
   const feitas = tarefas.filter((t) => t.concluida).length
   const pct = total ? Math.round((feitas / total) * 100) : 0
 
+  /* Filtra as tarefas exibidas de acordo com o aba/filtro selecionado */
   const visiveis = useMemo(
     () => tarefas.filter((t) => t.concluida === (filtro === 'concluidas')),
     [tarefas, filtro],
   )
 
+  /* Alterna o estado da tarefa com atualização otimista na interface */
   const alternar = async (id) => {
     const marcar = (lista) => lista.map((t) => (t.id === id ? { ...t, concluida: !t.concluida } : t))
-    setTarefas(marcar)                       // otimista
+    setTarefas(marcar)                       // atualização otimista
     const res = await alternarTarefa(id)
-    if (!res.ok) setTarefas(marcar)          // desfaz
+    if (!res.ok) setTarefas(marcar)          // reverte em caso de erro
   }
 
+  /* Cria uma nova tarefa e atualiza a lista exibida */
   const adicionar = async (e) => {
     e.preventDefault()
     const res = await criarTarefa({ titulo })
@@ -71,6 +79,7 @@ export default function Tarefas() {
     <>
       <h1 className="text-title-l tarefas__titulo">Tarefas</h1>
 
+      {/* Indicador de progresso geral */}
       <section className="painel-card painel-card--green" aria-labelledby="progresso-titulo">
         <h2 id="progresso-titulo" className="text-title-s">Seu progresso</h2>
         <p className="text-body">{feitas} de {total} tarefas concluídas</p>
@@ -80,6 +89,7 @@ export default function Tarefas() {
         </div>
       </section>
 
+      {/* Formulário para adição rápida de tarefas */}
       <form className="tarefa-form" onSubmit={adicionar}>
         <label className="field tarefa-form__campo">
           <span className="text-body">Nova tarefa</span>
@@ -90,6 +100,7 @@ export default function Tarefas() {
       </form>
       {erro && <p id="erro-tarefa" role="alert" className="text-caption field__erro">{erro}</p>}
 
+      {/* Botões segmentados de filtro (pendentes x concluídas) */}
       <div className="segmented" role="group" aria-label="Filtrar tarefas">
         {FILTROS.map((f) => (
           <button key={f.id} type="button" className="segmented__btn"
