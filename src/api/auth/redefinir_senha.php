@@ -79,7 +79,7 @@
 
 
         // Atualiza a senha do usuário no banco.
-        $stmt = $pdo->prepare("UPDATE ``.`` SET hash_senha = :hash_senha WHERE id = :id_usuario;");
+        $stmt = $pdo->prepare("UPDATE `agrofacil_db`.`TB_Usuarios` SET hash_senha = :hash_senha WHERE id = :id_usuario;");
         $stmt->bindParam(':hash_senha', $hash_senha);
         $stmt->bindParam(':id_usuario', $registro['id_usuario']);
 
