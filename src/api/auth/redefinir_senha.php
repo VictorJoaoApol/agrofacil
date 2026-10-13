@@ -82,7 +82,8 @@
         $stmt = $pdo->prepare("UPDATE `agrofacil_db`.`TB_Usuarios` SET hash_senha = :hash_senha WHERE id = :id_usuario;");
         $stmt->bindParam(':hash_senha', $hash_senha);
         $stmt->bindParam(':id_usuario', $registro['id_usuario']);
-
+        $stmt->execute();
+        
 
         // Deleta a entrada anterior do banco.
         $stmt = $pdo->prepare("DELETE FROM `agrofacil_db`.`TB_Tokens_Recuperacao` WHERE id = :id;");
