@@ -10,12 +10,9 @@ SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,N
 -- -----------------------------------------------------
 -- Schema agrofacil_db
 -- -----------------------------------------------------
-
--- -----------------------------------------------------
--- Schema agrofacil_db
--- -----------------------------------------------------
 CREATE SCHEMA IF NOT EXISTS `agrofacil_db` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci ;
 USE `agrofacil_db` ;
+
 
 -- -----------------------------------------------------
 -- Table `agrofacil_db`.`TB_Usuarios`
@@ -29,8 +26,7 @@ CREATE TABLE IF NOT EXISTS `agrofacil_db`.`TB_Usuarios` (
   `estado` CHAR(2) NULL,
   `data_cadastro` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE)
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC))
 ENGINE = InnoDB;
 
 
@@ -38,14 +34,13 @@ ENGINE = InnoDB;
 -- Table `agrofacil_db`.`TB_Areas_Irrigacao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `agrofacil_db`.`TB_Areas_Irrigacao` (
-  `id` INT UNSIGNED NOT NULL,
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_usuario` INT UNSIGNED NOT NULL,
   `nome_area` VARCHAR(20) NOT NULL,
   `tamanho` INT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  INDEX `id_usuario_INDEX` (`id_usuario` ASC) VISIBLE,
-  UNIQUE INDEX `nome_area_UNIQUE` (`nome_area` ASC) VISIBLE,
+  INDEX `id_usuario_INDEX` (`id_usuario` ASC),
+  UNIQUE INDEX `nome_area_usuario_UNIQUE` (`id_usuario`, `nome_area`),
   CONSTRAINT `fk_usuarios_areas_irrigacao`
     FOREIGN KEY (`id_usuario`)
     REFERENCES `agrofacil_db`.`TB_Usuarios` (`id`)
@@ -62,8 +57,7 @@ CREATE TABLE IF NOT EXISTS `agrofacil_db`.`TB_Tarefas` (
   `nome_tarefa` VARCHAR(45) NOT NULL,
   `descricao` TEXT NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  UNIQUE INDEX `nome_tarefa_UNIQUE` (`nome_tarefa` ASC) VISIBLE)
+  UNIQUE INDEX `nome_tarefa_UNIQUE` (`nome_tarefa` ASC))
 ENGINE = InnoDB;
 
 
@@ -71,12 +65,12 @@ ENGINE = InnoDB;
 -- Table `agrofacil_db`.`TB_Progresso_Tarefas`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `agrofacil_db`.`TB_Progresso_Tarefas` (
-  `id_usuario` INT UNSIGNED NOT NULL,
+  `id_usuario` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_tarefa` INT UNSIGNED NOT NULL,
   `esta_feito` ENUM("S", "N") NOT NULL DEFAULT 'N',
   PRIMARY KEY (`id_tarefa`, `id_usuario`),
-  INDEX `id_tarefa_INDEX` (`id_tarefa` ASC) VISIBLE,
-  INDEX `id_usuario_INDEX` (`id_usuario` ASC) VISIBLE,
+  INDEX `id_tarefa_INDEX` (`id_tarefa` ASC),
+  INDEX `id_usuario_INDEX` (`id_usuario` ASC),
   CONSTRAINT `fk_usuarios_progresso`
     FOREIGN KEY (`id_usuario`)
     REFERENCES `agrofacil_db`.`TB_Usuarios` (`id`)
@@ -100,10 +94,9 @@ CREATE TABLE IF NOT EXISTS `agrofacil_db`.`TB_Sensores` (
   `nome_sensor` VARCHAR(45) NOT NULL,
   `tipo_sensor` ENUM("TEMP", "COND", "UMID") NOT NULL,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  INDEX `id_usuario_INDEX` (`id_usuario` ASC) VISIBLE,
-  INDEX `id_area_INDEX` (`id_area` ASC) VISIBLE,
-  UNIQUE INDEX `nome_sensor_UNIQUE` (`nome_sensor` ASC) VISIBLE,
+  INDEX `id_usuario_INDEX` (`id_usuario` ASC),
+  INDEX `id_area_INDEX` (`id_area` ASC),
+  UNIQUE INDEX `nome_sensor_usuario_UNIQUE` (`id_usuario`,`nome_sensor`),
   CONSTRAINT `fk_usuarios_sensores`
     FOREIGN KEY (`id_usuario`)
     REFERENCES `agrofacil_db`.`TB_Usuarios` (`id`)
@@ -127,8 +120,7 @@ CREATE TABLE IF NOT EXISTS `agrofacil_db`.`TB_Leituras` (
   `valor` FLOAT NOT NULL,
   `datahora_leitura` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC) VISIBLE,
-  INDEX `id_sensor_INDEX` (`id_sensor` ASC) VISIBLE,
+  INDEX `id_sensor_INDEX` (`id_sensor` ASC),
   CONSTRAINT `fk_sensores_leituras`
     FOREIGN KEY (`id_sensor`)
     REFERENCES `agrofacil_db`.`TB_Sensores` (`id`)
@@ -136,17 +128,18 @@ CREATE TABLE IF NOT EXISTS `agrofacil_db`.`TB_Leituras` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
---------------------------------------------------------
+-- -----------------------------------------------------
 -- Table `agrofacil_db`.`TB_Tokens_Recuperacao`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `agrofacil_db`.`TB_Tokens_Recuperacao` (
-  `id` INT UNSIGNED NOT NULL PRIMARY KEY,
+  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_usuario` INT UNSIGNED NOT NULL,
   `token` CHAR(64) NOT NULL,
   `validade` DATETIME NOT NULL,
   `data_criacao` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
-  INDEX `id_INDEX` (`id` ASC) VISIBLE,
+  UNIQUE INDEX `token_UNIQUE` (`token` ASC),
+  INDEX `id_INDEX` (`id` ASC),
   CONSTRAINT `fk_usuarios_token`
     FOREIGN KEY (`id_usuario`)
     REFERENCES `agrofacil_db`.`TB_Usuarios` (`id`)

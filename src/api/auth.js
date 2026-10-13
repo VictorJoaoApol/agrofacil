@@ -66,3 +66,39 @@ export async function verificarSessao() {
         ...(await resposta.json()),
     };
 }
+
+
+// Usado em frontend/src/components/forms/FormRecuperarSenha.jsx
+export async function solicitarRecuperacao(email) {
+    const resposta = await fetch(`${API_URL}/auth/solicitar_recuperacao.php`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email }),
+    });
+
+    // Espera a resposta chegar e a retorna.
+    return {
+        ok: resposta.ok,
+        ...(await resposta.json()),
+    };
+}
+
+
+// Usado em frontend/src/components/forms/FormRedefinirSenha.jsx
+export async function redefinirSenha(token, senha) {
+    const resposta = await fetch(`${API_URL}/auth/redefinir_senha.php`, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ token, senha }),
+    });
+
+    // Espera a resposta chegar e a retorna.
+    return {
+        ok: resposta.ok,
+        ...(await resposta.json()),
+    };
+}
