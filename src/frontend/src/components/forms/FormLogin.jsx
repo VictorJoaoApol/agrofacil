@@ -97,12 +97,6 @@ function FormLogin() {
           {enviando ? "Logando..." : "Logar"}
         </button>
       </form>
-
-      {/* Links de navegação externa */}
-      <nav>
-        <NavLink to="/cadastro">Não tem conta? Cadastre aqui.</NavLink>
-        <NavLink to="/login/recuperar-senha">Esqueci a senha.</NavLink>
-      </nav>
     </>
   );
 }
