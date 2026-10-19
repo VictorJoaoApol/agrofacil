@@ -1,12 +1,15 @@
 // pages/Dispositivos/Dispositivos.jsx
+/*
 import { useEffect, useMemo, useState } from 'react'
 import Accordion from '../../components/ui/Accordion.jsx'
 import EmptyState from '../../components/ui/EmptyState.jsx'
 import Button from '../../components/ui/Button.jsx'
 import DeviceItem from '../../components/devices/DeviceItem.jsx'
 import { listarDispositivos } from '../../features/devices/devicesService'
+*/
 
 export default function Dispositivos() {
+  /*
   const [status, setStatus] = useState('loading')   // loading | ready | error
   const [dispositivos, setDispositivos] = useState([])
 
@@ -45,9 +48,9 @@ export default function Dispositivos() {
   if (porArea.length === 0) {
     return <EmptyState title="Nenhum dispositivo disponível" text="Adicione um dispositivo para vê-lo aqui." />
   }
-
+  */
   return (
-    <div className="accordion-list">
+    /*<div className="accordion-list">
       {porArea.map(([area, itens], i) => (
         <Accordion
           key={area}
@@ -60,6 +63,7 @@ export default function Dispositivos() {
           </ul>
         </Accordion>
       ))}
-    </div>
+    </div>*/
+    <></>
   )
 }

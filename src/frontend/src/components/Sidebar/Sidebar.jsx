@@ -1,11 +1,10 @@
-// components/Sidebar/Sidebar.jsx
 import { NavLink } from 'react-router'
 import { appPages, appPath } from '../../routes/pages'
 import { useSidebar } from './SidebarContext.jsx'
 import { useTheme } from '../../hooks/useTheme'
 import { Fechar } from '../../assets/Icons'
 
-export default function Sidebar() {
+function SidebarProvider() {
   const { isOpen, close } = useSidebar()
   const { theme, toggleTheme } = useTheme()
   const itens = appPages.filter((p) => p.menus?.includes('sidebar'))
@@ -43,3 +42,5 @@ export default function Sidebar() {
     </>
   )
 }
+
+export default SidebarProvider;
