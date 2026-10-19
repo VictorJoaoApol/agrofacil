@@ -2,7 +2,7 @@
 import { Suspense, useEffect, useRef } from 'react'
 import { Outlet, useLocation } from 'react-router'
 import { SidebarProvider, useSidebar } from '../components/Sidebar/SidebarContext.jsx'
-import Navbar from '../components/navbar/Navbar.jsx'
+import Navbar from '../components/Navbar/Navbar.jsx'
 import Sidebar from '../components/Sidebar/sidebar.jsx'
 import BarraNavegacao from '../components/Navegacao/barraNavegacao.jsx'
 import ErrorBoundary from '../components/ErrorBoundary.jsx'

@@ -84,7 +84,7 @@ export default function Painel() {
           <Anel pct={pct} />
           <div className="painel-irrig__centro" role="img"
             aria-label={`${formatarTempo(irrigacao.minutosUsados)} de ${formatarTempo(irrigacao.minutosMeta)}, ${pct}%`}>
-            <p className="text-caption"><p>Tempo</p> total de Irrigação</p>
+            <p className="text-caption">Tempo<br></br> total de Irrigação</p>
             <p className="painel-irrig__tempo">{formatarTempo(irrigacao.minutosUsados)}</p>
             <p className="text-caption">De {formatarTempo(irrigacao.minutosMeta)}<br />{pct}%</p>
           </div>
