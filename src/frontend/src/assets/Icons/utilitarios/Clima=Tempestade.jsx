@@ -1,0 +1,26 @@
+export function Tempestade({ size, className, ...props }) {
+  return (
+    <svg {...props} width={size ?? 24} height={size ?? 24} className={className} viewBox="0 0 72 72" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <g filter="url(#filter0_d_541_813)">
+        <path d="M23.6 64L26.48 56.381H20.4L24.4 45.7143H32.4L28.96 53.3333H35.6L26.8 64H23.6ZM45.2 60.9524L47.44 54.8571H41.2L44.64 45.7143H52.64L49.84 51.8095H56.4L48.4 60.9524H45.2ZM22.8 41.1429C18.16 41.1429 14.2 39.581 10.92 36.4571C7.64 33.3333 6 29.5619 6 25.1429C6 21.1302 7.50667 17.5492 10.52 14.4C13.5333 11.2508 17.28 9.52381 21.76 9.21905C23.4667 6.3746 25.72 4.12698 28.52 2.47619C31.32 0.825397 34.48 0 38 0C42.8533 0 46.92 1.46032 50.2 4.38095C53.48 7.30159 55.4933 10.9206 56.24 15.2381C60.4533 15.4413 63.8 16.8 66.28 19.3143C68.76 21.8286 70 24.7873 70 28.1905C70 31.746 68.68 34.7937 66.04 37.3333C63.4 39.873 60.1867 41.1429 56.4 41.1429H22.8Z" fill="url(#paint0_linear_541_813)"/>
+      </g>
+      <defs>
+        <filter id="filter0_d_541_813" x="0" y="0" width="72" height="72" filterUnits="userSpaceOnUse" colorInterpolationFilters="sRGB">
+          <feFlood floodOpacity="0" result="BackgroundImageFix"/>
+          <feColorMatrix in="SourceAlpha" type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 127 0" result="hardAlpha"/>
+          <feOffset dx="-2" dy="4"/>
+          <feGaussianBlur stdDeviation="2"/>
+          <feComposite in2="hardAlpha" operator="out"/>
+          <feColorMatrix type="matrix" values="0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.25 0"/>
+          <feBlend mode="normal" in2="BackgroundImageFix" result="effect1_dropShadow_541_813"/>
+          <feBlend mode="normal" in="SourceGraphic" in2="effect1_dropShadow_541_813" result="shape"/>
+        </filter>
+        <linearGradient id="paint0_linear_541_813" x1="38" y1="0" x2="38" y2="64" gradientUnits="userSpaceOnUse">
+          <stop stopColor="#5D2FAD"/>
+          <stop offset="0.653846" stopColor="#261347"/>
+          <stop offset="0.778846" stopColor="#F9D717"/>
+        </linearGradient>
+      </defs>
+    </svg>
+  );
+}

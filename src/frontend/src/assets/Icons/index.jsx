@@ -32,3 +32,7 @@ export { TarefasAtivado } from './utilitarios/TarefasAtivado.jsx';
 export { Umidade } from './utilitarios/Umidade.jsx';
 export { Usuario } from './utilitarios/Usuario.jsx';
 export { IconPlaceholder } from './utilitarios/IconPlaceholder.jsx';
+export { Chuvoso } from './utilitarios/Clima=Chuvoso.jsx';
+export { Ensolarado } from './utilitarios/Clima=Ensolarado.jsx';
+export { Nublado } from './utilitarios/Clima=Nublado.jsx';
+export { Tempestade } from './utilitarios/Clima=Tempestade.jsx';

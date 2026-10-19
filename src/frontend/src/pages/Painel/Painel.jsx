@@ -1,18 +1,36 @@
 // pages/Painel/Painel.jsx
-import { useState } from 'react'
+import { Link } from 'react-router'
 import Button from '../../components/ui/Button.jsx'
 import EmptyState from '../../components/ui/EmptyState.jsx'
-import NovaAreaModal from '../../components/painel/NovaAreaModal.jsx'
+import { Radiacao, Seta, Umidade, Ensolarado } from '../../assets/Icons'
 import useAsync from '../../hooks/useAsync'
 import { obterPainel } from '../../features/painel/painelService'
+import { appPath } from '../../routes/pages'
+import logo from '../../assets/img/Logo.png'
 
-/* Dashboard principal com métricas de uso de água, condições do clima e áreas agrícolas */
+/* 150 -> "2h30min" */
+const formatarTempo = (min) => {
+  const h = Math.floor(min / 60)
+  const m = min % 60
+  return `${h}h${String(m).padStart(2, '0')}min`
+}
+
+/* Anel de progresso (SVG) do tempo de irrigação */
+function Anel({ pct }) {
+  const r = 70
+  const c = 2 * Math.PI * r
+  return (
+    <svg className="svg-original irrig__anel" viewBox="0 0 160 160" aria-hidden="true">
+      <circle cx="80" cy="80" r={r} fill="none" stroke="rgb(255 255 255 / .25)" strokeWidth="10" />
+      <circle cx="80" cy="80" r={r} fill="none" stroke="var(--blue)" strokeWidth="10" strokeLinecap="round"
+        strokeDasharray={`${(c * pct) / 100} ${c}`} transform="rotate(-90 80 80)" />
+    </svg>
+  )
+}
+
+/* Painel: clima, tempo de irrigação, dispositivos IoT e atalho para as áreas */
 export default function Painel() {
-  /* Requisição dos dados do painel */
-  const { status, data: painel, recarregar, setData } = useAsync(obterPainel)
-  
-  /* Estado de visibilidade do modal de cadastro de nova área */
-  const [novaArea, setNovaArea] = useState(false)
+  const { status, data: painel, recarregar } = useAsync(obterPainel)
 
   if (status === 'loading') return <p className="text-body" role="status">Carregando painel...</p>
 
@@ -26,62 +44,66 @@ export default function Painel() {
     )
   }
 
-  const { agua, clima, areas } = painel
-  /* Calcula a porcentagem de consumo de água em relação à meta */
-  const pct = Math.min(100, Math.round((agua.usadoLitros / agua.metaLitros) * 100))
+  const { clima, irrigacao, dispositivos } = painel
+  const pct = Math.min(100, Math.round((irrigacao.minutosUsados / irrigacao.minutosMeta) * 100))
 
   return (
     <>
-      <h1 className="text-title-l painel__titulo">Painel</h1>
+      <header className="painel-topo">
+        <img className="painel-topo__logo" src={logo} alt="" />
+        <h1 className="text-title-l">Painel</h1>
+        <p className="text-body">Dados sobre sua terra</p>
+      </header>
 
-      {/* Card indicador de uso de água */}
-      <section className="painel-card painel-card--blue" aria-labelledby="agua-titulo">
-        <h2 id="agua-titulo" className="text-title-s">Uso de água</h2>
-        <p className="text-body">{agua.usadoLitros} L de {agua.metaLitros} L</p>
-        <div className="meter" role="progressbar" aria-valuemin={0} aria-valuemax={100}
-          aria-valuenow={pct} aria-label="Uso de água no mês">
-          <span className="meter__fill" style={{ width: `${pct}%` }} />
+      <div className="painel-resumo">
+        {/* Clima */}
+        <section className="painel-clima" aria-labelledby="clima-titulo">
+          <h2 id="clima-titulo" className="sr-only">Clima</h2>
+          <div className="painel-clima__topo">
+            <Ensolarado size={72} className="painel-clima__sol" aria-hidden="true" />
+            <div>
+              <p className="painel-clima__temp">{clima.temperatura}°</p>
+              <p className="text-caption">{clima.cidade}</p>
+            </div>
+          </div>
+          <ul className="painel-clima__dados">
+            <li>
+              <Radiacao size={20} aria-hidden="true" />
+              <span><small>Radiação Solar</small><strong>{clima.radiacao}W/m²</strong></span>
+            </li>
+            <li>
+              <Umidade size={20} aria-hidden="true" />
+              <span><small>Umidade e DPV</small><strong>{clima.umidade}% | {String(clima.dpv).replace('.', ',')}kPa</strong></span>
+            </li>
+          </ul>
+        </section>
+
+        {/* Irrigação */}
+        <section className="painel-irrig" aria-labelledby="irrig-titulo">
+          <h2 id="irrig-titulo" className="sr-only">Tempo de irrigação</h2>
+          <Anel pct={pct} />
+          <div className="painel-irrig__centro" role="img"
+            aria-label={`${formatarTempo(irrigacao.minutosUsados)} de ${formatarTempo(irrigacao.minutosMeta)}, ${pct}%`}>
+            <p className="text-caption"><p>Tempo</p> total de Irrigação</p>
+            <p className="painel-irrig__tempo">{formatarTempo(irrigacao.minutosUsados)}</p>
+            <p className="text-caption">De {formatarTempo(irrigacao.minutosMeta)}<br />{pct}%</p>
+          </div>
+        </section>
+      </div>
+
+      {/* Dispositivos IoT */}
+      <Link to={appPath('dispositivos')} className="painel-iot">
+        <div className="painel-iot__texto">
+          <h2 className="painel-iot__titulo">Dispositivos IoT</h2>
+          <p className="painel-iot__ativos">{dispositivos.ativos}/{dispositivos.total}</p>
+          <p className="text-body">Dispositivos ativos</p>
         </div>
-        <p className="text-caption">{pct}% da meta</p>
-      </section>
+        <span className="painel-iot__ir" aria-hidden="true"><Seta size={28} /></span>
+      </Link>
 
-      {/* Card indicador de dados meteorológicos locais */}
-      <section className="painel-card painel-card--green" aria-labelledby="clima-titulo">
-        <h2 id="clima-titulo" className="text-title-s">Clima</h2>
-        <ul className="clima">
-          <li><strong className="text-title-s">{clima.temperatura}°C</strong><span className="text-caption">Temperatura</span></li>
-          <li><strong className="text-title-s">{clima.umidade}%</strong><span className="text-caption">Umidade</span></li>
-          <li><strong className="text-title-s">{clima.chuvaPct}%</strong><span className="text-caption">Chuva</span></li>
-        </ul>
-      </section>
-
-      {/* Seção de gestão de áreas de irrigação */}
-      <section aria-labelledby="areas-titulo">
-        <div className="painel__areas-head">
-          <h2 id="areas-titulo" className="text-title-s">Áreas de irrigação</h2>
-          <Button variant="highlight" onClick={() => setNovaArea(true)}>Nova área</Button>
-        </div>
-
-        {areas.length === 0
-          ? <EmptyState title="Nenhuma área cadastrada" text="Crie sua primeira área para começar." />
-          : (
-            <ul className="area-list">
-              {areas.map((a) => (
-                <li key={a.id} className="area">
-                  <p className="text-body area__nome">{a.nome}</p>
-                  <p className="text-caption area__meta">{a.cultura} · {a.hectares} ha</p>
-                </li>
-              ))}
-            </ul>
-          )}
-      </section>
-
-      {/* Modal de adição de uma nova área */}
-      <NovaAreaModal
-        open={novaArea}
-        onClose={() => setNovaArea(false)}
-        onCriada={(a) => setData((p) => ({ ...p, areas: [...p.areas, a] }))}
-      />
+      <div className="painel-areas-link">
+        <Button variant="primary" to={appPath('painel/areas')}>Áreas de Irrigação</Button>
+      </div>
     </>
   )
 }

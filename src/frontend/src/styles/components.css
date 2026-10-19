@@ -5,7 +5,7 @@
 
 /* ---------- Button ---------- */
 
-/*----- Define a estrutura base do botão: layout flexível, espaçamentos, tipografia e transição -----*/
+/*----- Define a estrutura, o alinhamento e as dimensões padrão dos botões -----*/
 .btn {
   display: inline-flex;
   align-items: center;
@@ -20,49 +20,45 @@
   transition: background-color .15s;
 }
 
-/*----- Impede o encolhimento de ícones vetoriais inseridos dentro do botão -----*/
+/*----- Impede que o ícone SVG do botão encolha durante o alinhamento -----*/
 .btn svg {
   flex-shrink: 0;
 }
 
-/* primary: Padrão / Hover / Pressionado (laranja) */
-
-/*----- Estilização visual do botão primário (cor de fundo e texto) -----*/
+/*----- Define as cores de fundo e texto do botão principal -----*/
 .btn--primary {
   background: var(--btn-bg);
   color: var(--ink);
 }
 
-/*----- Alteração da cor de fundo no estado de hover do botão primário -----*/
+/*----- Altera o fundo do botão principal quando o cursor passa sobre ele -----*/
 .btn--primary:hover:not(:disabled) {
   background: var(--btn-bg-hover);
 }
 
-/*----- Alteração da cor de fundo no estado pressionado/ativo do botão primário -----*/
+/*----- Aplica a cor de fundo do botão principal enquanto ele está pressionado -----*/
 .btn--primary:active:not(:disabled) {
   background: var(--btn-bg-active);
 }
 
-/* highlight: Destacado (azul) */
-
-/*----- Estilização visual do botão de destaque/secundário -----*/
+/*----- Define as cores do botão destacado -----*/
 .btn--highlight {
   background: var(--btn-highlight);
   color: var(--ink);
 }
 
-/*----- Alteração da cor de fundo no estado de hover do botão de destaque -----*/
+/*----- Altera o fundo do botão destacado durante o hover -----*/
 .btn--highlight:hover:not(:disabled) {
   background: var(--blue-light);
 }
 
-/*----- Alteração das cores de fundo e texto no estado ativo do botão de destaque -----*/
+/*----- Aplica o estado pressionado do botão destacado, com texto branco -----*/
 .btn--highlight:active:not(:disabled) {
   background: var(--blue-dark);
   color: #fff;
 }
 
-/*----- Estilização do botão em formato de link de texto -----*/
+/*----- Estiliza o botão de link com altura reduzida e texto sublinhado -----*/
 .btn--link {
   min-height: 40px;
   padding-inline: var(--space-1);
@@ -71,10 +67,9 @@
   text-decoration: underline;
 }
 
-/* Desativado (vale para primary e highlight) */
-
-/*----- Estilos visuais e comportamentais para botões desativados -----*/
-.btn--primary:disabled, .btn--highlight:disabled {
+/*----- Define o visual e o cursor dos botões principal e destacado desativados -----*/
+.btn--primary:disabled,
+.btn--highlight:disabled {
   background: var(--btn-bg-disabled);
   color: var(--ink);
   cursor: not-allowed;
@@ -82,19 +77,19 @@
 
 /* ---------- Field (TextField, select e textarea compartilham o visual) ---------- */
 
-/*----- Container estrutural para rotulagem e campos de formulário em coluna -----*/
+/*----- Organiza o campo e seu rótulo em coluna, com espaçamento compacto -----*/
 .field {
   display: flex;
   flex-direction: column;
   gap: var(--space-half);
 }
 
-/*----- Container relativo para posicionamento de elementos internos (ex: botão de senha) -----*/
+/*----- Cria o contexto de posicionamento para os elementos internos do campo -----*/
 .field__control {
   position: relative;
 }
 
-/*----- Estilização padrão para inputs de texto, seletores e áreas de texto -----*/
+/*----- Define largura, altura, espaçamento, cores e borda do campo de entrada -----*/
 .field__input {
   width: 100%;
   min-height: 48px;
@@ -105,24 +100,24 @@
   border-radius: var(--radius-button);
 }
 
-/*----- Ajuste de espaçamento interno à direita para campos de senha com botão alternador -----*/
+/*----- Reserva espaço à direita do campo de senha para o controle “Mostrar” -----*/
 .field__input--password {
   padding-right: 88px;
-}      /* espaço do "Mostrar" */
+}
 
-/*----- Altera a cor da borda quando o campo possui erro de validação -----*/
+/*----- Destaca a borda do campo quando ele apresenta um valor inválido -----*/
 .field__input[aria-invalid='true'] {
   border-color: var(--danger);
 }
 
-/*----- Ajuste de altura e redimensionamento específico para elementos textarea -----*/
+/*----- Aumenta a altura da área de texto e permite redimensionamento vertical -----*/
 textarea.field__input {
   min-height: 120px;
   padding-block: var(--space-1);
   resize: vertical;
 }
 
-/*----- Posicionamento do botão alternador de exibição de senha no canto do input -----*/
+/*----- Posiciona e estiliza o controle para mostrar ou ocultar a senha -----*/
 .field__toggle {
   position: absolute;
   top: 0;
@@ -132,12 +127,12 @@ textarea.field__input {
   color: var(--link);
 }
 
-/*----- Estilização do texto de mensagem de erro do campo -----*/
+/*----- Aplica a cor de erro à mensagem de validação do campo -----*/
 .field__error {
   color: var(--danger);
 }
 
-/*----- Alinhamento e estilo do contador de caracteres do campo -----*/
+/*----- Alinha o contador de caracteres à direita e suaviza sua cor -----*/
 .field__contador {
   align-self: flex-end;
   color: var(--text-muted);
@@ -145,7 +140,7 @@ textarea.field__input {
 
 /* ---------- Accordion ---------- */
 
-/*----- Container principal do acordeão com bordas, fundo e ocultação de transbordo -----*/
+/*----- Define o fundo, a borda e o recorte do componente expansível -----*/
 .accordion {
   background: var(--surface);
   border: 1px solid var(--border);
@@ -153,7 +148,7 @@ textarea.field__input {
   overflow: hidden;
 }
 
-/*----- Botão disparador do acordeão com espaçamentos e alinhamento do título/ícone -----*/
+/*----- Organiza o botão acionador do acordeão e define sua área clicável -----*/
 .accordion__trigger {
   display: flex;
   align-items: center;
@@ -164,57 +159,57 @@ textarea.field__input {
   text-align: left;
 }
 
-/*----- Garante que o texto do título do acordeão ocupe o espaço disponível -----*/
+/*----- Faz o primeiro trecho de texto ocupar o espaço disponível no acionador -----*/
 .accordion__trigger > span:first-child {
   flex: 1;
 }
 
-/*----- Ajusta o deslocamento do contorno de foco para não ser cortado pelo overflow -----*/
+/*----- Ajusta o contorno de foco para que não seja cortado pelo overflow do acordeão -----*/
 .accordion__trigger:focus-visible {
   outline-offset: -2px;
-}   /* overflow:hidden cortaria o contorno */
+}
 
-/*----- Estilização de informações metadados/secundárias no cabeçalho do acordeão -----*/
+/*----- Aplica cor secundária às informações complementares do acordeão -----*/
 .accordion__meta {
   color: var(--text-muted);
 }
 
-/*----- Suavização do movimento de rotação do ícone de seta do acordeão -----*/
+/*----- Anima a transformação do ícone de expansão do acordeão -----*/
 .accordion__chevron {
   transition: transform .2s;
 }
 
-/*----- Rotaciona o ícone de seta quando o acordeão está aberto -----*/
+/*----- Gira o ícone quando o acordeão está aberto -----*/
 .accordion.is-open .accordion__chevron {
   transform: rotate(180deg);
 }
 
-/*----- Painel oculto com transição de altura via CSS Grid -----*/
+/*----- Prepara a área interna do painel para uma transição de expansão -----*/
 .accordion__panel {
   display: grid;
   grid-template-rows: 0fr;
   transition: grid-template-rows .25s ease;
 }
 
-/*----- Expande as linhas do grid para revelar o conteúdo quando aberto -----*/
+/*----- Expande a linha do painel quando o acordeão está aberto -----*/
 .accordion.is-open .accordion__panel {
   grid-template-rows: 1fr;
 }
 
-/*----- Envolvente interno que permite a animação de transição suave da altura -----*/
+/*----- Permite que o conteúdo interno seja recortado durante a animação -----*/
 .accordion__inner {
   overflow: hidden;
   min-height: 0;
 }
 
-/*----- Aplica os espaçamentos internos ao painel quando o acordeão está aberto -----*/
+/*----- Adiciona espaçamento interno ao conteúdo do acordeão aberto -----*/
 .accordion.is-open .accordion__inner {
   padding: 0 var(--space-2) var(--space-2);
 }
 
 /* ---------- DeviceItem ---------- */
 
-/*----- Container visual e estrutural para exibição de itens de dispositivo -----*/
+/*----- Organiza o item de dispositivo, definindo dimensões, fundo e contorno -----*/
 .device {
   display: flex;
   align-items: center;
@@ -226,37 +221,28 @@ textarea.field__input {
   border-radius: var(--radius-button);
 }
 
-/*----- Área quadrada centralizada para o ícone representativo do dispositivo -----*/
+/*----- Centraliza o ícone do dispositivo em uma área de 40 por 40 pixels -----*/
 .device__icon {
   display: grid;
   place-items: center;
   width: 40px;
   height: 40px;
-  color: var(--link);
 }
 
-.iconSvg,
-.bottom-nav__icon {
-  display: block;
-  width: 40px;
-  height: 40px;
-  flex: 0 0 40px;
-}
-
-/*----- Container de informações de texto do dispositivo com flexível truncamento -----*/
+/*----- Faz as informações do dispositivo ocuparem o espaço restante sem ultrapassar -----*/
 .device__info {
   flex: 1;
   min-width: 0;
 }
 
-/*----- Trunca o nome do dispositivo com reticências em caso de texto longo -----*/
+/*----- Trunca nomes de dispositivos longos em uma única linha -----*/
 .device__name {
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-/*----- Alinhamento e estilo da linha de status do dispositivo -----*/
+/*----- Alinha o indicador de status e seu texto com cor secundária -----*/
 .device__status {
   display: flex;
   align-items: center;
@@ -264,24 +250,24 @@ textarea.field__input {
   color: var(--text-muted);
 }
 
-/*----- Ponto indicador circular do estado de conexão do dispositivo -----*/
+/*----- Define o tamanho e o formato circular do indicador de status -----*/
 .device__dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
 }
 
-/*----- Cor verde para o indicador de status online -----*/
+/*----- Indica visualmente que o dispositivo está conectado -----*/
 .device__dot.is-online {
   background: var(--green);
 }
 
-/*----- Cor neutra/apagada para o indicador de status offline -----*/
+/*----- Usa a cor secundária para indicar que o dispositivo está desconectado -----*/
 .device__dot.is-offline {
   background: var(--text-muted);
 }
 
-/*----- Container do indicador de bateria posicionado à direita -----*/
+/*----- Organiza as informações da bateria e as alinha à direita -----*/
 .device__battery {
   display: flex;
   flex-direction: column;
@@ -289,7 +275,7 @@ textarea.field__input {
   gap: var(--space-half);
 }
 
-/*----- Trilho/fundo da barra do nível de bateria -----*/
+/*----- Define a trilha da barra de bateria e recorta o preenchimento interno -----*/
 .device__bar {
   width: 40px;
   height: 8px;
@@ -298,21 +284,21 @@ textarea.field__input {
   overflow: hidden;
 }
 
-/*----- Preenchimento padrão da barra de bateria (nível normal/alto) -----*/
+/*----- Define a altura e a cor do preenchimento da bateria -----*/
 .device__fill {
   display: block;
   height: 100%;
   background: var(--green);
 }
 
-/*----- Preenchimento com cor de alerta para nível de bateria baixo -----*/
+/*----- Usa a cor laranja para destacar o nível baixo de bateria -----*/
 .device__fill.is-low {
   background: var(--orange);
 }
 
 /* ---------- EmptyState ---------- */
 
-/*----- Estrutura centralizada para telas/seções de estado vazio (sem dados) -----*/
+/*----- Centraliza o estado vazio e define o espaçamento e o alinhamento do texto -----*/
 .empty-state {
   display: flex;
   flex-direction: column;
@@ -322,14 +308,14 @@ textarea.field__input {
   text-align: center;
 }
 
-/*----- Cor e estilo do texto explicativo do estado vazio -----*/
+/*----- Aplica cor secundária ao texto explicativo do estado vazio -----*/
 .empty-state__text {
   color: var(--text-muted);
 }
 
 /* ---------- Avatar ---------- */
 
-/*----- Container circular centralizado para fotos de perfil ou iniciais -----*/
+/*----- Cria um avatar circular com tamanho configurável e conteúdo centralizado -----*/
 .avatar {
   display: grid;
   place-items: center;
@@ -345,7 +331,7 @@ textarea.field__input {
   line-height: 1;
 }
 
-/*----- Garante que a imagem do avatar cubra todo o espaço circular sem distorcer -----*/
+/*----- Faz a imagem do avatar preencher o contêiner sem distorção -----*/
 .avatar img {
   width: 100%;
   height: 100%;
@@ -354,7 +340,7 @@ textarea.field__input {
 
 /* ---------- Switch ---------- */
 
-/*----- Linha de controle do interruptor com rótulo e alinhamento espaçado -----*/
+/*----- Organiza o rótulo e o controle de alternância em extremidades opostas -----*/
 .switch-row {
   display: flex;
   align-items: center;
@@ -364,7 +350,7 @@ textarea.field__input {
   padding: var(--space-1) var(--space-2);
 }
 
-/*----- Trilho do botão interruptor (switch/toggle) desativado/padrão -----*/
+/*----- Define o formato, o tamanho e o fundo padrão do controle switch -----*/
 .switch {
   position: relative;
   width: 48px;
@@ -374,7 +360,7 @@ textarea.field__input {
   transition: background-color .2s;
 }
 
-/*----- Marcador/circulo deslizante do interruptor -----*/
+/*----- Posiciona e estiliza a peça móvel do controle switch -----*/
 .switch__thumb {
   position: absolute;
   top: 2px;
@@ -386,19 +372,19 @@ textarea.field__input {
   transition: transform .2s;
 }
 
-/*----- Cor de fundo do trilho quando o interruptor está marcado/ativo -----*/
+/*----- Aplica a cor verde ao controle quando ele está ativado -----*/
 .switch-row[aria-checked='true'] .switch {
   background: var(--green-dark);
 }
 
-/*----- Desloca o marcador circular para a direita quando o interruptor está ativo -----*/
+/*----- Desloca a peça móvel para a direita quando o controle está ativado -----*/
 .switch-row[aria-checked='true'] .switch__thumb {
   transform: translateX(24px);
 }
 
 /* ---------- Modal ---------- */
 
-/*----- Caixa de diálogo modal responsiva centralizada com dimensões limite -----*/
+/*----- Define a largura responsiva, o espaçamento e o visual da janela modal -----*/
 .modal {
   width: min(calc(var(--design-width) - 2 * var(--space-3)), 90vw);
   padding: var(--space-3);
@@ -409,97 +395,136 @@ textarea.field__input {
   border-radius: var(--radius-card);
 }
 
-/*----- Estilização da camada escura de fundo (backdrop) do modal -----*/
+/*----- Escurece o conteúdo atrás do modal usando a variável de sobreposição -----*/
 .modal::backdrop {
   background: var(--overlay);
 }
 
-/*----- Espaçamento vertical entre elementos filhos consecutivos do modal -----*/
+/*----- Adiciona espaço entre os elementos filhos consecutivos do modal -----*/
 .modal > * + * {
   margin-top: var(--space-2);
 }
 
-/*----- Container para botões de ação do modal alinhados à direita -----*/
+/*----- Alinha as ações do modal à direita com espaçamento entre os botões -----*/
 .modal__actions {
   display: flex;
   justify-content: flex-end;
   gap: var(--space-1);
 }
 
-/*----- Grid para exibição de lista de chave-valor tipo resumo de informações -----*/
+/*----- Organiza os pares de rótulo e valor do resumo em duas colunas -----*/
 .resumo {
   display: grid;
   grid-template-columns: auto 1fr;
   gap: var(--space-half) var(--space-2);
 }
 
-/*----- Cor suavizada para os termos/rótulos da lista de resumo -----*/
+/*----- Aplica cor secundária aos termos do resumo -----*/
 .resumo dt {
   color: var(--text-muted);
 }
 
 /* ---------- Home ---------- */
 
-/*----- Cabeçalho da página inicial com margem inferior e estrutura em coluna -----*/
+/*----- Centraliza o cabeçalho da página inicial e organiza seus elementos em coluna -----*/
 .home-header {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: var(--space-half);
   margin-bottom: var(--space-3);
+  text-align: center;
 }
 
-/*----- Card informativo da página inicial com flexbox e altura mínima -----*/
+/*----- Define o tamanho e o ajuste da logo no cabeçalho da página inicial -----*/
+.home-header__logo {
+  width: 192px;
+  height: 192px;
+  object-fit: contain;
+  margin-bottom: var(--space-1);
+}
+
+/*----- Permite que títulos longos do cabeçalho quebrem para evitar transbordamento -----*/
+.home-header .text-title-l {
+  overflow-wrap: anywhere;
+}
+
+/*----- Define a estrutura do card inicial, com fundo azul e conteúdo alinhado em linha -----*/
 .home-card {
   display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  min-height: 176px;
-  padding: var(--space-2);
+  align-items: stretch;
+  min-height: 200px;
+  overflow: hidden;
   border-radius: var(--radius-card);
-  color: var(--ink);                 /* fixo: o card é claro nos dois temas */
+  background: var(--card-blue);
 }
 
-/*----- Variação de fundo verde para o card da home -----*/
-.home-card--green {
-  background: var(--green-light);
-}
-
-/*----- Variação de fundo azul para o card da home -----*/
-.home-card--blue {
-  background: var(--blue-light);
-}
-
-/*----- Inverte a ordem da imagem e do conteúdo do card -----*/
+/*----- Inverte a ordem dos elementos do card quando a classe de reversão está ativa -----*/
 .home-card.is-reversed {
   flex-direction: row-reverse;
 }
 
-/*----- Container da imagem com largura fixa dentro do card da home -----*/
+/*----- Reserva a área da imagem e centraliza seu conteúdo dentro do card -----*/
 .home-card__img {
-  flex: 0 0 120px;
+  flex: 0 0 42%;
+  display: grid;
+  place-items: center;
+  padding: var(--space-1);
 }
 
-/*----- Ajuste de dimensão e encaixe proporcional da imagem no card -----*/
+/*----- Ajusta a imagem do card à largura disponível sem distorcer sua proporção -----*/
 .home-card__img img {
   width: 100%;
-  max-height: 144px;
+  max-height: 168px;
   object-fit: contain;
-  margin-inline: auto;
 }
 
-/*----- Corpo de texto e conteúdo do card alinhado à esquerda em coluna -----*/
+/*----- Organiza o texto do card, aplica o fundo verde e cria a borda curva lateral -----*/
 .home-card__body {
-  flex: 1;
+  flex: 1 1 58%;
   min-width: 0;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   gap: var(--space-1);
+  padding: var(--space-2);
+  text-align: center;
+  background: var(--home-green, var(--green));
+  color: #fff;
+  border-radius: 64px 0 0 64px / 50% 0 0 50%;
+}
+
+/*----- Inverte o lado da borda curva do texto nos cards com layout reverso -----*/
+.home-card.is-reversed .home-card__body {
+  border-radius: 0 64px 64px 0 / 0 50% 50% 0;
+}
+
+/*----- Ajusta o fundo da área de texto do card para o tema escuro -----*/
+:root[data-theme='dark'] .home-card__body {
+  --home-green: var(--card-green);
+  color: #fff;
+}
+
+/*----- Mantém o título do card em uma única linha -----*/
+.home-card__titulo {
+  white-space: nowrap;
+}
+
+/*----- Permite que o texto do card quebre quando necessário -----*/
+.home-card__texto {
+  overflow-wrap: break-word;
+}
+
+/*----- Mantém a altura padrão e o texto escuro do botão dentro do card -----*/
+.home-card .btn {
+  min-height: 48px;
+  color: var(--ink);
 }
 
 /* ---------- Perfil ---------- */
 
-/*----- Cabeçalho da página de perfil com avatar e informações do usuário -----*/
+/*----- Alinha os dados principais do perfil e define o espaçamento inferior -----*/
 .perfil-header {
   display: flex;
   align-items: center;
@@ -507,12 +532,12 @@ textarea.field__input {
   margin-bottom: var(--space-4);
 }
 
-/*----- Estilização do texto de e-mail do usuário -----*/
+/*----- Aplica cor secundária ao endereço de e-mail do perfil -----*/
 .perfil-email {
   color: var(--text-muted);
 }
 
-/*----- Container e estilo visual para a lista de opções de perfil -----*/
+/*----- Define o fundo, a borda e o arredondamento da lista de perfil -----*/
 .perfil-lista {
   margin-bottom: var(--space-4);
   background: var(--surface);
@@ -522,12 +547,12 @@ textarea.field__input {
 
 /* ---------- Painel ---------- */
 
-/*----- Espaçamento inferior para o título das seções do painel -----*/
+/*----- Adiciona espaçamento abaixo do título do painel -----*/
 .painel__titulo {
   margin-bottom: var(--space-3);
 }
 
-/*----- Card estilizado do painel com espaçamentos em coluna -----*/
+/*----- Organiza o conteúdo dos cards do painel em coluna e aplica cores de texto -----*/
 .painel-card {
   display: flex;
   flex-direction: column;
@@ -535,48 +560,48 @@ textarea.field__input {
   padding: var(--space-2);
   margin-bottom: var(--space-2);
   border-radius: var(--radius-card);
-  color: var(--ink);
+  color: var(--on-card);
 }
 
-/*----- Variação de cor de fundo azul para os cards do painel -----*/
+/*----- Define o fundo azul para os cards de painel dessa variante -----*/
 .painel-card--blue {
-  background: var(--blue-light);
+  background: var(--card-blue);
 }
 
-/*----- Variação de cor de fundo verde para os cards do painel -----*/
+/*----- Define o fundo verde para os cards de painel dessa variante -----*/
 .painel-card--green {
-  background: var(--green-light);
+  background: var(--card-green);
 }
 
-/*----- Barra de medição/progresso genérica -----*/
+/*----- Define a trilha e o recorte da barra de medição -----*/
 .meter {
   height: 8px;
   border-radius: 4px;
-  background: rgb(21 12 0 / .15);
+  background: var(--meter-track);
   overflow: hidden;
 }
 
-/*----- Preenchimento interno ativo da barra de medição -----*/
+/*----- Preenche a barra de medição com a cor configurada -----*/
 .meter__fill {
   display: block;
   height: 100%;
-  background: var(--blue-dark);
+  background: var(--meter-fill);
 }
 
-/*----- Layout horizontal para exibição de informações de clima -----*/
+/*----- Distribui os itens climáticos nas extremidades da linha -----*/
 .clima {
   display: flex;
   justify-content: space-between;
   gap: var(--space-1);
 }
 
-/*----- Estruturação dos itens da lista de previsão do clima -----*/
+/*----- Organiza cada item climático em coluna -----*/
 .clima li {
   display: flex;
   flex-direction: column;
 }
 
-/*----- Cabeçalho da seção de áreas do painel com alinhamento entre elementos -----*/
+/*----- Alinha o título da área do painel e suas ações nas extremidades -----*/
 .painel__areas-head {
   display: flex;
   align-items: center;
@@ -584,7 +609,7 @@ textarea.field__input {
   margin: var(--space-3) 0 var(--space-2);
 }
 
-/*----- Container visual para apresentação de áreas/cômodos -----*/
+/*----- Define a altura, o espaçamento e o visual dos itens de área -----*/
 .area {
   min-height: 64px;
   padding: var(--space-1) var(--space-2);
@@ -593,19 +618,19 @@ textarea.field__input {
   border-radius: var(--radius-button);
 }
 
-/*----- Texto descritivo/secundário dentro do card de área -----*/
+/*----- Aplica cor secundária aos metadados de cada área -----*/
 .area__meta {
   color: var(--text-muted);
 }
 
 /* ---------- Tarefas ---------- */
 
-/*----- Espaçamento do título principal da página de tarefas -----*/
+/*----- Adiciona espaçamento abaixo do título da seção de tarefas -----*/
 .tarefas__titulo {
   margin-bottom: var(--space-3);
 }
 
-/*----- Formulário de adição de novas tarefas alinhado na base -----*/
+/*----- Alinha o formulário de tarefa pela base e separa seus controles -----*/
 .tarefa-form {
   display: flex;
   align-items: flex-end;
@@ -613,13 +638,13 @@ textarea.field__input {
   margin-bottom: var(--space-1);
 }
 
-/*----- Garante que o campo de entrada ocupe o espaço restante do formulário -----*/
+/*----- Faz o campo do formulário ocupar o espaço disponível sem transbordar -----*/
 .tarefa-form__campo {
   flex: 1;
   min-width: 0;
 }
 
-/*----- Controle de seleção segmentada (abas de filtro) em duas colunas -----*/
+/*----- Cria uma grade de duas opções e estiliza o contêiner de seleção segmentada -----*/
 .segmented {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -631,7 +656,7 @@ textarea.field__input {
   border-radius: var(--radius-button);
 }
 
-/*----- Botões individuais dentro da seleção segmentada -----*/
+/*----- Define altura, arredondamento, tipografia e cor dos botões segmentados -----*/
 .segmented__btn {
   min-height: 40px;
   border-radius: 4px;
@@ -640,21 +665,21 @@ textarea.field__input {
   color: var(--text);
 }
 
-/*----- Destaque visual do botão segmentado selecionado (pressionado) -----*/
+/*----- Destaca o botão segmentado selecionado com fundo laranja e texto escuro -----*/
 .segmented__btn[aria-pressed='true'] {
   background: var(--btn-bg);
   color: var(--ink);
   font-weight: 600;
 }
 
-/*----- Container visual para um item da lista de tarefas -----*/
+/*----- Define o fundo, a borda e o arredondamento de cada tarefa -----*/
 .tarefa {
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-button);
 }
 
-/*----- Rótulo clicável da tarefa unindo checkbox e textos -----*/
+/*----- Alinha o controle e as informações da tarefa em uma área clicável -----*/
 .tarefa__label {
   display: flex;
   align-items: center;
@@ -664,7 +689,7 @@ textarea.field__input {
   cursor: pointer;
 }
 
-/*----- Estilização da caixa de seleção (checkbox) da tarefa -----*/
+/*----- Define o tamanho e a cor de destaque da caixa de seleção da tarefa -----*/
 .tarefa__label input {
   flex: 0 0 24px;
   width: 24px;
@@ -672,19 +697,19 @@ textarea.field__input {
   accent-color: var(--green-dark);
 }
 
-/*----- Container dos textos (nome e área) da tarefa -----*/
+/*----- Organiza o nome e os detalhes da tarefa em coluna -----*/
 .tarefa__texto {
   display: flex;
   flex-direction: column;
   min-width: 0;
 }
 
-/*----- Cor do texto identificador da área da tarefa -----*/
+/*----- Aplica cor secundária ao nome da área associada à tarefa -----*/
 .tarefa__area {
   color: var(--text-muted);
 }
 
-/*----- Aplica risco no texto e cor opaca quando a tarefa está marcada como concluída -----*/
+/*----- Risca o nome da tarefa e suaviza sua cor quando a caixa está marcada -----*/
 .tarefa__label input:checked + .tarefa__texto .tarefa__nome {
   text-decoration: line-through;
   color: var(--text-muted);
@@ -692,7 +717,7 @@ textarea.field__input {
 
 /* ---------- Fale Conosco ---------- */
 
-/*----- Cabeçalho da tela de contato -----*/
+/*----- Organiza o cabeçalho da página de contato e adiciona margem inferior -----*/
 .contato-header {
   display: flex;
   flex-direction: column;
@@ -700,29 +725,29 @@ textarea.field__input {
   margin-bottom: var(--space-3);
 }
 
-/*----- Margem inferior para seções da página de contato -----*/
+/*----- Define o espaçamento inferior da seção de contato -----*/
 .contato__secao {
   margin-bottom: var(--space-2);
 }
 
-/*----- Espaçamento superior da seção contendo o formulário de contato -----*/
+/*----- Adiciona espaço antes da seção que contém o formulário de contato -----*/
 .contato__form-secao {
   margin-top: var(--space-4);
 }
 
-/*----- Estrutura do formulário de contato em coluna -----*/
+/*----- Organiza os campos do formulário de contato em coluna -----*/
 .contato-form {
   display: flex;
   flex-direction: column;
   gap: var(--space-2);
 }
 
-/*----- Estica o botão para cobrir toda a largura no formulário de contato -----*/
+/*----- Faz o botão do formulário de contato ocupar a largura disponível -----*/
 .contato-form .btn {
   align-self: stretch;
 }
 
-/*----- Mensagem de confirmação de envio bem-sucedido no formulário de contato -----*/
+/*----- Organiza e estiliza a mensagem de confirmação de envio do contato -----*/
 .contato-ok {
   display: flex;
   flex-direction: column;
@@ -730,13 +755,16 @@ textarea.field__input {
   align-items: flex-start;
   padding: var(--space-2);
   border-radius: var(--radius-card);
-  background: var(--green-light);
-  color: var(--ink);
+  background: var(--card-green);
+  color: var(--on-card);
 }
 
-/*----- Desativa transições para usuários que preferem movimentos reduzidos -----*/
+/*----- Reduz movimentos e transições para usuários que preferem menos animações -----*/
 @media (prefers-reduced-motion: reduce) {
-  .accordion__panel, .accordion__chevron, .switch, .switch__thumb {
+  .accordion__panel,
+  .accordion__chevron,
+  .switch,
+  .switch__thumb {
     transition: none;
   }
 }
@@ -747,30 +775,30 @@ textarea.field__input {
    No formato base tudo continua em 1 coluna, como no Figma.
    ========================================================== */
 
-/* listas de cards: 1 coluna no celular, mais colunas conforme a largura */
-
-/*----- Configuração de grade auto-adaptável para listas de cartões, itens e dispositivos -----*/
-.accordion-list, .device-list, .area-list, .tarefa-list, .home-cards {
+/*----- Organiza listas de cards em colunas responsivas conforme a largura disponível -----*/
+.accordion-list,
+.device-list,
+.area-list,
+.tarefa-list,
+.home-cards {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--card-min)), 1fr));
   gap: var(--space-1);
   align-items: start;
 }
 
-/*----- Ajuste de espaçamento e estiramento específico para os cards da home -----*/
+/*----- Aumenta o espaçamento entre os cards da página inicial e estica suas alturas -----*/
 .home-cards {
   gap: var(--space-3);
   align-items: stretch;
 }
 
-/* blocos que ocupam "meia grade" (tela inteira no celular) */
-
-/*----- Faz com que o card do painel ocupe metade das colunas da grade -----*/
+/*----- Faz os cards do painel ocuparem metade da grade definida pelo layout -----*/
 .painel-card {
   grid-column: span var(--span-half);
 }
 
-/*----- Elementos da interface ajustados para ocupar metade da grade em telas maiores -----*/
+/*----- Posiciona cabeçalho do perfil, lista, botão principal, formulário e abas na meia grade -----*/
 .perfil-header,
 .perfil-lista,
 .app-main > .btn,
@@ -779,16 +807,690 @@ textarea.field__input {
   grid-column: 1 / span var(--span-half);
 }
 
-/*----- Seções de FAQ e formulário ajustados para divisão de grade -----*/
+/*----- Faz a seção de FAQ e o formulário de contato ocuparem metade da grade -----*/
 .app-main > section[aria-labelledby='faq-titulo'],
 .contato__form-secao {
   grid-column: span var(--span-half);
 }
 
-/*----- Ajustes responsivos para telas a partir de 744px de largura -----*/
+/*----- Ajusta o espaçamento da seção de formulário em telas a partir de 744px -----*/
 @media (min-width: 744px) {
-  /* FAQ e formulário ficam lado a lado: o espaço de cima não é mais necessário */
+  /*----- Remove a margem superior extra do formulário em telas maiores -----*/
   .contato__form-secao {
     margin-top: 0;
+  }
+}
+
+/* ==========================================================
+   DISPOSITIVOS — sessões, escolha de sensores e modelos
+   ========================================================== */
+
+/*----- Limita a altura do modal de dispositivos e habilita rolagem vertical -----*/
+.modal {
+  max-height: min(90dvh, 720px);
+  overflow-y: auto;
+}
+
+/*----- Alinha as ações da área de dispositivos à direita -----*/
+.dispositivos__acoes {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: var(--space-2);
+}
+
+/*----- Aplica cor secundária à mensagem exibida quando a sessão está vazia -----*/
+.sessao__vazio {
+  color: var(--text-muted);
+  margin-bottom: var(--space-1);
+}
+
+/*----- Alinha as ações da sessão à direita e adiciona espaçamento superior -----*/
+.sessao__acoes {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: var(--space-1);
+}
+
+/* ---------- Bottom sheet (components/ui/BottomSheet.jsx) ---------- */
+
+/*----- Define dimensões, posicionamento, aparência e estado fechado do painel inferior -----*/
+.sheet {
+  width: 100%;
+  max-width: min(100%, 560px);
+  max-height: 90dvh;
+  margin: auto auto 0;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-l) var(--radius-l) 0 0;
+  background: var(--surface);
+  color: var(--text);
+  overflow: hidden;
+  transform: translateY(100%);
+  transition: transform .3s cubic-bezier(.2, .8, .2, 1);
+}
+
+/*----- Organiza o bottom sheet em coluna quando o elemento está aberto -----*/
+.sheet[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+/*----- Desliza o bottom sheet para a posição visível quando está aberto -----*/
+.sheet.is-open {
+  transform: translateY(0);
+}
+
+/*----- Define a camada de fundo do bottom sheet inicialmente transparente -----*/
+.sheet::backdrop {
+  background: var(--overlay);
+  opacity: 0;
+  transition: opacity .3s;
+}
+
+/*----- Torna a camada de fundo visível quando o bottom sheet está aberto -----*/
+.sheet.is-open::backdrop {
+  opacity: 1;
+}
+
+/*----- Define a área superior arrastável do painel e impede a rolagem do toque -----*/
+.sheet__cabecalho {
+  flex: none;
+  padding: var(--space-half) var(--space-3) var(--space-2);
+  text-align: center;
+  touch-action: none;
+  cursor: grab;
+  user-select: none;
+}
+
+/*----- Indica que o cabeçalho está sendo arrastado -----*/
+.sheet__cabecalho:active {
+  cursor: grabbing;
+}
+
+/*----- Cria uma área de toque ampla para a alça do painel -----*/
+.sheet__alca {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 24px;
+  margin: 0 auto;
+}
+
+/*----- Desenha a alça visual do bottom sheet -----*/
+.sheet__alca::before {
+  content: '';
+  width: 32px;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--btn-bg-disabled);
+}
+
+/*----- Define o espaçamento superior do título do painel -----*/
+.sheet__titulo {
+  margin-top: var(--space-half);
+}
+
+/*----- Define a área rolável do conteúdo e respeita o espaço seguro inferior do dispositivo -----*/
+.sheet__corpo {
+  flex: 1;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  padding: 0 var(--space-3) calc(var(--space-3) + env(safe-area-inset-bottom, 0px));
+}
+
+/* ---------- círculo de seleção (checkbox e radio), como no Figma ---------- */
+
+/*----- Remove a aparência nativa e cria um controle circular de seleção -----*/
+.circulo {
+  appearance: none;
+  -webkit-appearance: none;
+  display: grid;
+  place-items: center;
+  flex: 0 0 32px;
+  width: 32px;
+  height: 32px;
+  margin: 0;
+  border: 3px solid var(--btn-bg-disabled);
+  border-radius: 50%;
+  background: transparent;
+  cursor: pointer;
+}
+
+/*----- Destaca o contorno do círculo quando a opção está selecionada -----*/
+.circulo:checked {
+  border-color: var(--btn-bg);
+}
+
+/*----- Desenha o ponto central do controle circular selecionado -----*/
+.circulo:checked::after {
+  content: '';
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--btn-bg);
+}
+
+/* ---------- lista de sensores e de modelos ---------- */
+
+/*----- Organiza os seletores de sensores e modelos em coluna sem borda externa -----*/
+.sensor-picker,
+.modelo-lista {
+  min-width: 0;
+  border: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+/*----- Adiciona espaçamento inferior à legenda dos seletores de sensores e modelos -----*/
+.sensor-picker legend,
+.modelo-lista legend {
+  margin-bottom: var(--space-1);
+}
+
+/*----- Aplica cor secundária e espaçamento aos títulos de grupo de sensores -----*/
+.sensor-picker__grupo {
+  color: var(--text-muted);
+  margin: var(--space-1) 0 var(--space-half);
+}
+
+/*----- Organiza as opções da lista de sensores em coluna -----*/
+.sensor-picker__lista {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+/*----- Organiza cada opção de sensor e define o espaçamento entre seus elementos -----*/
+.sensor-opcao {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+/*----- Alinha o controle de seleção e as informações de cada sensor -----*/
+.sensor-opcao__label {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 64px;
+  cursor: pointer;
+}
+
+/*----- Centraliza o ícone em um bloco verde com cores consistentes entre temas -----*/
+.sensor-opcao__tile {
+  display: grid;
+  place-items: center;
+  flex: 0 0 64px;
+  width: 64px;
+  height: 64px;
+  /* A área verde e a cor do ícone permanecem iguais nos temas claro e escuro. */
+  --sensor-tile-bg: var(--green-light);
+  --sensor-icon-color: var(--ink);
+  background: var(--sensor-tile-bg);
+  color: var(--sensor-icon-color);
+  border-radius: var(--radius-s);
+}
+
+/*----- Define o tamanho do ícone exibido na opção de sensor -----*/
+.sensor-opcao__icone {
+  flex: none;
+  width: 52px;
+  height: 52px;
+}
+
+/*----- Faz o nome do sensor ocupar o espaço restante do item -----*/
+.sensor-opcao__nome {
+  flex: 1;
+  min-width: 0;
+}
+
+/*----- Alinha os controles do stepper à direita em uma única linha -----*/
+.stepper {
+  align-self: flex-end;
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+}
+
+/*----- Centraliza o conteúdo dos botões do stepper e define sua aparência -----*/
+.stepper button {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-button);
+  font-size: 20px;
+  line-height: 1;
+}
+
+/*----- Reduz a opacidade e desativa o cursor dos botões indisponíveis do stepper -----*/
+.stepper button:disabled {
+  opacity: .4;
+  cursor: not-allowed;
+}
+
+/*----- Define largura mínima e alinhamento do valor exibido no stepper -----*/
+.stepper output {
+  min-width: 24px;
+  text-align: center;
+}
+
+/*----- Alinha o seletor circular e o texto da opção de modelo -----*/
+.modelo-opcao {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  min-height: 64px;
+  cursor: pointer;
+}
+
+/*----- Organiza o nome e a descrição do modelo em coluna -----*/
+.modelo-opcao__texto {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/*----- Aplica cor secundária à legenda da opção de modelo -----*/
+.modelo-opcao__texto .text-caption {
+  color: var(--text-muted);
+}
+
+/* ==========================================================
+   PERFIL (novo) — foto grande, blocos "Conta" / "Aplicação" / "Sair"
+   ========================================================== */
+
+/*----- Centraliza as informações principais do perfil e define a margem inferior -----*/
+.perfil-topo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-3);
+}
+
+/*----- Centraliza o nome exibido no topo do perfil -----*/
+.perfil-topo__nome {
+  text-align: center;
+}
+
+/*----- Organiza os blocos do perfil em coluna e limita sua largura -----*/
+.perfil-blocos {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  width: 100%;
+  max-width: 360px;
+  margin-inline: auto;
+}
+
+/*----- Organiza os elementos de cada seção do perfil em coluna -----*/
+.perfil-secao {
+  display: flex;
+  flex-direction: column;
+}
+
+/*----- Estiliza o rótulo da seção com separador inferior -----*/
+.perfil-secao__rotulo {
+  padding-bottom: var(--space-half);
+  margin-bottom: var(--space-1);
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--text);
+}
+
+/*----- Separa a seção de saída das demais seções do perfil -----*/
+.perfil-secao--sair {
+  padding-top: var(--space-1);
+  border-top: 1px solid var(--text);
+}
+
+/*----- Define o alinhamento, a altura e a área clicável das linhas do perfil -----*/
+.perfil-linha {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  width: 100%;
+  min-height: 48px;
+  padding-inline: var(--space-half);
+  text-align: left;
+  border-radius: var(--radius-button);
+}
+
+/*----- Destaca a linha do perfil com o fundo da superfície durante o hover -----*/
+.perfil-linha:hover {
+  background: var(--surface);
+}
+
+/*----- Impede que o ícone da linha do perfil encolha -----*/
+.perfil-linha__icone {
+  flex: none;
+}
+
+/*----- Faz o texto da linha do perfil ocupar o espaço disponível -----*/
+.perfil-linha__texto {
+  flex: 1;
+  min-width: 0;
+}
+
+/*----- Impede que a seta da linha do perfil encolha -----*/
+.perfil-linha__seta {
+  flex: none;
+}
+
+/*----- Destaca a ação de sair com a cor laranja escura -----*/
+.perfil-linha--sair {
+  color: var(--orange-dark);
+}
+
+/*----- Ajusta o espaçamento das chaves de configuração nas seções do perfil -----*/
+.perfil-secao .switch-row {
+  min-height: 48px;
+  padding: 0 var(--space-half);
+  gap: var(--space-1);
+}
+
+/*----- Define o espaço, o alinhamento e a tipografia do texto das chaves do perfil -----*/
+.perfil-secao .switch-row__texto {
+  flex: 1;
+  text-align: left;
+  font-size: 12px;
+  line-height: 16px;
+}
+
+/*----- Personaliza o contorno e as dimensões dos switches dentro do perfil -----*/
+.perfil-secao .switch {
+  --sw: var(--green-dark);
+  width: 52px;
+  height: 28px;
+  border-radius: 14px;
+  background: transparent;
+  border: 2px solid var(--sw);
+}
+
+/*----- Usa laranja como cor do switch associado ao modo escuro -----*/
+.perfil-secao .switch-row--laranja .switch {
+  --sw: var(--orange);
+}
+
+/*----- Define posição, dimensões e cor da peça móvel dos switches do perfil -----*/
+.perfil-secao .switch__thumb {
+  top: 2px;
+  left: 2px;
+  width: 20px;
+  height: 20px;
+  background: var(--sw);
+}
+
+/*----- Mantém o fundo transparente do switch do perfil quando ativado -----*/
+.perfil-secao .switch-row[aria-checked='true'] .switch {
+  background: transparent;
+}
+
+/*----- Desloca a peça móvel do switch do perfil quando ativado -----*/
+.perfil-secao .switch-row[aria-checked='true'] .switch__thumb {
+  transform: translateX(24px);
+}
+
+/*----- Define o espaçamento abaixo do controle para voltar às subpáginas -----*/
+.subpagina__voltar {
+  margin-bottom: var(--space-1);
+}
+
+/*----- Organiza os campos de informação em coluna e limita a largura do formulário -----*/
+.info-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  width: 100%;
+  max-width: 480px;
+  margin-inline: auto;
+}
+
+/*----- Aplica cor secundária à observação do formulário de informações -----*/
+.info-form__nota {
+  color: var(--text-muted);
+}
+
+/*----- Organiza o conteúdo da página Sobre em coluna e centraliza o bloco -----*/
+.sobre {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  max-width: 560px;
+  margin-inline: auto;
+}
+
+/*----- Define o tamanho da logo da página Sobre e a centraliza -----*/
+.sobre__logo {
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+  align-self: center;
+}
+
+/* ==========================================================
+   PAINEL (novo) — clima, irrigação, Dispositivos IoT
+   ========================================================== */
+
+/*----- Centraliza o conteúdo do topo do painel e define a margem inferior -----*/
+.painel-topo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-bottom: var(--space-2);
+}
+
+/*----- Define as dimensões da logo no topo do painel -----*/
+.painel-topo__logo {
+  width: 112px;
+  height: 112px;
+  object-fit: contain;
+}
+
+/*----- Organiza os resumos do painel em duas colunas com espaçamento -----*/
+.painel-resumo {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-2);
+  margin-bottom: var(--space-2);
+}
+
+/*----- Compartilha cores, arredondamento e sombra entre os cards do painel -----*/
+.painel-clima,
+.painel-irrig,
+.painel-iot {
+  color: #fff;
+  border-radius: var(--radius-card);
+  box-shadow: 0 4px 0 rgb(0 0 0 / .25);
+}
+
+/*----- Organiza os dados climáticos e aplica o fundo em gradiente azul -----*/
+.painel-clima {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: var(--space-1);
+  min-height: 176px;
+  padding: var(--space-1);
+  background: linear-gradient(160deg, #BEEDFE 0%, #438EAA 100%);
+}
+
+/*----- Alinha o topo do card climático e distribui os elementos -----*/
+.painel-clima__topo {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-half);
+}
+
+/*----- Aplica a cor laranja clara ao ícone de sol e impede que encolha -----*/
+.painel-clima__sol {
+  color: var(--orange-light);
+  flex: none;
+}
+
+/*----- Alinha à direita o bloco de informações no topo climático -----*/
+.painel-clima__topo > div {
+  text-align: right;
+}
+
+/*----- Destaca a temperatura com tipografia grande e em negrito -----*/
+.painel-clima__temp {
+  font-size: 36px;
+  line-height: 40px;
+  font-weight: 700;
+}
+
+/*----- Organiza os dados climáticos em coluna com espaçamento compacto -----*/
+.painel-clima__dados {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-half);
+}
+
+/*----- Alinha o ícone e o texto de cada informação climática -----*/
+.painel-clima__dados li {
+  display: flex;
+  align-items: center;
+  gap: var(--space-half);
+}
+
+/*----- Organiza os textos de cada informação climática em coluna -----*/
+.painel-clima__dados span {
+  display: flex;
+  flex-direction: column;
+}
+
+/*----- Define tipografia compacta e opacidade das legendas climáticas -----*/
+.painel-clima__dados small {
+  font-size: 9px;
+  line-height: 10px;
+  opacity: .85;
+}
+
+/*----- Define tamanho e peso dos valores de dados climáticos -----*/
+.painel-clima__dados strong {
+  font-size: 14px;
+  line-height: 16px;
+}
+
+/*----- Centraliza o conteúdo do card de irrigação e aplica o gradiente verde -----*/
+.painel-irrig {
+  position: relative;
+  display: grid;
+  place-items: center;
+  min-height: 176px;
+  padding: var(--space-1);
+  background: linear-gradient(160deg, #F2F20F 0%, #4BA52A 45%, #0B5C3A 100%);
+}
+
+/*----- Posiciona o anel da irrigação com margem interna e limita sua altura -----*/
+.irrig__anel {
+  position: absolute;
+  inset: 8px;
+  margin: auto;
+  width: calc(100% - 16px);
+  height: auto;
+  max-height: calc(100% - 16px);
+}
+
+/*----- Mantém o conteúdo central do card de irrigação acima do anel -----*/
+.painel-irrig__centro {
+  position: relative;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-half);
+}
+
+/*----- Destaca o tempo de irrigação com tipografia grande e em negrito -----*/
+.painel-irrig__tempo {
+  font-size: 24px;
+  line-height: 28px;
+  font-weight: 700;
+}
+
+/*----- Alinha os elementos do card IoT e aplica o fundo em gradiente -----*/
+.painel-iot {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
+  min-height: 160px;
+  padding: var(--space-2);
+  margin-bottom: var(--space-3);
+  background: linear-gradient(110deg, #5FA81F 0%, #3DB59B 55%, #1CB9E8 100%);
+}
+
+/*----- Define o tamanho e o peso do título do card IoT -----*/
+.painel-iot__titulo {
+  font-size: 28px;
+  line-height: 32px;
+  font-weight: 400;
+}
+
+/*----- Destaca a quantidade de dispositivos ativos no card IoT -----*/
+.painel-iot__ativos {
+  margin-top: var(--space-2);
+  font-size: 28px;
+  line-height: 32px;
+  font-weight: 700;
+}
+
+/*----- Cria o botão circular de acesso à área de dispositivos IoT -----*/
+.painel-iot__ir {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  background: var(--blue);
+  color: #fff;
+  box-shadow: 0 4px 0 rgb(0 0 0 / .25);
+}
+
+/*----- Centraliza o link de navegação para a lista de áreas -----*/
+.painel-areas-link {
+  display: flex;
+  justify-content: center;
+}
+
+/*----- Estiliza o botão de acesso às áreas com fundo verde, texto branco e sombra -----*/
+.painel-areas-link .btn {
+  min-height: 40px;
+  background: var(--green-dark);
+  color: #fff;
+  box-shadow: 0 3px 0 rgb(0 0 0 / .25);
+}
+
+/*----- Clareia o fundo do botão de acesso às áreas durante o hover -----*/
+.painel-areas-link .btn:hover {
+  background: var(--green);
+}
+
+/*----- Limita e centraliza os resumos do painel em telas a partir de 744px -----*/
+@media (min-width: 744px) {
+  .painel-resumo {
+    max-width: 720px;
+    width: 100%;
+    margin-inline: auto;
+  }
+
+  /*----- Limita e centraliza o card IoT em telas maiores -----*/
+  .painel-iot {
+    max-width: 720px;
+    width: 100%;
+    margin-inline: auto;
+    margin-bottom: var(--space-3);
   }
 }

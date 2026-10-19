@@ -1,10 +1,11 @@
+
 /* ==========================================================
    TOKENS + RESET + TIPOGRAFIA BASE
    Só variáveis, reset e utilitários globais. Nada de componente aqui
    (layout em layout.css, componentes em components.css, auth em auth.css).
    ========================================================== */
 
-/*----- Carrega e define a fonte tipográfica personalizada Inclusive Sans -----*/
+/*----- Registra a fonte Inclusive Sans e permite o uso de seus pesos variáveis -----*/
 @font-face {
   font-family: 'Inclusive Sans';
   src: url('../assets/fonts/Inclusive_Sans/InclusiveSans-VariableFont_wght.ttf') format('truetype');
@@ -13,24 +14,43 @@
   font-display: swap;
 }
 
-/*----- Variáveis globais para paleta de cores, layout, espaçamentos e valores padrão -----*/
+/* ==========================================================
+   TOKENS — paleta de cores
+   ========================================================== */
+
+/*----- Define as cores da paleta principal utilizada pela aplicação -----*/
 :root {
-  /* ---------- paleta do Figma ---------- */
-  --white-light: #F0F0F0;   --white: #E6E6E6;   --white-dark: #CECECE;    /* 40% */
-  --green-light: #A5C763;   --green: #6DA833;   --green-dark: #489723;    /* 30% */
-  --brown-light: #FEDBC0;   --brown: #DCB190;   --brown-dark: #A2796A;    /* 15% */
-  --orange-light: #F7D93A;  --orange: #EE9728;  --orange-dark: #E96528;   /* 10% */
-  --blue-light: #BEEDFE;    --blue: #6DD1F6;    --blue-dark: #438EAA;     /*  5% */
+  /* Paleta do Figma */
+  --white-light: #F0F0F0;
+  --white: #E6E6E6;
+  --white-dark: #CECECE; /* 40% */
+
+  --green-light: #A5C763;
+  --green: #6DA833;
+  --green-dark: #489723; /* 30% */
+
+  --brown-light: #FEDBC0;
+  --brown: #DCB190;
+  --brown-dark: #A2796A; /* 15% */
+
+  --orange-light: #F7D93A;
+  --orange: #EE9728;
+  --orange-dark: #E96528; /* 10% */
+
+  --blue-light: #BEEDFE;
+  --blue: #6DD1F6;
+  --blue-dark: #438EAA; /* 5% */
+
   --ink: #150C00;
 
-  /* ---------- botão (estados do Figma) ---------- */
-  --btn-bg: #EE9728;            /* padrão */
+  /* Botão: estados do Figma */
+  --btn-bg: #EE9728; /* Padrão */
   --btn-bg-hover: #EEBD55;
-  --btn-bg-active: #E58629;     /* pressionado */
-  --btn-bg-disabled: #9D9D9D;   /* desativado */
-  --btn-highlight: #6DD1F6;     /* destacado */
+  --btn-bg-active: #E58629; /* Pressionado */
+  --btn-bg-disabled: #9D9D9D; /* Desativado */
+  --btn-highlight: #6DD1F6; /* Destacado */
 
-  /* ---------- semânticos (tema claro) ---------- */
+  /* Cores semânticas do tema claro */
   --bg: #FFFFFF;
   --surface: var(--white-light);
   --border: var(--white-dark);
@@ -41,29 +61,45 @@
   --danger: #C62828;
   --overlay: rgb(21 12 0 / 0.5);
 
-  /* ---------- formato base (Figma): 412 x 917, grade de 4 colunas ----------
-     É o ponto de partida (mobile-first). Telas maiores só ganham mais
-     colunas e mais espaço; nada é limitado a 412px.                        */
+  /* Cores dos cards */
+  --card-green: var(--green-light);
+  --card-blue: var(--blue-light);
+  --on-card: var(--ink);
+  --meter-track: rgb(21 12 0 / 0.15);
+  --meter-fill: var(--blue-dark);
+
+  /* ==========================================================
+     TOKENS — grade e dimensões do layout
+     Formato base: 412 x 917, grade de 4 colunas
+     ========================================================== */
+
+  /*----- Define as dimensões de referência para o layout responsivo -----*/
   --design-width: 412px;
   --design-height: 917px;
-  --app-width: var(--design-width);       /* alias antigo */
+  --app-width: var(--design-width); /* Alias antigo */
 
+  /*----- Configura a grade principal e os limites de largura do conteúdo -----*/
   --grid-cols: 4;
   --grid-margin: 8px;
   --grid-gutter: 24px;
-  --span-half: 4;                         /* "meia grade": 4 de 4, 4 de 8, 6 de 12 */
-  --content-max: 1200px;                  /* largura máxima do conteúdo em telas grandes */
-  --card-min: 360px;                      /* largura mínima de um card em listas */
-  --auth-card-max: 396px;                 /* 412 - 2 x 8 */
-  /* margem lateral: 8px no celular; em telas largas centraliza o conteúdo */
+  --span-half: 4;
+  --content-max: 1200px;
+  --card-min: 360px;
+  --auth-card-max: 396px;
+
+  /*----- Centraliza o conteúdo em telas largas e preserva a margem mínima em celulares -----*/
   --content-pad: max(var(--grid-margin), calc((100% - var(--content-max)) / 2));
 
+  /*----- Define as alturas das barras, o tamanho da logo e a largura da Sidebar -----*/
   --navbar-height: 80px;
+  --navbar-logo: 64px;
+  --navbar-logo-margin: 8px;
   --bottomnav-height: 64px;
-  --bottomnav-item-width: 82.8px;
-  --bottomnav-radius: 8px;
+  --bottomnav-item-width: 80px;
+  --bottomnav-radius: 4px;
   --sidebar-width: 288px;
 
+  /*----- Define os espaçamentos padronizados utilizados nos componentes -----*/
   --space-half: 4px;
   --space-1: 8px;
   --space-2: 16px;
@@ -72,16 +108,20 @@
   --space-5: 40px;
   --space-6: 48px;
 
-  --radius-card: 16px;    /* confirmar no Figma */
-  --radius-button: 8px;   /* confirmar no Figma */
+  /*----- Define os raios de borda dos cards e dos botões -----*/
+  --radius-card: 16px; /* Confirmar no Figma */
+  --radius-button: 8px; /* Confirmar no Figma */
 
+  /*----- Define a família tipográfica principal e suas alternativas de sistema -----*/
   --font-family: 'Inclusive Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
 
-/* ---------- pontos de quebra (media query não aceita variável) ---------- */
+/* ==========================================================
+   RESPONSIVIDADE — pontos de quebra
+   ========================================================== */
 
-/*----- Redefine tokens de grade e dimensões para telas de médio porte (tablets) -----*/
-@media (min-width: 744px) {            /* tablet: grade de 8 colunas */
+/*----- Adapta a grade para tablets e amplia os itens da navegação e a Sidebar -----*/
+@media (min-width: 744px) {
   :root {
     --grid-cols: 8;
     --grid-margin: 24px;
@@ -91,8 +131,8 @@
   }
 }
 
-/*----- Redefine tokens de grade e dimensões para telas grandes (desktops) -----*/
-@media (min-width: 1100px) {           /* desktop: grade de 12 colunas */
+/*----- Amplia a grade para 12 colunas e ajusta a largura dos itens em desktops -----*/
+@media (min-width: 1100px) {
   :root {
     --grid-cols: 12;
     --grid-margin: 32px;
@@ -101,43 +141,59 @@
   }
 }
 
-/*----- Reduz alturas das barras de navegação para dispositivos móveis em modo paisagem -----*/
-@media (max-height: 480px) and (orientation: landscape) {   /* celular deitado */
+/*----- Reduz a altura das barras e da logo quando o celular estiver na horizontal -----*/
+@media (max-height: 480px) and (orientation: landscape) {
   :root {
     --navbar-height: 56px;
+    --navbar-logo: 40px;
     --bottomnav-height: 48px;
   }
 }
 
-/*----- Sobrescreve as variáveis semânticas de cores para ativação do tema escuro -----*/
+/* ==========================================================
+   TEMA ESCURO — substitui as cores semânticas
+   ========================================================== */
+
+/*----- Sobrescreve as cores principais quando o tema escuro estiver ativado -----*/
 :root[data-theme='dark'] {
   --bg: #150C00;
   --surface: #241A0D;
   --border: #3A2E1E;
   --text: #FFFFFF;
-  --text-muted: #C9BFAF;
-  --link: var(--green-light);
+  --text-muted: #DADADA;
+  --link: #FFFFFF;
   --focus: var(--blue);
+  --danger: #FF8A80;
+
+  --card-green: #2F6A17; /* Estimado: confirmar no Figma */
+  --card-blue: #2A6378; /* Estimado: confirmar no Figma */
+  --on-card: #FFFFFF;
+  --meter-track: rgb(255 255 255 / 0.25);
+  --meter-fill: var(--blue);
 }
 
-/* ---------- reset enxuto ---------- */
+/* ==========================================================
+   RESET — padronização dos elementos
+   ========================================================== */
 
-/*----- Normaliza o modelo de caixa (box-sizing) e remove margens e preenchimentos padrão -----*/
-*, *::before, *::after {
+/*----- Inclui bordas e preenchimentos no cálculo das dimensões e remove margens padrão -----*/
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
 
-/*----- Previne o ajuste automático de tamanho de texto no iOS/WebKit -----*/
+/*----- Evita ajustes automáticos no tamanho do texto em dispositivos móveis -----*/
 html {
   -webkit-text-size-adjust: 100%;
 }
 
-/*----- Estilização base do corpo da página: altura, fundo, cores e tipografia -----*/
+/*----- Define a tipografia global, a cor do texto e o fundo externo da aplicação -----*/
 body {
   min-height: 100dvh;
-  background: var(--surface);          /* fundo fora do "celular" */
+  background: var(--surface);
   color: var(--text);
   font-family: var(--font-family);
   font-size: 16px;
@@ -145,88 +201,127 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* quem define o tamanho do título é a classe .text-title-*, não a tag */
-
-/*----- Reseta os tamanhos e pesos padrão das tags de cabeçalho -----*/
-h1, h2, h3, h4, h5, h6 {
+/*----- Faz os títulos herdarem a tipografia, permitindo que as classes controlem sua aparência -----*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-size: inherit;
   font-weight: inherit;
 }
 
-/*----- Define imagens e SVGs como blocos responsivos -----*/
-img, svg {
+/*----- Mantém imagens e SVGs dentro dos limites de seus elementos contêineres -----*/
+img,
+svg {
   display: block;
   max-width: 100%;
 }
 
-/*----- Garante que elementos de formulário herdem a fonte e cor do elemento pai -----*/
-button, input, select, textarea {
+/*----- Faz os SVGs herdarem a cor do texto e preserva a possibilidade de manter suas cores originais -----*/
+svg {
+  color: inherit;
+}
+
+/*----- Aplica a cor atual aos SVGs sem a classe de preservação e sem preenchimento none -----*/
+svg:not(.svg-original):not([fill='none']) {
+  fill: currentColor;
+}
+
+/*----- Substitui os preenchimentos fixos dos elementos internos dos SVGs comuns -----*/
+svg:not(.svg-original) [fill]:not([fill='none']) {
+  fill: currentColor;
+}
+
+/*----- Substitui os traçados fixos dos SVGs comuns pela cor atual -----*/
+svg:not(.svg-original)[stroke]:not([stroke='none']),
+svg:not(.svg-original) [stroke]:not([stroke='none']) {
+  stroke: currentColor;
+}
+
+/*----- Define a cor e a transparência padrão dos textos de orientação dos campos -----*/
+::placeholder {
+  color: var(--text-muted);
+  opacity: 0.8;
+}
+
+/*----- Padroniza a fonte e a cor dos elementos de formulário -----*/
+button,
+input,
+select,
+textarea {
   font: inherit;
   color: inherit;
 }
 
-/*----- Reseta a aparência padrão dos botões para estilo neutro -----*/
+/*----- Remove o estilo padrão dos botões e indica que eles podem ser acionados -----*/
 button {
   background: none;
   border: 0;
   cursor: pointer;
 }
 
-/*----- Reseta os estilos e sublinhados padrão de links -----*/
+/*----- Remove o estilo visual padrão dos links -----*/
 a {
   color: inherit;
   text-decoration: none;
 }
 
-/*----- Remove os marcadores de listas não ordenadas e ordenadas -----*/
-ul, ol {
+/*----- Remove os marcadores padrão de listas -----*/
+ul,
+ol {
   list-style: none;
 }
 
-/*----- Estilização de foco visível para acessibilidade via navegação por teclado -----*/
+/*----- Destaca os elementos que recebem foco pelo teclado -----*/
 :focus-visible {
   outline: 2px solid var(--focus);
   outline-offset: 2px;
 }
 
-/* ---------- tipografia (estilos de texto do Figma, Inclusive Sans) ---------- */
+/* ==========================================================
+   TIPOGRAFIA — estilos de texto do Figma
+   ========================================================== */
 
-/*----- Estilo de texto para legendas pequenas -----*/
+/*----- Define o estilo de texto para legendas e informações secundárias -----*/
 .text-caption {
   font-size: 12px;
   line-height: 16px;
-}     /* Legendas */
+}
 
-/*----- Estilo de texto padrão para corpo de texto e botões -----*/
+/*----- Define o estilo de texto para conteúdo e botões -----*/
 .text-body {
   font-size: 16px;
   line-height: 24px;
-}     /* Corpo / Botões */
+}
 
-/*----- Estilo de texto para títulos pequenos (equivalente a H3) -----*/
+/*----- Define o estilo de títulos pequenos, equivalente ao H3 -----*/
 .text-title-s {
   font-size: 20px;
   line-height: 24px;
   font-weight: 700;
-}   /* H3 */
+}
 
-/*----- Estilo de texto para títulos médios (equivalente a H2) -----*/
+/*----- Define o estilo de títulos médios, equivalente ao H2 -----*/
 .text-title-m {
   font-size: 28px;
   line-height: 32px;
   font-weight: 700;
-}   /* H2 */
+}
 
-/*----- Estilo de texto para títulos grandes (equivalente a H1) -----*/
+/*----- Define o estilo de títulos grandes, equivalente ao H1 -----*/
 .text-title-l {
   font-size: 36px;
   line-height: 40px;
   font-weight: 700;
-}   /* H1 */
+}
 
-/* ---------- utilitários ---------- */
+/* ==========================================================
+   UTILITÁRIOS — acessibilidade e grade
+   ========================================================== */
 
-/*----- Classe utilitária de acessibilidade para ocultar elementos visualmente mantendo para leitores de tela -----*/
+/*----- Oculta visualmente um elemento, mantendo-o disponível para leitores de tela -----*/
 .sr-only {
   position: absolute;
   width: 1px;
@@ -239,7 +334,7 @@ ul, ol {
   border: 0;
 }
 
-/*----- Utilitário de grade CSS baseado nas variáveis dinâmicas de colunas -----*/
+/*----- Cria uma grade reutilizável com o número de colunas e os espaçamentos definidos nos tokens -----*/
 .grid {
   display: grid;
   grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
@@ -247,19 +342,21 @@ ul, ol {
   padding-inline: var(--grid-margin);
 }
 
-/*----- Classe utilitária para estender o elemento por 2 colunas no grid -----*/
+/*----- Faz o elemento ocupar duas colunas da grade -----*/
 .span-2 {
   grid-column: span 2;
 }
 
-/*----- Classe utilitária para estender o elemento por 4 colunas no grid -----*/
+/*----- Faz o elemento ocupar quatro colunas da grade -----*/
 .span-4 {
   grid-column: span 4;
 }
 
-/*----- Desativa ou reduz drasticamente animações/transições para usuários com preferência de movimento reduzido -----*/
+/*----- Reduz a duração das animações e transições para usuários que preferem movimento reduzido -----*/
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
+  *,
+  *::before,
+  *::after {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
   }

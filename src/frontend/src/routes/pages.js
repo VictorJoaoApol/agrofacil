@@ -1,5 +1,7 @@
 // routes/pages.js
 import { lazy } from 'react'
+import imgTarefas from '../assets/img/Tarefas.png'
+import imgPainel from '../assets/img/Painel.png'
 import { Ajuda, Dispositivos, DispositivosAtivado, Home, HomeAtivado, Tarefas, TarefasAtivado, Configuracao, Painel, PainelAtivado, Perfil, PerfilAtivado, } from '../assets/Icons'
 
 /*
@@ -12,6 +14,7 @@ import { Ajuda, Dispositivos, DispositivosAtivado, Home, HomeAtivado, Tarefas, T
   icon     -> componente de ícone
   variant  -> 'home' | 'inner' (padrão) | 'profile'    (aparência da Navbar)
   menus    -> onde aparece: 'bottom' (barra inferior, máx. 5) e/ou 'sidebar'
+  grupo    -> (sidebar) rótulo da seção em que o item aparece; itens seguidos com o mesmo grupo ficam juntos
   home     -> (opcional) cria um card na Home: { tone, img, text }
 */
 
@@ -23,6 +26,7 @@ export const appPages = [
   {
     path: '',
     label: 'Home',
+    grupo: 'Navegação',
     variant: 'home',
     icon: Home,
     iconActive: HomeAtivado,
@@ -33,6 +37,8 @@ export const appPages = [
   {
     path: 'tarefas',
     label: 'Tarefas',
+    home: { tone: 'green', img: imgTarefas, text: 'Veja suas tarefas, metas e progresso nos seus objetivos!' },
+    grupo: 'Navegação',
     icon: Tarefas,
     iconActive: TarefasAtivado,
     menus: ['bottom', 'sidebar'],
@@ -42,6 +48,7 @@ export const appPages = [
   {
     path: 'dispositivos',
     label: 'Dispositivos',
+    grupo: 'Navegação',
     icon: Dispositivos,
     iconActive: DispositivosAtivado,
     menus: ['bottom', 'sidebar'],
@@ -51,15 +58,25 @@ export const appPages = [
   {
     path: 'painel',
     label: 'Painel',
+    home: { tone: 'green', img: imgPainel, text: 'Veja informações sobre seu uso de água, clima e áreas de irrigação!' },
+    grupo: 'Navegação',
     icon: Painel,
     iconActive: PainelAtivado,
     menus: ['bottom', 'sidebar'],
     Component: lazy(() => import('../pages/Painel/Painel.jsx')),
   },
 
+  /* Subpáginas (sem menu): abertas por botões do Painel e do Perfil */
+  {
+    path: 'painel/areas',
+    label: 'Áreas de Irrigação',
+    Component: lazy(() => import('../pages/Painel/AreasIrrigacao.jsx')),
+  },
+
   {
     path: 'perfil',
     label: 'Perfil',
+    grupo: 'Conta',
     variant: 'profile',
     icon: Perfil,
     iconActive: PerfilAtivado,
@@ -68,8 +85,21 @@ export const appPages = [
   },
 
   {
+    path: 'perfil/informacoes',
+    label: 'Informações do Usuário',
+    Component: lazy(() => import('../pages/Perfil/InformacoesUsuario.jsx')),
+  },
+
+  {
+    path: 'perfil/quem-somos',
+    label: 'Quem nós somos',
+    Component: lazy(() => import('../pages/Perfil/QuemSomos.jsx')),
+  },
+
+  {
     path: 'fale-conosco',
     label: 'Fale Conosco',
+    grupo: 'Suporte',
     icon: Ajuda,
     menus: ['sidebar'],
     Component: lazy(() => import('../pages/Home/FaleConosco.jsx')),

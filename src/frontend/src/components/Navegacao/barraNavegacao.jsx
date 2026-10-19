@@ -31,6 +31,7 @@ export default function BarraNavegacao() {
             return (
               <>
                 <IconComponent
+                  size={40}
                   className="bottom-nav__icon"
                   aria-hidden="true"
                 />

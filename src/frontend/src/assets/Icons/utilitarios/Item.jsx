@@ -1,7 +1,7 @@
-export function Item({ iconSvg }) {
+export function Item({ size, className, ...props }) {
   return (
     
-<svg width="24" height="24" className={iconSvg} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+<svg {...props} width={size ?? 24} height={size ?? 24} className={className} viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
 <rect x="6" y="10" width="12" height="4" rx="2" fill="#150C00"/>
 </svg>
 
