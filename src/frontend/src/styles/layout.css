@@ -134,12 +134,12 @@
 
 /*----- Arredonda os cantos esquerdos do primeiro item da navegação -----*/
 .bottom-nav__item:first-child {
-  border-radius: var(--bottomnav-radius) 0 0 var(--bottomnav-radius);
+  border-radius: var(--bottomnav-radius) 0 0 0;
 }
 
 /*----- Arredonda os cantos direitos do último item da navegação -----*/
 .bottom-nav__item:last-child {
-  border-radius: 0 var(--bottomnav-radius) var(--bottomnav-radius) 0;
+  border-radius: 0 var(--bottomnav-radius) 0 0;
 }
 
 /* ==========================================================

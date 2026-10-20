@@ -296,6 +296,56 @@ textarea.field__input {
   background: var(--orange);
 }
 
+.device__extra {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.badge {
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.badge--uso   {
+  background: rgba(0, 128, 0, 0.12);
+}
+
+.badge--livre { 
+  background: rgba(128, 128, 128, 0.16);
+}
+
+.achados {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-block: 16px;
+}
+
+.achados__lista {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.achado {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.achado__info {
+  display: flex;
+  flex-direction: column;
+}
+
+
+
 /* ---------- EmptyState ---------- */
 
 /*----- Centraliza o estado vazio e define o espaçamento e o alinhamento do texto -----*/
@@ -573,6 +623,19 @@ textarea.field__input {
   background: var(--card-green);
 }
 
+.painel-titulo{
+  font-size: 32px;
+  padding-bottom: var(--space-2);
+  display: flex;
+  flex-direction: row;
+  font-weight: bold;
+}
+
+.painel-titulo.id{
+  font-size: 32px;
+  color: var(--btn-bg-disabled);
+}
+
 /*----- Define a trilha e o recorte da barra de medição -----*/
 .meter {
   height: 8px;
@@ -612,15 +675,20 @@ textarea.field__input {
 /*----- Define a altura, o espaçamento e o visual dos itens de área -----*/
 .area {
   min-height: 64px;
-  padding: var(--space-1) var(--space-2);
+  padding: var(--space-2) var(--space-2);
   background: var(--surface);
   border: 1px solid var(--border);
   border-radius: var(--radius-button);
 }
 
 /*----- Aplica cor secundária aos metadados de cada área -----*/
-.area__meta {
+
+p.area__meta{
   color: var(--text-muted);
+  font-size: 16px;
+  display: flex;
+  padding-bottom: 4px;
+  flex-direction: row;
 }
 
 /* ---------- Tarefas ---------- */
@@ -1104,6 +1172,8 @@ textarea.field__input {
   color: var(--text-muted);
 }
 
+
+
 /* ==========================================================
    PERFIL (novo) — foto grande, blocos "Conta" / "Aplicação" / "Sair"
    ========================================================== */
@@ -1476,6 +1546,11 @@ textarea.field__input {
 /*----- Clareia o fundo do botão de acesso às áreas durante o hover -----*/
 .painel-areas-link .btn:hover {
   background: var(--green);
+}
+
+.painel-dispositivos{
+  color: var(--ink);
+  flex: none;
 }
 
 /*----- Limita e centraliza os resumos do painel em telas a partir de 744px -----*/

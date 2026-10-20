@@ -74,6 +74,20 @@ export const appPages = [
   },
 
   {
+    path: 'painel/clima',
+    label: 'Clima',
+    Component: lazy(() => import('../pages/Painel/Clima.jsx')),
+  },
+
+  {
+    path: 'painel/tempo',
+    label: 'Tempo de Irrigação',
+    Component: lazy(() => import('../pages/Painel/TempoIrrigacao.jsx')),
+  },
+
+  /* Fim das subpáginas */
+
+  {
     path: 'perfil',
     label: 'Perfil',
     grupo: 'Conta',

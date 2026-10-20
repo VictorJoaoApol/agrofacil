@@ -8,6 +8,7 @@ import useAsync from '../../hooks/useAsync'
 import { criarArea } from '../../features/areas/areasService'
 import { obterPainel } from '../../features/painel/painelService'
 import { appPath } from '../../routes/pages'
+import { DispositivosAtivado, Extensao } from '../../assets/Icons/index.jsx'
 
 const plural = (n) => `${n} ${n === 1 ? 'dispositivo' : 'dispositivos'}`
 
@@ -46,8 +47,10 @@ export default function AreasIrrigacao() {
           <ul className="area-list">
             {areas.map((a) => (
               <li key={a.id} className="area">
-                <p className="text-body area__nome">{a.nome}</p>
-                <p className="text-caption area__meta">{a.cultura} · {a.hectares} ha · {plural(a.dispositivos)}</p>
+                <p className="text-body painel-titulo">{a.nome}<p className='painel-titulo id'>#{a.id}</p></p>
+                <p className="text-caption area__meta">{a.cultura}</p>
+                <p className="text-caption area__meta"><DispositivosAtivado size={16} aria-hidden="true" />{plural(a.dispositivos)}</p>
+                <p className="text-caption area__meta"><Extensao size={16} aria-hidden="true" />{a.hectares} ha</p>
               </li>
             ))}
           </ul>

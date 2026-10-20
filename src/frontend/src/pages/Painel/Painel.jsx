@@ -6,7 +6,7 @@ import { Radiacao, Seta, Umidade, Ensolarado } from '../../assets/Icons'
 import useAsync from '../../hooks/useAsync'
 import { obterPainel } from '../../features/painel/painelService'
 import { appPath } from '../../routes/pages'
-import logo from '../../assets/img/Logo.png'
+
 
 /* 150 -> "2h30min" */
 const formatarTempo = (min) => {
@@ -50,48 +50,56 @@ export default function Painel() {
   return (
     <>
       <header className="painel-topo">
-        <img className="painel-topo__logo" src={logo} alt="" />
         <h1 className="text-title-l">Painel</h1>
         <p className="text-body">Dados sobre sua terra</p>
       </header>
 
       <div className="painel-resumo">
         {/* Clima */}
-        <section className="painel-clima" aria-labelledby="clima-titulo">
-          <h2 id="clima-titulo" className="sr-only">Clima</h2>
-          <div className="painel-clima__topo">
-            <Ensolarado size={72} className="painel-clima__sol" aria-hidden="true" />
-            <div>
-              <p className="painel-clima__temp">{clima.temperatura}°</p>
-              <p className="text-caption">{clima.cidade}</p>
-            </div>
-          </div>
-          <ul className="painel-clima__dados">
-            <li>
-              <Radiacao size={20} aria-hidden="true" />
-              <span><small>Radiação Solar</small><strong>{clima.radiacao}W/m²</strong></span>
-            </li>
-            <li>
-              <Umidade size={20} aria-hidden="true" />
-              <span><small>Umidade e DPV</small><strong>{clima.umidade}% | {String(clima.dpv).replace('.', ',')}kPa</strong></span>
-            </li>
-          </ul>
-        </section>
+        <button>
+          <Link to={appPath('painel/clima')}>
+            <section className="painel-clima" aria-labelledby="clima-titulo">
+                <h2 id="clima-titulo" className="sr-only">Clima</h2>
+                <div className="painel-clima__topo">
+                  <Ensolarado size={72} className="painel-clima__sol" aria-hidden="true" />
+                  <div>
+                    <p className="painel-clima__temp">{clima.temperatura}°</p>
+                    <p className="text-caption">{clima.cidade}</p>
+                  </div>
+                </div>
+                <ul className="painel-clima__dados">
+                  <li>
+                    <Radiacao size={20} aria-hidden="true" />
+                    <span><small>Radiação Solar</small><strong>{clima.radiacao}W/m²</strong></span>
+                  </li>
+                  <li>
+                    <Umidade size={20} aria-hidden="true" />
+                    <span><small>Umidade e DPV</small><strong>{clima.umidade}% | {String(clima.dpv).replace('.', ',')}kPa</strong></span>
+                  </li>
+                </ul>
+            </section>
+          </Link>
+        </button>
 
         {/* Irrigação */}
-        <section className="painel-irrig" aria-labelledby="irrig-titulo">
-          <h2 id="irrig-titulo" className="sr-only">Tempo de irrigação</h2>
-          <Anel pct={pct} />
-          <div className="painel-irrig__centro" role="img"
-            aria-label={`${formatarTempo(irrigacao.minutosUsados)} de ${formatarTempo(irrigacao.minutosMeta)}, ${pct}%`}>
-            <p className="text-caption">Tempo<br></br> total de Irrigação</p>
-            <p className="painel-irrig__tempo">{formatarTempo(irrigacao.minutosUsados)}</p>
-            <p className="text-caption">De {formatarTempo(irrigacao.minutosMeta)}<br />{pct}%</p>
-          </div>
-        </section>
+        <button>
+          <Link to={appPath('painel/tempo')}>
+            <section className="painel-irrig" aria-labelledby="irrig-titulo">
+              <h2 id="irrig-titulo" className="sr-only">Tempo de irrigação</h2>
+              <Anel pct={pct} />
+              <div className="painel-irrig__centro" role="img"
+                aria-label={`${formatarTempo(irrigacao.minutosUsados)} de ${formatarTempo(irrigacao.minutosMeta)}, ${pct}%`}>
+                <p className="text-caption">Tempo<br></br> total de Irrigação</p>
+                <p className="painel-irrig__tempo">{formatarTempo(irrigacao.minutosUsados)}</p>
+                <p className="text-caption">De {formatarTempo(irrigacao.minutosMeta)}<br />{pct}%</p>
+              </div>
+            </section>
+          </Link>
+        </button>
       </div>
 
       {/* Dispositivos IoT */}
+      <button>
       <Link to={appPath('dispositivos')} className="painel-iot">
         <div className="painel-iot__texto">
           <h2 className="painel-iot__titulo">Dispositivos IoT</h2>
@@ -100,6 +108,7 @@ export default function Painel() {
         </div>
         <span className="painel-iot__ir" aria-hidden="true"><Seta size={28} /></span>
       </Link>
+      </button>
 
       <div className="painel-areas-link">
         <Button variant="primary" to={appPath('painel/areas')}>Áreas de Irrigação</Button>

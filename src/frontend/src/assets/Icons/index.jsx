@@ -36,3 +36,4 @@ export { Chuvoso } from './utilitarios/Clima=Chuvoso.jsx';
 export { Ensolarado } from './utilitarios/Clima=Ensolarado.jsx';
 export { Nublado } from './utilitarios/Clima=Nublado.jsx';
 export { Tempestade } from './utilitarios/Clima=Tempestade.jsx';
+export { Extensao} from './utilitarios/Extensao.jsx';
