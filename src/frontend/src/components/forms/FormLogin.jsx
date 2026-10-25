@@ -1,8 +1,9 @@
-import { useState } from "react";
-import { NavLink, useNavigate } from "react-router";
-import { login } from "../../../../api/auth";
-import useAuth from "../../hooks/useAuth";
-
+import { useState } from 'react';
+import { useNavigate } from 'react-router';
+import TextField from '../ui/TextField.jsx';
+import Button from '../ui/Button.jsx';
+import useAuth from '../../hooks/useAuth';
+import { login } from '../../services/auth';
 
 function FormLogin() {
   // Cria estado para cada dado, erros e estado de envio.
@@ -55,49 +56,39 @@ function FormLogin() {
     }
   }
 
-
   return (
-    <>
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
+    <form className="auth-form" onSubmit={handleSubmit}>
+
+      {/* Campo de entrada para o e-mail do usuário */}
+      <TextField
+        label="Email:"
+        type="email"
+        autoComplete="email"
+        placeholder="exemplo@email.com"
+        value={email}
+        onChange={(event) => setEmail(event.target.value)}
+      />
 
 
-        {/* Input de Email */}
-        <label className="campotexto">
-          Email:
-          <input
-            type="email"
-            placeholder="exemplo@email.com"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            required 
-          />
-        </label>
+      {/* Campo de entrada para a senha do usuário */}
+      <TextField
+        label="Senha:"
+        autoComplete="current-password"
+        type="password"
+        placeholder="Digite sua senha..."
+        value={senha}
+        onChange={(event) => setSenha(event.target.value)}
+        required
+      />
 
 
-        {/* Input de Senha */}
-        <label className="campotexto">
-          Senha:
-          <input
-            type="password"
-            placeholder="Digite sua senha..."
-            value={senha}
-            onChange={(event) => setSenha(event.target.value)}
-            required
-          />
-        </label>
+      {/* Mensagem de erro -> aparece apenas se houver erros */}
+      {erro && <p className="field__error text-body" role="alert">{erro}</p>}
 
 
-        {/* Mensagem de erro -> aparece apenas se houver erros */}
-        {erro && <p className="erro">{erro}</p>}
-
-
-        {/* Botão de envio -> se torna inativo enquanto o formulário está em envio */}
-        <button type="submit" disabled={enviando}>
-          {enviando ? "Logando..." : "Logar"}
-        </button>
-      </form>
-    </>
+      {/* Botão de envio -> se torna inativo enquanto o formulário está em envio */}
+      <Button type="submit" variant="highlight" loading={enviando}>Logar</Button>
+    </form>
   );
 }
 

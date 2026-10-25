@@ -2,6 +2,7 @@
 import FormCadastro from '../../components/forms/FormCadastro.jsx'
 import Button from '../../components/ui/Button.jsx'
 
+/* Página pública para cadastro de novos usuários */
 export default function Cadastro() {
   return (
     <>

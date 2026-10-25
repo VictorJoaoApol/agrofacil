@@ -1,5 +1,6 @@
 import { Routes, Route } from 'react-router';
-import './App.css';
+import './styles/tokens.css'    // Variáveis globais de design (cores, fontes, espaçamentos)
+import './styles/components.css'// Estilos globais e reutilizáveis de componentes
 
 import Teste from './pages/Teste.jsx';
 import NotFound from './pages/NotFound.jsx';

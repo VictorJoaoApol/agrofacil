@@ -1,0 +1,325 @@
+
+/* ==========================================================
+   LAYOUT — ocupa a tela toda; o formato base é 412 x 917
+   (veja os pontos de quebra em tokens.css)
+   ========================================================== */
+
+/*----- Define a estrutura principal da aplicação, posiciona a Sidebar e divide a tela em três linhas -----*/
+.app-shell {
+  position: relative; /* A Sidebar se ancora aqui */
+  overflow: hidden;
+  width: 100%;
+  height: 100vh;
+  height: 100dvh;
+  background: var(--bg);
+  display: grid;
+  grid-template-rows:
+    calc(var(--navbar-height) + env(safe-area-inset-top, 0px))
+    minmax(0, 1fr)
+    calc(var(--bottomnav-height) + env(safe-area-inset-bottom, 0px));
+}
+
+/*----- Permite rolagem apenas no conteúdo principal e organiza as páginas em uma grade responsiva -----*/
+.app-main {
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: grid;
+  grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
+  column-gap: var(--grid-gutter);
+  align-content: start;
+  padding: var(--space-2) var(--content-pad) var(--space-3);
+}
+
+/*----- Faz cada bloco ocupar a linha inteira por padrão, sem aumentar a especificidade das classes -----*/
+:where(.app-main) > * {
+  grid-column: 1 / -1;
+  min-width: 0;
+}
+
+/*----- Centraliza páginas independentes, como a tela 404, e define sua altura mínima -----*/
+.page-frame {
+  display: grid;
+  place-content: center;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding: var(--space-3) var(--grid-margin);
+  background: var(--bg);
+}
+
+/* ==========================================================
+   NAVBAR — barra superior
+   ========================================================== */
+
+/*----- Organiza os elementos da barra superior e reserva espaço para a área segura do dispositivo -----*/
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-inline: max(var(--space-2), calc((100% - var(--content-max)) / 2));
+  background: var(--bg);
+  box-shadow: 0 1px 0 var(--border); /* Linha inferior sem aumentar a altura */
+}
+
+/*----- Define a área clicável dos botões da barra superior -----*/
+.navbar__btn {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+}
+
+/*----- Dimensiona a logo e mantém sua proporção original -----*/
+.navbar__logo {
+  flex: none;
+  width: var(--navbar-logo);
+  height: var(--navbar-logo);
+  margin: var(--navbar-logo-margin);
+  object-fit: contain;
+}
+
+/*----- Permite que o título ocupe o espaço disponível e fique centralizado -----*/
+.navbar__title {
+  flex: 2;
+  text-align: center;
+}
+
+/* ==========================================================
+   BARRA INFERIOR — navegação principal
+   Formato base: 5 itens de 80 x 64, centralizados em 412px
+   ========================================================== */
+
+/*----- Distribui os cinco itens da navegação inferior e respeita a área segura do dispositivo -----*/
+.bottom-nav {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, var(--bottomnav-item-width)));
+  justify-content: center;
+  align-content: start;
+  height: 100%;
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  background: var(--bg);
+}
+
+/*----- Organiza o ícone e o texto de cada item e define seu fundo e suas dimensões -----*/
+.bottom-nav__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-half);
+  height: var(--bottomnav-height);
+  background: var(--green-dark);
+  color: #fff;
+}
+
+/*----- Padroniza o tamanho dos ícones da navegação inferior em 40 x 40px -----*/
+.bottom-nav__icon {
+  flex: none;
+  width: 40px;
+  height: 40px;
+}
+
+/*----- Clareia o fundo do item ao passar o cursor, exceto quando ele estiver ativo -----*/
+.bottom-nav__item:hover:not(.active) {
+  background: var(--green);
+}
+
+/*----- Remove o fundo do item ativo e destaca sua cor para indicar a página atual -----*/
+.bottom-nav__item.active {
+  background: transparent;
+  color: var(--green-dark);
+}
+
+/*----- Arredonda os cantos esquerdos do primeiro item da navegação -----*/
+.bottom-nav__item:first-child {
+  border-radius: var(--bottomnav-radius) 0 0 0;
+}
+
+/*----- Arredonda os cantos direitos do último item da navegação -----*/
+.bottom-nav__item:last-child {
+  border-radius: 0 var(--bottomnav-radius) 0 0;
+}
+
+/* ==========================================================
+   SIDEBAR — gaveta lateral sobre o layout principal
+   ========================================================== */
+
+/*----- Cria a camada escurecida que cobre o conteúdo quando a Sidebar está aberta -----*/
+.sidebar-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background: var(--overlay);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+}
+
+/*----- Exibe a camada de fundo quando a Sidebar está aberta -----*/
+.sidebar-backdrop.is-open {
+  opacity: 1;
+  visibility: visible;
+}
+
+/*----- Posiciona a Sidebar sobre o conteúdo e define sua largura, rolagem e animação de entrada -----*/
+.sidebar {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 11;
+  width: min(var(--sidebar-width), 85%);
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  padding: calc(var(--space-2) + env(safe-area-inset-top, 0px)) var(--space-2) var(--space-2);
+  background: var(--bg);
+  transform: translateX(-100%);
+  visibility: hidden;
+  transition: transform 0.25s ease, visibility 0.25s;
+}
+
+/*----- Desliza a Sidebar para a posição visível quando ela é aberta -----*/
+.sidebar.is-open {
+  transform: none;
+  visibility: visible;
+}
+
+/*----- Alinha a foto do usuário, suas informações e os controles do cabeçalho -----*/
+.sidebar__header {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+/*----- Permite que o nome do usuário ocupe o espaço disponível sem ultrapassar os limites -----*/
+.sidebar__user {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/*----- Posiciona o botão de fechar à direita e define sua área clicável -----*/
+.sidebar__close {
+  flex: none;
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  margin-left: auto;
+}
+
+/*----- Define o espaçamento superior, o tamanho e o peso do título da Sidebar -----*/
+.sidebar__title {
+  margin-top: var(--space-1);
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 400;
+}
+
+/*----- Organiza os grupos de navegação verticalmente e separa suas seções -----*/
+.sidebar__groups {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+/*----- Estiliza os rótulos das seções com texto suavizado e uma linha inferior -----*/
+.sidebar__label {
+  padding-bottom: var(--space-half);
+  color: var(--text-muted);
+  border-bottom: 1px solid var(--text);
+}
+
+/*----- Organiza os links de cada seção em uma coluna -----*/
+.sidebar__menu {
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--space-1);
+}
+
+/*----- Alinha os ícones, os textos e as setas dos itens da Sidebar -----*/
+.sidebar__link {
+  display: flex;
+  align-items: center;
+  gap: var(--space-1);
+  width: 100%;
+  height: 32px;
+  border-radius: var(--radius-button);
+  text-align: left;
+}
+
+/*----- Define o tamanho dos ícones dos itens da Sidebar em 24 x 24px -----*/
+.sidebar__icon {
+  flex: none;
+  width: 24px;
+  height: 24px;
+}
+
+/*----- Faz o texto ocupar o espaço disponível sem quebrar ou ultrapassar os limites -----*/
+.sidebar__text {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/*----- Padroniza o tamanho das setas de navegação em 12 x 12px -----*/
+.sidebar__arrow {
+  flex: none;
+  width: 12px;
+  height: 12px;
+}
+
+/*----- Destaca o item ativo com fundo, peso de fonte e espaçamento lateral -----*/
+.sidebar__link.active {
+  background: var(--surface);
+  font-weight: 600;
+  margin-inline: calc(var(--space-half) * -1);
+  padding-inline: var(--space-half);
+  width: calc(100% + var(--space-1));
+}
+
+/*----- Organiza os controles do rodapé da Sidebar e separa-os do conteúdo por uma linha -----*/
+.sidebar__footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+  margin-top: var(--space-3);
+  padding-top: var(--space-1);
+  border-top: 1px solid var(--text);
+}
+
+/*----- Ajusta a altura e o espaçamento dos controles de alternância dentro da Sidebar -----*/
+.sidebar .switch-row {
+  min-height: 32px;
+  padding: 0;
+}
+
+/*----- Padroniza a tipografia dos textos dos controles de alternância da Sidebar -----*/
+.sidebar .switch-row .text-body {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+/*----- Destaca a ação de saída com contorno e texto na cor de perigo -----*/
+.sidebar__link--danger {
+  padding-inline: var(--space-1);
+  color: var(--orange-dark);
+  border: 1px solid var(--orange-dark);
+}
+
+/*----- Desativa as transições da Sidebar e do fundo para usuários que preferem movimento reduzido -----*/
+@media (prefers-reduced-motion: reduce) {
+  .sidebar,
+  .sidebar-backdrop {
+    transition: none;
+  }
+}

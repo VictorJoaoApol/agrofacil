@@ -1,6 +1,8 @@
-import { useState } from "react";
-import { NavLink, useNavigate } from "react-router";
-import { cadastro } from "../../../../api/auth";
+import { useState } from 'react';
+import { useNavigate } from 'react-router';
+import TextField from '../ui/TextField.jsx';
+import Button from '../ui/Button.jsx';
+import { cadastro } from '../../services/auth';
 
 function FormCadastro() {
   const [nome, setNome] = useState("");
@@ -42,49 +44,45 @@ function FormCadastro() {
 
 
   return (
-    <form onSubmit={handleSubmit} className="formulario">
+    <form className="auth-form" onSubmit={handleSubmit}>
       {/* Input de Nome */}
-      <label className="campotexto">
-        Nome
-        <input
-          type="text"
-          placeholder="Insire seu nome"
-          value={nome}
-          onChange={(event) => setNome(event.target.value)}
-          required
-        />
-      </label>
+      <TextField
+        label="Nome:"
+        autoComplete="name"
+        type="text"
+        placeholder="Insira seu nome"
+        value={nome}
+        onChange={(event) => setNome(event.target.value)}
+        required
+      />
 
       {/* Input de Email */}
-      <label className="campotexto">
-        Email:
-        <input
-          type="email"
-          placeholder="exemplo@email.com"
-          value={email}
-          onChange={(event) => setEmail(event.target.value)}
-          required 
-        />
-      </label>
+      <TextField
+        label="Email:"
+        autoComplete="email"
+        type="email"
+        placeholder="exemplo@email.com"
+        value={email}
+        onChange={(event) => setEmail(event.target.value)}
+        required 
+      />
 
 
-      {/* Input de Senha */}
-      <label className="campotexto">
-        Senha:
-        <input
-          type="password"
-          placeholder="Digite sua senha..."
-          value={senha}
-          onChange={(event) => setSenha(event.target.value)}
-          required
-        />
-      </label>
+      {/* Campo para criação de Senha */}
+      <TextField
+        label="Senha:"
+        autoComplete="new-password"
+        type="password"
+        placeholder="Digite sua senha..."
+        value={senha}
+        onChange={(event) => setSenha(event.target.value)}
+        required
+      />
 
-      {erro && <p className="erro">{erro}</p>}
 
-      <button type="submit" className="btn-cadastrar" disabled={enviando}>
-        {enviando ? "Cadastrando..." : "Cadastrar"}
-      </button>
+      {erro && <p className="field__error text-body" role="alert">{erro}</p>}
+
+      <Button type="submit" variant="highlight" loading={enviando}>Cadastrar</Button>
     </form>
   );
 }

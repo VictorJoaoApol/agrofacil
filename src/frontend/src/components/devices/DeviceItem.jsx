@@ -1,15 +1,17 @@
 // components/devices/DeviceItem.jsx
-import { Configuracao } from '../../assets/Icons'
+// `extra` é opcional: conteúdo mostrado ao lado do item (selo de uso, botão de editar...).
+import { iconeDoSensor } from './iconesSensores'
 
 const BATERIA_BAIXA = 20
 
-export default function DeviceItem({ nome, tipo, bateria, online }) {
+export default function DeviceItem({ nome, tipo, bateria, online, extra }) {
   const baixa = bateria <= BATERIA_BAIXA
+  const Icone = iconeDoSensor(tipo)
 
   return (
     <li className="device">
       <span className="device__icon" aria-hidden="true">
-        <Configuracao />
+        <Icone size={40} />
       </span>
 
       <div className="device__info">
@@ -27,6 +29,8 @@ export default function DeviceItem({ nome, tipo, bateria, online }) {
         </span>
         <span className="text-caption">{bateria}%</span>
       </div>
+
+      {extra && <div className="device__extra">{extra}</div>}
     </li>
   )
 }

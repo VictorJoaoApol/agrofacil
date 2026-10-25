@@ -1,41 +1,105 @@
+
+/* ==========================================================
+   TOKENS + RESET + TIPOGRAFIA BASE
+   Só variáveis, reset e utilitários globais. Nada de componente aqui
+   (layout em layout.css, componentes em components.css, auth em auth.css).
+   ========================================================== */
+
+/*----- Registra a fonte Inclusive Sans e permite o uso de seus pesos variáveis -----*/
+@font-face {
+  font-family: 'Inclusive Sans';
+  src: url('../assets/fonts/Inclusive_Sans/InclusiveSans-VariableFont_wght.ttf') format('truetype');
+  font-weight: 300 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ==========================================================
+   TOKENS — paleta de cores
+   ========================================================== */
+
+/*----- Define as cores da paleta principal utilizada pela aplicação -----*/
 :root {
-  /* ---------- paleta do Figma ---------- */
-  --white-light: #F0F0F0;   --white: #E6E6E6;   --white-dark: #CECECE;    /* 40% */
-  --green-light: #A5C763;   --green: #6DA833;   --green-dark: #489723;    /* 30% */
-  --brown-light: #FEDBC0;   --brown: #DCB190;   --brown-dark: #A2796A;    /* 15% */
-  --orange-light: #F7D93A;  --orange: #EE9728;  --orange-dark: #E96528;   /* 10% */
-  --blue-light: #BEEDFE;    --blue: #6DD1F6;    --blue-dark: #438EAA;     /*  5% */
+  /* Paleta do Figma */
+  --white-light: #F0F0F0;
+  --white: #E6E6E6;
+  --white-dark: #CECECE; /* 40% */
+
+  --green-light: #A5C763;
+  --green: #6DA833;
+  --green-dark: #489723; /* 30% */
+
+  --brown-light: #FEDBC0;
+  --brown: #DCB190;
+  --brown-dark: #A2796A; /* 15% */
+
+  --orange-light: #F7D93A;
+  --orange: #EE9728;
+  --orange-dark: #E96528; /* 10% */
+
+  --blue-light: #BEEDFE;
+  --blue: #6DD1F6;
+  --blue-dark: #438EAA; /* 5% */
+
   --ink: #150C00;
 
-  /* ---------- botão (estados do Figma) ---------- */
-  --btn-bg: #EE9728;            /* padrão */
+  /* Botão: estados do Figma */
+  --btn-bg: #EE9728; /* Padrão */
   --btn-bg-hover: #EEBD55;
-  --btn-bg-active: #E58629;     /* pressionado */
-  --btn-bg-disabled: #9D9D9D;   /* desativado */
-  --btn-highlight: #6DD1F6;     /* destacado */
+  --btn-bg-active: #E58629; /* Pressionado */
+  --btn-bg-disabled: #9D9D9D; /* Desativado */
+  --btn-highlight: #6DD1F6; /* Destacado */
 
-  /* ---------- semânticos (tema claro) ---------- */
+  /* Cores semânticas do tema claro */
   --bg: #FFFFFF;
   --surface: var(--white-light);
   --border: var(--white-dark);
   --text: var(--ink);
   --text-muted: #5E5347;
-  --link: #2F7A0F;              /* verde escurecido, ver nota abaixo */
+  --link: #2F7A0F;
   --focus: var(--blue-dark);
   --danger: #C62828;
   --overlay: rgb(21 12 0 / 0.5);
 
-  /* medidas (sem mudança) */
-  --app-width: 412px;
+  /* Cores dos cards */
+  --card-green: var(--green-light);
+  --card-blue: var(--blue-light);
+  --on-card: var(--ink);
+  --meter-track: rgb(21 12 0 / 0.15);
+  --meter-fill: var(--blue-dark);
+
+  /* ==========================================================
+     TOKENS — grade e dimensões do layout
+     Formato base: 412 x 917, grade de 4 colunas
+     ========================================================== */
+
+  /*----- Define as dimensões de referência para o layout responsivo -----*/
+  --design-width: 412px;
+  --design-height: 917px;
+  --app-width: var(--design-width); /* Alias antigo */
+
+  /*----- Configura a grade principal e os limites de largura do conteúdo -----*/
   --grid-cols: 4;
   --grid-margin: 8px;
   --grid-gutter: 24px;
+  --span-half: 4;
+  --content-max: 1200px;
+  --card-min: 360px;
+  --auth-card-max: 396px;
+
+  /*----- Centraliza o conteúdo em telas largas e preserva a margem mínima em celulares -----*/
+  --content-pad: max(var(--grid-margin), calc((100% - var(--content-max)) / 2));
+
+  /*----- Define as alturas das barras, o tamanho da logo e a largura da Sidebar -----*/
   --navbar-height: 80px;
+  --navbar-logo: 64px;
+  --navbar-logo-margin: 8px;
   --bottomnav-height: 64px;
-  --bottomnav-item-width: 80px;
+  --bottomnav-item-width: 84px;
   --bottomnav-radius: 4px;
   --sidebar-width: 288px;
 
+  /*----- Define os espaçamentos padronizados utilizados nos componentes -----*/
   --space-half: 4px;
   --space-1: 8px;
   --space-2: 16px;
@@ -44,140 +108,256 @@
   --space-5: 40px;
   --space-6: 48px;
 
-  --radius-card: 16px;    /* confirmar no Figma */
-  --radius-button: 8px;   /* confirmar no Figma */
+  /*----- Define os raios de borda dos cards e dos botões -----*/
+  --radius-card: 16px; /* Confirmar no Figma */
+  --radius-button: 8px; /* Confirmar no Figma */
+
+  /*----- Define a família tipográfica principal e suas alternativas de sistema -----*/
+  --font-family: 'Inclusive Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
 }
 
+/* ==========================================================
+   RESPONSIVIDADE — pontos de quebra
+   ========================================================== */
+
+/*----- Adapta a grade para tablets e amplia os itens da navegação e a Sidebar -----*/
+@media (min-width: 744px) {
+  :root {
+    --grid-cols: 8;
+    --grid-margin: 24px;
+    --span-half: 4;
+    --bottomnav-item-width: 112px;
+    --sidebar-width: 320px;
+  }
+}
+
+/*----- Amplia a grade para 12 colunas e ajusta a largura dos itens em desktops -----*/
+@media (min-width: 1100px) {
+  :root {
+    --grid-cols: 12;
+    --grid-margin: 32px;
+    --span-half: 6;
+    --bottomnav-item-width: 128px;
+  }
+}
+
+/*----- Reduz a altura das barras e da logo quando o celular estiver na horizontal -----*/
+@media (max-height: 480px) and (orientation: landscape) {
+  :root {
+    --navbar-height: 56px;
+    --navbar-logo: 40px;
+    --bottomnav-height: 48px;
+  }
+}
+
+/* ==========================================================
+   TEMA ESCURO — substitui as cores semânticas
+   ========================================================== */
+
+/*----- Sobrescreve as cores principais quando o tema escuro estiver ativado -----*/
 :root[data-theme='dark'] {
   --bg: #150C00;
   --surface: #241A0D;
   --border: #3A2E1E;
   --text: #FFFFFF;
-  --text-muted: #C9BFAF;
-  --link: var(--green-light);
+  --text-muted: #DADADA;
+  --link: #FFFFFF;
   --focus: var(--blue);
+  --danger: #FF8A80;
+
+  --card-green: #2F6A17; /* Estimado: confirmar no Figma */
+  --card-blue: #2A6378; /* Estimado: confirmar no Figma */
+  --on-card: #FFFFFF;
+  --meter-track: rgb(255 255 255 / 0.25);
+  --meter-fill: var(--blue);
 }
 
-/* ---------- reset enxuto ---------- */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { -webkit-text-size-adjust: 100%; }
+/* ==========================================================
+   RESET — padronização dos elementos
+   ========================================================== */
+
+/*----- Inclui bordas e preenchimentos no cálculo das dimensões e remove margens padrão -----*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/*----- Evita ajustes automáticos no tamanho do texto em dispositivos móveis -----*/
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+/*----- Define a tipografia global, a cor do texto e o fundo externo da aplicação -----*/
 body {
   min-height: 100dvh;
-  background: var(--surface);      /* fundo fora do "celular" */
+  background: var(--surface);
   color: var(--text);
-  font-family: system-ui, sans-serif;   /* troque pela fonte do Figma */
-  font-size: 16px; line-height: 24px;
+  font-family: var(--font-family);
+  font-size: 16px;
+  line-height: 24px;
+  -webkit-font-smoothing: antialiased;
 }
-img, svg { display: block; max-width: 100%; }
-button, input { font: inherit; color: inherit; }
-button { background: none; border: 0; cursor: pointer; }
-a { color: inherit; text-decoration: none; }
-ul { list-style: none; }
 
-/* ---------- tipografia (line-height múltiplo de 8/4) ---------- */
-.text-caption   { font-size: 12px; line-height: 16px; }
-.text-body      { font-size: 16px; line-height: 24px; }
-.text-title-s   { font-size: 20px; line-height: 24px; font-weight: 600; }
-.text-title-m   { font-size: 24px; line-height: 32px; font-weight: 600; }
-.text-title-l   { font-size: 32px; line-height: 40px; font-weight: 700; }
+/*----- Faz os títulos herdarem a tipografia, permitindo que as classes controlem sua aparência -----*/
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
 
-/* ---------- grade 4 colunas ---------- */
+/*----- Mantém imagens e SVGs dentro dos limites de seus elementos contêineres -----*/
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+/*----- Faz os SVGs herdarem a cor do texto e preserva a possibilidade de manter suas cores originais -----*/
+svg {
+  color: inherit;
+}
+
+/*----- Aplica a cor atual aos SVGs sem a classe de preservação e sem preenchimento none -----*/
+svg:not(.svg-original):not([fill='none']) {
+  fill: currentColor;
+}
+
+/*----- Substitui os preenchimentos fixos dos elementos internos dos SVGs comuns -----*/
+svg:not(.svg-original) [fill]:not([fill='none']) {
+  fill: currentColor;
+}
+
+/*----- Substitui os traçados fixos dos SVGs comuns pela cor atual -----*/
+svg:not(.svg-original)[stroke]:not([stroke='none']),
+svg:not(.svg-original) [stroke]:not([stroke='none']) {
+  stroke: currentColor;
+}
+
+/*----- Define a cor e a transparência padrão dos textos de orientação dos campos -----*/
+::placeholder {
+  color: var(--text-muted);
+  opacity: 0.8;
+}
+
+/*----- Padroniza a fonte e a cor dos elementos de formulário -----*/
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+/*----- Remove o estilo padrão dos botões e indica que eles podem ser acionados -----*/
+button {
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+
+/*----- Remove o estilo visual padrão dos links -----*/
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/*----- Remove os marcadores padrão de listas -----*/
+ul,
+ol {
+  list-style: none;
+}
+
+/*----- Destaca os elementos que recebem foco pelo teclado -----*/
+:focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 2px;
+}
+
+/* ==========================================================
+   TIPOGRAFIA — estilos de texto do Figma
+   ========================================================== */
+
+/*----- Define o estilo de texto para legendas e informações secundárias -----*/
+.text-caption {
+  font-size: 12px;
+  line-height: 16px;
+}
+
+/*----- Define o estilo de texto para conteúdo e botões -----*/
+.text-body {
+  font-size: 16px;
+  line-height: 24px;
+}
+
+/*----- Define o estilo de títulos pequenos, equivalente ao H3 -----*/
+.text-title-s {
+  font-size: 20px;
+  line-height: 24px;
+  font-weight: 700;
+}
+
+/*----- Define o estilo de títulos médios, equivalente ao H2 -----*/
+.text-title-m {
+  font-size: 28px;
+  line-height: 32px;
+  font-weight: 700;
+}
+
+/*----- Define o estilo de títulos grandes, equivalente ao H1 -----*/
+.text-title-l {
+  font-size: 36px;
+  line-height: 40px;
+  font-weight: 700;
+}
+
+/* ==========================================================
+   UTILITÁRIOS — acessibilidade e grade
+   ========================================================== */
+
+/*----- Oculta visualmente um elemento, mantendo-o disponível para leitores de tela -----*/
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/*----- Cria uma grade reutilizável com o número de colunas e os espaçamentos definidos nos tokens -----*/
 .grid {
   display: grid;
-  grid-template-columns: repeat(var(--grid-cols), 1fr);
+  grid-template-columns: repeat(var(--grid-cols), minmax(0, 1fr));
   column-gap: var(--grid-gutter);
   padding-inline: var(--grid-margin);
 }
-.span-2 { grid-column: span 2; }
-.span-4 { grid-column: span 4; }
 
-/* ---------- shells ---------- */
-.app-shell {
-  position: relative;
-  overflow: hidden;
-  width: 100%;
-  max-width: var(--app-width);
-  height: 100dvh;
-  margin-inline: auto;
-  background: var(--bg);
-  display: grid;
-  grid-template-rows: var(--navbar-height) 1fr var(--bottomnav-height);
+/*----- Faz o elemento ocupar duas colunas da grade -----*/
+.span-2 {
+  grid-column: span 2;
 }
-.app-main { overflow-y: auto; padding: var(--space-2) var(--grid-margin); }
 
-.auth-shell {
-  width: 100%;
-  max-width: var(--app-width);
-  min-height: 100dvh;
-  margin-inline: auto;
-  padding: var(--space-3) var(--grid-margin);
-  background: var(--bg);
+/*----- Faz o elemento ocupar quatro colunas da grade -----*/
+.span-4 {
+  grid-column: span 4;
 }
-.auth-shell__logo { display: flex; justify-content: center; margin-bottom: var(--space-3); }
 
-/* ---------- Navbar ---------- */
-.navbar {
-  display: flex; align-items: center; justify-content: space-between;
-  height: var(--navbar-height);
-  padding-inline: var(--space-2);
-  background: var(--bg);
-  border-bottom: 1px solid var(--border);
-}
-.navbar__btn { display: grid; place-items: center; width: 48px; height: 48px; }
-.navbar__logo { height: 40px; width: auto; }
-.navbar__title { flex: 1; text-align: center; }
-.navbar__back { transform: rotate(180deg); }   /* remova se a Seta já aponta para a esquerda */
-.navbar__avatar { width: 48px; height: 48px; border-radius: 50%; object-fit: cover; }
-
-/* ---------- Barra inferior ---------- */
-.bottom-nav {
-  display: flex; justify-content: center;
-  height: var(--bottomnav-height);
-  background: var(--bg);
-  border-top: 1px solid var(--border);
-}
-.bottom-nav__item {
-  display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: var(--space-half);
-  width: var(--bottomnav-item-width);
-  height: var(--bottomnav-height);
-  color: var(--text-muted);
-}
-.bottom-nav__item.active { color: var(--primary); }
-.bottom-nav__item:first-child { border-top-left-radius: var(--bottomnav-radius); }
-.bottom-nav__item:last-child  { border-top-right-radius: var(--bottomnav-radius); }
-
-/* ---------- Sidebar ---------- */
-.sidebar-backdrop {
-  position: absolute; inset: 0; z-index: 10;
-  background: var(--overlay);
-  opacity: 0; visibility: hidden;
-  transition: opacity .2s, visibility .2s;
-}
-.sidebar-backdrop.is-open { opacity: 1; visibility: visible; }
-
-.sidebar {
-  position: absolute; top: 0; bottom: 0; left: 0; z-index: 11;
-  width: var(--sidebar-width);
-  display: flex; flex-direction: column;
-  padding: var(--space-2);
-  background: var(--bg);
-  transform: translateX(-100%);
-  visibility: hidden;
-  transition: transform .25s ease, visibility .25s;
-}
-.sidebar.is-open { transform: none; visibility: visible; }
-.sidebar__close { align-self: flex-end; width: 48px; height: 48px; display: grid; place-items: center; }
-.sidebar__menu { flex: 1; display: flex; flex-direction: column; gap: var(--space-half); margin-top: var(--space-1); }
-.sidebar__link {
-  display: flex; align-items: center; gap: var(--space-2);
-  height: 48px; padding-inline: var(--space-2);
-  border-radius: var(--radius-button);
-}
-.sidebar__link.active { background: var(--surface); color: var(--primary); }
-.sidebar__footer { display: flex; flex-direction: column; gap: var(--space-1); border-top: 1px solid var(--border); padding-top: var(--space-2); }
-.sidebar__toggle { display: flex; align-items: center; justify-content: space-between; padding-inline: var(--space-2); height: 48px; }
-
+/*----- Reduz a duração das animações e transições para usuários que preferem movimento reduzido -----*/
 @media (prefers-reduced-motion: reduce) {
-  .sidebar, .sidebar-backdrop { transition: none; }
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
 }

@@ -1,4 +1,6 @@
 import { useState } from "react";
+import TextField from '../ui/TextField.jsx';
+import Button from '../ui/Button.jsx';
 import { solicitarRecuperacao } from "../../../../api/auth";
 
 function FormRecuperarSenha() {
@@ -45,30 +47,24 @@ function FormRecuperarSenha() {
   } 
   return (
     <>
-      <h1>Recuperar Senha</h1>
-      <p>Digite seu email, e então te mandaremos um link para que você troque sua senha. Não o compartilhe com ninguém.</p>
+      <form className="auth-form" onSubmit={handleSubmit}>
 
-      <form onSubmit={handleSubmit}>
-    
-        <label>
-          Digite seu Email:
-          <input
-            type="email"
-            placeholder="exemplo@email.com"
-            value={email}
-            onChange={(event) => setEmail(event.target.value)}
-            required
-          />
-        </label>
+        <TextField
+          label="Digite seu Email:"
+          autoComplete="email"
+          type="email"
+          placeholder="exemplo@email.com"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
+          required
+        />
 
         {/* Mensagens de erro ou sucesso */}
-        {erro && <p className="erro">{erro}</p>}
-        {mensagem && <p className="sucesso">{mensagem}</p>}
+        {erro && <p className="field__error text-body" role="alert">{erro}</p>}
+        {mensagem && <p className="auth-feedback text-body" role="status">{mensagem}</p>}
 
         {/* Botão de enviar fica inativo durante o envio */}
-        <button type="submit" disabled={enviando}>
-          {enviando ? "Enviando..." : "Enviar link"}
-        </button>
+        <Button type="submit" variant="highlight" loading={enviando}>Enviar link</Button>
       </form>
     </>
   );
