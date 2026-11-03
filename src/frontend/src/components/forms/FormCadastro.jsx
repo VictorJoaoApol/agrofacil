@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate } from 'react-router';
 import TextField from '../ui/TextField.jsx';
 import Button from '../ui/Button.jsx';
-import { cadastro } from '../../services/auth';
+import { cadastro } from '../../../../api/auth.js';
 
 function FormCadastro() {
   const [nome, setNome] = useState("");

@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router';
 import TextField from '../ui/TextField.jsx';
 import Button from '../ui/Button.jsx';
 import useAuth from '../../hooks/useAuth';
-import { login } from '../../services/auth';
+import { login } from '../../../../api/auth.js';
 
 function FormLogin() {
   // Cria estado para cada dado, erros e estado de envio.
