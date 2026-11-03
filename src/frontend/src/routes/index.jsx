@@ -11,7 +11,7 @@ import Cadastro from '../pages/RegistrosUsuarios/Cadastro.jsx'
 import RecuperarSenha from '../pages/RegistrosUsuarios/RecuperarSenha.jsx'
 
 /* Gerenciador central de rotas da aplicação utilizando hook de configuração declarativa */
-export default function AppRoutes() {
+function AppRoutes() {
   return useRoutes([
     /* Redirecionamento padrão da raiz para a área logada do sistema */
     { path: '/', element: <Navigate to="/app" replace /> },
@@ -50,3 +50,5 @@ export default function AppRoutes() {
     { path: '*', element: <NotFound /> },
   ])
 }
+
+export default AppRoutes;
