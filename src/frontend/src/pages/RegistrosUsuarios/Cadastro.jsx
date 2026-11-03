@@ -1,4 +1,3 @@
-// pages/RegistrosUsuarios/Cadastro.jsx
 import FormCadastro from '../../components/forms/FormCadastro.jsx'
 import Button from '../../components/ui/Button.jsx'
 

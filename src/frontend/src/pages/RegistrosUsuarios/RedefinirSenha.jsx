@@ -1,11 +1,9 @@
 import FormRedefinirSenha from "../../components/forms/FormRedefinirSenha";
 
 function RedefinirSenha() {
-    return (
-        <>
-            <FormRedefinirSenha />
-        </>
-    );
+  return (
+    <FormRedefinirSenha />
+  );
 }
 
 export default RedefinirSenha;

@@ -1,4 +1,3 @@
-// pages/Dispositivos/Dispositivos.jsx
 // Cada sessão é uma área do Painel (mesma fonte: features/areas). Criar uma sessão aqui
 // cria a área lá, e uma área criada no Painel aparece aqui.
 //
