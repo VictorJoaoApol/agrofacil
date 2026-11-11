@@ -9,6 +9,7 @@ import NotFound from '../pages/NotFound.jsx'
 import Login from '../pages/RegistrosUsuarios/Login.jsx'
 import Cadastro from '../pages/RegistrosUsuarios/Cadastro.jsx'
 import RecuperarSenha from '../pages/RegistrosUsuarios/RecuperarSenha.jsx'
+import RedefinirSenha from '../pages//RegistrosUsuarios/RedefinirSenha.jsx'
 
 /* Gerenciador central de rotas da aplicação utilizando hook de configuração declarativa */
 function AppRoutes() {
@@ -25,6 +26,7 @@ function AppRoutes() {
           children: [
             { path: 'login', element: <Login /> },
             { path: 'login/recuperar-senha', element: <RecuperarSenha /> },
+            { path: 'login/redefinir-senha', element: <RedefinirSenha /> },
             { path: 'cadastro', element: <Cadastro /> },
           ],
         },
