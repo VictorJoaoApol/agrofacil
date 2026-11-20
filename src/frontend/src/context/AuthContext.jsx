@@ -1,7 +1,5 @@
-// context/AuthContext.jsx
-
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from 'react'
-import { verificarSessao, logout } from '../services/auth'
+import { verificarSessao, logout } from '../../../api/auth';
 
 // Contexto que guarda o usuário autenticado (ou null, se não houver sessão ativa).
 /* Contexto global para autenticação e gerenciamento de dados da sessão do usuário */

@@ -1,4 +1,3 @@
-// pages/Perfil/InformacoesUsuario.jsx
 import Avatar from '../../components/ui/Avatar.jsx'
 import Button from '../../components/ui/Button.jsx'
 import useAuth from '../../hooks/useAuth'
