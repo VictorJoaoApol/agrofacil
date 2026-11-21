@@ -54,31 +54,16 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `agrofacil_db`.`TB_Tarefas` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
+  `id_usuario` INT UNSIGNED NOT NULL,
   `nome_tarefa` VARCHAR(45) NOT NULL,
   `descricao` TEXT NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `nome_tarefa_UNIQUE` (`nome_tarefa` ASC))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `agrofacil_db`.`TB_Progresso_Tarefas`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `agrofacil_db`.`TB_Progresso_Tarefas` (
-  `id_usuario` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  `id_tarefa` INT UNSIGNED NOT NULL,
   `esta_feito` ENUM("S", "N") NOT NULL DEFAULT 'N',
-  PRIMARY KEY (`id_tarefa`, `id_usuario`),
-  INDEX `id_tarefa_INDEX` (`id_tarefa` ASC),
-  INDEX `id_usuario_INDEX` (`id_usuario` ASC),
-  CONSTRAINT `fk_usuarios_progresso`
+  PRIMARY KEY (`id`),
+  INDEX `id_tarefa_INDEX` (`id_usuario` ASC),
+  INDEX `id_usuario_tarefa_INDEX` (`id_usuario` ASC),
+  CONSTRAINT `fk_usuarios_tarefa`
     FOREIGN KEY (`id_usuario`)
     REFERENCES `agrofacil_db`.`TB_Usuarios` (`id`)
-    ON DELETE CASCADE
-    ON UPDATE CASCADE,
-  CONSTRAINT `fk_tarefas_progresso`
-    FOREIGN KEY (`id_tarefa`)
-    REFERENCES `agrofacil_db`.`TB_Tarefas` (`id`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
