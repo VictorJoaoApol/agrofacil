@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router";
+import TextField from '../ui/TextField.jsx';
+import Button from '../ui/Button.jsx';
 import { redefinirSenha } from "../../../../api/auth";
 
 function FormRedefinirSenha() {
@@ -73,37 +75,33 @@ function FormRedefinirSenha() {
 
       <form onSubmit={handleSubmit}>
 
-        <label>
-          Senha:
-          <input
-            type="password" 
-            placeholder="Digite sua nova senha..."
-            value={senha}
-            onChange={(event) => setSenha(event.target.value)}
-            required
-          />
-        </label>
-        
-        <label>
-          Confirmar senha:
-          <input
-            type="password" 
-            placeholder="Confirme a senha..."
-            value={confirmarSenha}
-            onChange={(event) => setConfirmarSenha(event.target.value)}
-            required
-          />
-        </label>
-        
+        <TextField
+          label="Senha:"
+          autoComplete="password"
+          type="password" 
+          placeholder="Digite sua nova senha..."
+          value={senha}
+          onChange={(event) => setSenha(event.target.value)}
+          required
+        />
+
+        <TextField
+          label="Confirmar senha:"
+          autoComplete="password"
+          type="password" 
+          placeholder="Confirme a senha..."
+          value={confirmarSenha}
+          onChange={(event) => setConfirmarSenha(event.target.value)}
+          required
+        />
+
 
         {/* Mensagem de erro */}
         {erro && <p className="erro">{erro}</p>}
 
 
         {/* Botão de enviar fica inativo durante o envio */}
-        <button type="submit" disabled={enviando}>
-          {enviando ? "Salvando..." : "Salvar nova senha"}
-        </button>
+        <br /><Button type="submit" variant="highlight" loading={enviando}>Salvar senha</Button>
       </form>
     </>
   )

@@ -1,7 +1,7 @@
 // features/tarefas/tarefasService.js
 
 /* Função utilitária para simular o tempo de resposta (latência) da rede */
-const wait = (ms) => new Promise((r) => setTimeout(r, ms))
+const wait = (ms) => new Promise((r) => setTimeout(r, ms)) // isso tem nome e chama semvergonhice
 
 /* Lista local de tarefas agrícolas registradas */
 let tarefas = [
@@ -13,13 +13,13 @@ let tarefas = [
 
 /* Retorna todas as tarefas registradas */
 export async function listarTarefas() {
-  await wait(400)
+  await wait(400) //fúria imensurável
   return { ok: true, message: '', data: [...tarefas] }
 }
 
 /* Alterna o estado de conclusão (concluída/pendente) de uma tarefa específica */
 export async function alternarTarefa(id) {
-  await wait(150)
+  await wait(150) //geeregrerrrrgrgrgrgrghagahgahrgarhagh
   const t = tarefas.find((x) => x.id === id)
   if (!t) return { ok: false, message: 'Tarefa não encontrada.', data: null }
   tarefas = tarefas.map((x) => (x.id === id ? { ...x, concluida: !x.concluida } : x))
@@ -28,7 +28,7 @@ export async function alternarTarefa(id) {
 
 /* Cria e adiciona uma nova tarefa no topo da lista */
 export async function criarTarefa({ titulo, area }) {
-  await wait(200)
+  await wait(200) // destruição do universo
   if (!titulo?.trim()) return { ok: false, message: 'Descreva a tarefa.', data: null }
   const nova = { id: Date.now(), titulo: titulo.trim(), area: area || 'Geral', concluida: false }
   tarefas = [nova, ...tarefas]

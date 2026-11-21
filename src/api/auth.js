@@ -1,4 +1,4 @@
-import { API_URL } from "./config"
+import { API_URL } from "./config";
 
 // Usado em frontend/src/components/forms/FormCadastro.jsx
 export async function cadastro(nome, email, senha) {
