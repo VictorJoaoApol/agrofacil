@@ -16,11 +16,8 @@
         die;
     }
 
-    // Importa a conexão com o banco de dados e função de validação da entrada do formulário.
+    // Importa a conexão com o banco de dados.
     require_once __DIR__ . '/../db/connection.php';
-    require_once __DIR__ . '/../utils/valida_entrada_formulario.php';
-    require_once __DIR__ . '/../utils/valida_senha.php';
-
 
     try {
         // Pega as tarefas do usuário do banco de dados.

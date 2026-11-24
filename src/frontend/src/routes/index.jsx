@@ -1,15 +1,15 @@
 // routes/index.jsx
-import { Navigate, useRoutes } from 'react-router'
-import { appPages } from './pages'
-import ProtectedRoute from './ProtectedRoute.jsx'
-import PublicRoute from './PublicRoute.jsx'
-import AppLayout from '../layouts/AppLayout.jsx'
-import AuthLayout from '../layouts/AuthLayout.jsx'
-import NotFound from '../pages/NotFound.jsx'
-import Login from '../pages/RegistrosUsuarios/Login.jsx'
-import Cadastro from '../pages/RegistrosUsuarios/Cadastro.jsx'
-import RecuperarSenha from '../pages/RegistrosUsuarios/RecuperarSenha.jsx'
-import RedefinirSenha from '../pages//RegistrosUsuarios/RedefinirSenha.jsx'
+import { Navigate, useRoutes } from 'react-router';
+import { appPages } from './pages';
+import ProtectedRoute from './ProtectedRoute.jsx';
+import PublicRoute from './PublicRoute.jsx';
+import AppLayout from '../layouts/AppLayout.jsx';
+import AuthLayout from '../layouts/AuthLayout.jsx';
+import NotFound from '../pages/NotFound.jsx';
+import Login from '../pages/RegistrosUsuarios/Login.jsx';
+import Cadastro from '../pages/RegistrosUsuarios/Cadastro.jsx';
+import RecuperarSenha from '../pages/RegistrosUsuarios/RecuperarSenha.jsx';
+import RedefinirSenha from '../pages/RegistrosUsuarios/RedefinirSenha.jsx';
 
 /* Gerenciador central de rotas da aplicação utilizando hook de configuração declarativa */
 function AppRoutes() {
@@ -50,7 +50,7 @@ function AppRoutes() {
 
     /* Rota coringa para tratamento de páginas inexistentes (Erro 404) */
     { path: '*', element: <NotFound /> },
-  ])
+  ]);
 }
 
 export default AppRoutes;

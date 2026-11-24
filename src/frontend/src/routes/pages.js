@@ -1,8 +1,8 @@
 // routes/pages.js
-import { lazy } from 'react'
-import imgTarefas from '../assets/img/Tarefas.png'
-import imgPainel from '../assets/img/Painel.png'
-import { Ajuda, Dispositivos, DispositivosAtivado, Home, HomeAtivado, Tarefas, TarefasAtivado, Configuracao, Painel, PainelAtivado, Perfil, PerfilAtivado, } from '../assets/Icons'
+import { lazy } from 'react';
+import imgTarefas from '../assets/img/Tarefas.png';
+import imgPainel from '../assets/img/Painel.png';
+import { Ajuda, Dispositivos, DispositivosAtivado, Home, HomeAtivado, Tarefas, TarefasAtivado, Configuracao, Painel, PainelAtivado, Perfil, PerfilAtivado, } from '../assets/Icons';
 
 /*
   ÚNICA lista de páginas internas: rotas, barra inferior, Sidebar, títulos da
