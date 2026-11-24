@@ -35,17 +35,18 @@
 
         // Verifica se o usuário tem alguma tarefa.
         if (!$tarefas) {
-            // No Content -> Sem falhas, mas nenhum conteúdo encontrado.
-            http_response_code(204);
+            // Sucesso, mas nenhuma tarefa encontrada.
+            http_response_code(200);
             echo json_encode([
                 "status" => "sucesso",
-                "mensagem" => "Nenhuma tarefa encontrada!"
+                "mensagem" => "Nenhuma tarefa encontrada!",
+                "tarefas" => []
             ]);
             exit;
         }
 
 
-        // Retorna mensagem de sucesso.
+        // Retorna mensagem de sucesso e tarefas.
         http_response_code(200);
         echo json_encode([
             "status" => "sucesso",
