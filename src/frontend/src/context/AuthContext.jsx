@@ -5,7 +5,9 @@ import { verificarSessao, logout } from '../../../api/src/auth';
 /* Contexto global para autenticação e gerenciamento de dados da sessão do usuário */
 const AuthContext = createContext(null)
 
-/* Provedor de contexto responsável pela inicialização, verificação e encerramento de sessão */
+/**
+ * Provedor de contexto responsável pela inicialização, verificação e encerramento de sessão.
+ */
 export function AuthProvider({ children }) {
   /* Estado com informações do usuário logado */
   const [usuario, setUsuario] = useState(null)
@@ -62,9 +64,11 @@ export function AuthProvider({ children }) {
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
 
-// Prefira o hook `useAuth` (src/hooks/useAuth.jsx) nos componentes.
-// eslint-disable-next-line react-refresh/only-export-components
-/* Hook utilitário para consumo direto do AuthContext com validação de escopo */
+/**
+ * Hook utilitário para consumo direto do AuthContext com validação de escopo.
+ * 
+ * Prefira o hook `useAuth` (src/hooks/useAuth.jsx) nos componentes.
+ */ 
 export function useAuthContext() {
   const context = useContext(AuthContext)
   if (context === null) {
