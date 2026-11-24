@@ -1,8 +1,8 @@
 // pages/Tarefas/Tarefas.jsx
-import { useEffect, useMemo, useState } from 'react'
-import Button from '../../components/ui/Button.jsx'
-import EmptyState from '../../components/ui/EmptyState.jsx'
-import { listarTarefas, alternarTarefa, criarTarefa } from '../../features/tarefas/tarefasService'
+import { useEffect, useMemo, useState } from 'react';
+import Button from '../../components/ui/Button.jsx';
+import EmptyState from '../../components/ui/EmptyState.jsx';
+import { listarTarefas, alternarTarefa, criarTarefa } from '../../../../api/src/tarefas.js';
 
 /* Opções para filtragem das tarefas por status */
 const FILTROS = [

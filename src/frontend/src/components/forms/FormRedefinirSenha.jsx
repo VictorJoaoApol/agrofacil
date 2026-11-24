@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, useSearchParams } from "react-router";
 import TextField from '../ui/TextField.jsx';
 import Button from '../ui/Button.jsx';
-import { redefinirSenha } from "../../../../api/auth";
+import { redefinirSenha } from "../../../../api/src/auth";
 
 function FormRedefinirSenha() {
   // Cria estado para cada dado, status e estado de envio.

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import TextField from '../ui/TextField.jsx';
 import Button from '../ui/Button.jsx';
-import { solicitarRecuperacao } from "../../../../api/auth";
+import { solicitarRecuperacao } from "../../../../api/src/auth";
 
 function FormRecuperarSenha() {
   // Cria estado para o email, status e estado de envio.
