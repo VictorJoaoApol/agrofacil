@@ -43,20 +43,50 @@
         $id_tarefa = $dados['id'];
 
 
+        // Pega as tarefas do usuário do banco de dados.
+        $stmt = $pdo->prepare("SELECT esta_feito FROM `agrofacil_db`.`TB_Tarefas` WHERE id = :id;");
+
+
+        // Passa o parâmetro de id da tarefa e executa o $stmt.
+        $stmt->bindParam(':id', $id_tarefa);
+        $stmt->execute();
+
+
+        // Pega a tarefa no formato de array associativo, e salva seu status.
+        $tarefa = $stmt->fetch(PDO::FETCH_ASSOC);
+
+
+        // Verifica se a tarefa foi encontrada.
+        if (!$tarefa) {
+            // Not Found -> Não Encontrado.
+            http_response_code(404);
+            echo json_encode([
+                "status" => "nao_encontrado",
+                "mensagem" => "Nenhuma tarefa encontrada!"
+            ]);
+            exit;
+        }
+
+
+        // Alterna o estado de completude da tarefa (toggle).
+        $esta_feito = ($tarefa['esta_feito'] === 'S' ? 'N' : 'S');
+
+
         // Prepara statement de atualização.
-        $stmt = $pdo->prepare("UPDATE `agrofacil_db`.`TB_Tarefas` SET esta_feito='S' WHERE id=:id;");
+        $stmt = $pdo->prepare("UPDATE `agrofacil_db`.`TB_Tarefas` SET esta_feito=:esta_feito WHERE id=:id;");
 
         
-        // Passa o parâmetro e executa o $stmt.
+        // Passa os parâmetros e executa o $stmt.
+        $stmt->bindParam(':esta_feito', $esta_feito);
         $stmt->bindParam(':id', $id_tarefa);
         $stmt->execute();
 
 
         // Manda mensagem de sucesso caso tudo funcione.
-        http_response_code(201);
+        http_response_code(200);
         echo json_encode([
             "status" => "sucesso",
-            "mensagem" => "Tarefa criada com sucesso!",
+            "mensagem" => "Estado da tarefa alterado com sucesso!"
         ]);
         exit;
 

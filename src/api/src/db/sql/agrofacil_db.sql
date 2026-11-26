@@ -56,7 +56,6 @@ CREATE TABLE IF NOT EXISTS `agrofacil_db`.`TB_Tarefas` (
   `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
   `id_usuario` INT UNSIGNED NOT NULL,
   `nome_tarefa` VARCHAR(45) NOT NULL,
-  `descricao` TEXT NOT NULL,
   `esta_feito` ENUM("S", "N") NOT NULL DEFAULT 'N',
   PRIMARY KEY (`id`),
   INDEX `id_tarefa_INDEX` (`id_usuario` ASC),

@@ -20,8 +20,12 @@
     require_once __DIR__ . '/../db/connection.php';
 
     try {
+        // Puxa o ID do usuário da sessão.
+        $id_usuario = $_SESSION['id_usuario'];
+
+
         // Pega as tarefas do usuário do banco de dados.
-        $stmt = $pdo->prepare("SELECT id, nome_tarefa, descricao, esta_feito FROM `agrofacil_db`.`TB_Tarefas` WHERE id_usuario = :id_usuario;");
+        $stmt = $pdo->prepare("SELECT id, nome_tarefa, esta_feito FROM `agrofacil_db`.`TB_Tarefas` WHERE id_usuario = :id_usuario;");
 
 
         // Passa o parâmetro de id do usuário e executa o $stmt.
@@ -30,17 +34,16 @@
 
 
         // Pega as tarefas no formato de array associativo -> Mudar no connection.php para deixar como padrão depois.
-        $tarefas = $stmt->fetch(PDO::FETCH_ASSOC);
-
+        $tarefas = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
         // Verifica se o usuário tem alguma tarefa.
-        if (!$tarefas) {
+        if (count($tarefas) === 0) {
             // Sucesso, mas nenhuma tarefa encontrada.
             http_response_code(200);
             echo json_encode([
                 "status" => "sucesso",
                 "mensagem" => "Nenhuma tarefa encontrada!",
-                "tarefas" => []
+                "tarefas" => $tarefas
             ]);
             exit;
         }

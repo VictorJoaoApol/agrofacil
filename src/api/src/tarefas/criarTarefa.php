@@ -39,7 +39,7 @@
 
 
         // Valida as entradas.
-        if (!valida_entrada_formulario($dados['nome_tarefa'] ?? null, $dados['descricao'] ?? null)) {
+        if (!valida_entrada_formulario($dados['nome_tarefa'] ?? null)) {
             // Bad Request -> Requisição inválida.
             http_response_code(400);
             echo json_encode([
@@ -53,17 +53,15 @@
         // Armazena os dados em variáveis.
         $id_usuario = $_SESSION['id_usuario']; // Puxado da sessão
         $nome_tarefa = $dados['nome_tarefa'];
-        $descricao = $dados['descricao'];
 
 
         // Prepara statement do PDO.
-        $stmt = $pdo->prepare("INSERT INTO `agrofacil_db`.`TB_Tarefas` (id_usuario, nome_tarefa, descricao) VALUES (:id_usuario, :nome_tarefa, :descricao);");
+        $stmt = $pdo->prepare("INSERT INTO `agrofacil_db`.`TB_Tarefas` (id_usuario, nome_tarefa) VALUES (:id_usuario, :nome_tarefa);");
 
         
         // Passa os parâmetros.
         $stmt->bindParam(':id_usuario', $id_usuario);
         $stmt->bindParam(':nome_tarefa', $nome_tarefa);
-        $stmt->bindParam(':descricao', $descricao);
 
 
         // Executa o $stmt.

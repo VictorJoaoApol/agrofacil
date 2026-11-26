@@ -2,14 +2,14 @@ import { API_URL } from "./config";
 
 
 // Usado em frontend/src/pages/Tarefas/Tarefas.jsx
-export async function criarTarefa(nome_tarefa, descricao) {
+export async function criarTarefa(nome_tarefa) {
     const resposta = await fetch(`${API_URL}/tarefas/criarTarefa.php`, {
         method: "POST",
         credentials: "include",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ nome_tarefa, descricao }),
+        body: JSON.stringify({ nome_tarefa }),
     });
 
     // Espera a resposta chegar e a retorna.
@@ -21,14 +21,14 @@ export async function criarTarefa(nome_tarefa, descricao) {
 
 
 // Usado em frontend/src/pages/Tarefas/Tarefas.jsx
-export async function editarTarefa(id, nome_tarefa, descricao) {
-    const resposta = await fetch(`${API_URL}/tarefas/editarTarefa.php`, {
+export async function removerTarefa(id) {
+    const resposta = await fetch(`${API_URL}/tarefas/removerTarefa.php`, {
         method: "POST",
         credentials: "include",
         headers: {
             "Content-Type": "application/json",
         },
-        body: JSON.stringify({ id, nome_tarefa, descricao }),
+        body: JSON.stringify({ id }),
     });
 
     // Espera a resposta chegar e a retorna.
@@ -40,8 +40,8 @@ export async function editarTarefa(id, nome_tarefa, descricao) {
 
 
 // Usado em frontend/src/pages/Tarefas/Tarefas.jsx
-export async function completarTarefa(id) {
-    const resposta = await fetch(`${API_URL}/tarefas/completarTarefa.php`, {
+export async function toggleTarefa(id) {
+    const resposta = await fetch(`${API_URL}/tarefas/toggleTarefa.php`, {
         method: "POST",
         credentials: "include",
         headers: {
