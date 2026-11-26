@@ -21,25 +21,6 @@ export async function criarTarefa(nome_tarefa) {
 
 
 // Usado em frontend/src/pages/Tarefas/Tarefas.jsx
-export async function removerTarefa(id) {
-    const resposta = await fetch(`${API_URL}/tarefas/removerTarefa.php`, {
-        method: "POST",
-        credentials: "include",
-        headers: {
-            "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ id }),
-    });
-
-    // Espera a resposta chegar e a retorna.
-    return {
-        ok: resposta.ok,
-        ...(await resposta.json()),
-    };
-}
-
-
-// Usado em frontend/src/pages/Tarefas/Tarefas.jsx
 export async function toggleTarefa(id) {
     const resposta = await fetch(`${API_URL}/tarefas/toggleTarefa.php`, {
         method: "POST",

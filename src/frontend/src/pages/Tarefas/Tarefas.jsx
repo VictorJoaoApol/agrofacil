@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from 'react';
 import TextField from '../../components/ui/TextField.jsx';
 import Button from '../../components/ui/Button.jsx';
 import EmptyState from '../../components/ui/EmptyState.jsx';
-import { listarTarefas, removerTarefa, criarTarefa, toggleTarefa } from '../../../../api/src/tarefas.js';
+import { listarTarefas, criarTarefa, toggleTarefa } from '../../../../api/src/tarefas.js';
 
 
 
