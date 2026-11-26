@@ -30,9 +30,7 @@ O **AgroFácil** surge para resolver esses problemas em uma única plataforma, u
 - [x] Controle de acesso por usuário
 
 ### 📊 Dashboard Principal
-- [x] Cards com indicadores em tempo real
 - [x] Lista de tarefas pendentes e concluídas
-- [x] Contador de notificações não lidas
 - [x] Saudação personalizada ao usuário
 
 ### 📟 Gestão de Dispositivos IoT
@@ -45,21 +43,6 @@ O **AgroFácil** surge para resolver esses problemas em uma única plataforma, u
 - [x] Cadastro de talhões com cultura plantada
 - [x] Registro de coordenadas geográficas (latitude/longitude)
 - [x] Cálculo de área em hectares
-
-### 🗺️ Mapa Interativo
-- [x] Visualização geográfica das áreas cadastradas
-- [x] Marcadores com popups informativos
-- [x] Zoom e navegação em mapa OpenStreetMap
-
-### 🔔 Sistema de Alertas Automáticos
-- [x] Notificação quando umidade do solo < 40%
-- [x] Alerta quando temperatura > 33°C
-- [x] Marcação de notificações como lidas
-
-### 📄 Central de Documentação Agrícola
-- [x] Guia sobre CAF (Cadastro da Agricultura Familiar)
-- [x] Orientações sobre CAR (Cadastro Ambiental Rural)
-- [x] Informações sobre PRONAF e linhas de crédito
 
 ### 🤖 Simulador de Sensores IoT
 - [x] Geração automática de leituras realistas
